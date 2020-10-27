@@ -5,9 +5,9 @@
 
                
 1. master
-   _ main
-   _ yoshiBranch
-   _ imaiBranch
-   _ tauchiBranch
-   _ taniBranch
-   _ kobayashiBranch
+   - main
+   - yoshiBranch
+   - imaiBranch
+   - tauchiBranch
+   - taniBranch
+   - kobayashiBranch
