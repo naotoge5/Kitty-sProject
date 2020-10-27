@@ -6,8 +6,8 @@
                
 - master
   - main
-    - yoshiBranch
-    - imaiBranch
-    - tauchiBranch
-    - taniBranch
-    - kobayashiBranch
+    - feature/yoshi
+    - feature/imai
+    - feature/tauchi
+    - feature/tani
+    - feature/kobayashi
