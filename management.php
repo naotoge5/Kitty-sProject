@@ -1,6 +1,7 @@
 <?php
 require 'authentication/connect.php';
 ?>
+<!--test-->
 <!DOCTYPE html>
 <html>
 <head>
