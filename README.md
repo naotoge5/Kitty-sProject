@@ -11,3 +11,6 @@
     - feature/tauchi
     - feature/tani
     - feature/kobayashi
+
+ブランチの一覧確認
+> git branch -a
