@@ -24,12 +24,18 @@
   remotes/origin/feature/名前
 ```
 ローカルブランチの削除
-> git branch -d feature/名前
+> git branch -d ブランチ名
+
+ローカルブランチ名の変更
+> git branch -m ブランチ名
 
 mergeされている場合
-> git branch -D feature/名前
+> git branch -D ブランチ名
 
 リモートブランチの削除
-> git push origin :feature/名前
+> git push origin :ブランチ名
+
+ローカルブランチをプッシュ
+> git push origin ブランチ名
 
 
