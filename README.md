@@ -1,5 +1,6 @@
 # Kitty-sProject
 ## プロジェクト演習2
+# mainブランチにpull request
 完成形をmasterブランチとする
 開発段階ではmainブランチにmergeする。
 
