@@ -4,10 +4,10 @@
 開発段階ではmainブランチにmergeする。
 
                
-master
- -main
-  -yoshiBranch
-  -imaiBranch
-  -tauchiBranch
-  -taniBranch
-  -kobayashiBranch
+1.master
+  _main
+  _yoshiBranch
+  _imaiBranch
+  _tauchiBranch
+  _taniBranch
+  _kobayashiBranch
