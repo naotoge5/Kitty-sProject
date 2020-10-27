@@ -5,7 +5,7 @@
 
                
 1. master
-   - main
+   2- main
    - yoshiBranch
    - imaiBranch
    - tauchiBranch
