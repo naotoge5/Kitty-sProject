@@ -6,7 +6,7 @@
                
 - master
   - main
-    - feature/yoshii
+    - feature/yoshi
     - feature/imai
     - feature/tauchi
     - feature/tani
@@ -15,10 +15,13 @@
 ブランチの一覧確認
 > git branch -a
 ```
-master
-  my-branch
+  master
+* main
+  feature/名前
   remotes/origin/HEAD -> origin/master
   remotes/origin/master
-  remotes/origin/my-branch
-  remotes/origin/tarou-branch
+  remotes/origin/feature/名前
 ```
+ブランチの削除
+> git branch -d feature/名前
+
