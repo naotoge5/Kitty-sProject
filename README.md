@@ -23,11 +23,11 @@
   remotes/origin/master
   remotes/origin/feature/名前
 ```
-ローカルブランチの削除
-> git branch -d feature/名前
-mergeされている場合
-> git branch -D feature/名前
-リモートブランチの削除
+ローカルブランチの削除  
+> git branch -d feature/名前  
+mergeされている場合  
+> git branch -D feature/名前  
+リモートブランチの削除  
 > git push origin :feature/名前
 
 
