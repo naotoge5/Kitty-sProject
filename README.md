@@ -6,7 +6,7 @@
                
 - master
   - main
-    - feature/yoshi
+    - feature/yoshii
     - feature/imai
     - feature/tauchi
     - feature/tani
@@ -14,3 +14,11 @@
 
 ブランチの一覧確認
 > git branch -a
+```
+master
+  my-branch
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+  remotes/origin/my-branch
+  remotes/origin/tarou-branch
+```
