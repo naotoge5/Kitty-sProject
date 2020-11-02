@@ -5,6 +5,7 @@ require 'authentication/connect.php';
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>login</title>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
@@ -49,7 +50,7 @@ require 'authentication/connect.php';
 if (read_objectData($_SESSION['id'])) {
     echo '<table><thead><tr><th>名前</th><th>詳細</th><th>ジャンル</th><th>登録日時</th></tr></thead><tbody>';
     foreach (read_objectData($_SESSION['id']) as $row) {
-        echo '<tr data-href="register.php">;';
+        echo '<tr data-href="register.php">';
         echo '<td>' . htmlspecialchars($row['name']) . '</td>';
         echo '<td>' . htmlspecialchars($row['details']) . '</td>';
         echo '<td>' . htmlspecialchars($row['category']) . '</td>';
@@ -62,6 +63,7 @@ if (read_objectData($_SESSION['id'])) {
     echo '<p>落とし物が登録されていません。</p>';
 }
 ?>
+<!--
 <table>
     <thead>
     <tr>
@@ -86,6 +88,6 @@ if (read_objectData($_SESSION['id'])) {
     </tr>
     </tbody>
 </table>
-
+-->
 </body>
 </html>
