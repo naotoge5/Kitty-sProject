@@ -1,4 +1,5 @@
 <?php
+session_start();
 //定数
 define('DSN', 'mysql:host=localhost;dbname=kittydb');
 define('DB_USER', 'kitty');
@@ -20,7 +21,7 @@ function getPDO()
 function read_companyData($id)
 {
     try {
-        global $pdo;
+        $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM companies WHERE id=:id");
         if ($stmt->execute(array(":id" => $id))) {
             return $stmt->fetchAll();
@@ -34,7 +35,7 @@ function read_companyData($id)
 function read_objectData($id)//落とし物データの呼び出し
 {
     try {
-        global $pdo;
+        $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM objects WHERE company_id=:company_id");
         if ($stmt->execute(array(":company_id" => $id))) {
             return $stmt->fetchAll();

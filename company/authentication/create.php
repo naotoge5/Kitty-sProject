@@ -1,14 +1,15 @@
 <?php
 try {
-    include("connect.php");
+    include('../../assets/functions.php');
+    $pdo = getPDO();//pdo取得
+    //変数に格納
     $name = $_POST['name'];
     $tel = $_POST['tel'];
     $address = $_POST['address'];
     $mail = $_POST['mail'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $stmt = $pdo->prepare(
-        "INSERT INTO companies VALUES(null, :name  , :tel , :address, :mail, :password )");
-    //$stmt->bindValue();
+    //insert文の発行
+    $stmt = $pdo->prepare("INSERT INTO companies VALUES(null, :name  , :tel , :address, :mail, :password )");
     $stmt->execute(array(":name" => $name, ":tel" => $tel, ":address" => $address, ":mail" => $mail, ":password" => $password));
     $_SESSION['id'] = $pdo->lastInsertId();
 } catch (PDOException $e) {

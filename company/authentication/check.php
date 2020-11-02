@@ -1,10 +1,11 @@
 <?php
 try {
-    include("connect.php");
+    include('../../assets/functions.php');
+    $pdo = getPDO();//pdo取得
+    //変数に格納
     $mail = $_POST['mail'];
     $password = $_POST['password'];
-    $stmt = $pdo->prepare(
-        "SELECT * FROM companies WHERE mail=:mail");
+    $stmt = $pdo->prepare("SELECT * FROM companies WHERE mail=:mail");
     $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
     $stmt->execute();
     //結果の取り出し
