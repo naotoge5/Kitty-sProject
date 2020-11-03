@@ -37,6 +37,8 @@ function read_objectData($id)//落とし物データの呼び出し
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM objects WHERE company_id=:company_id");
+        $stmt->bindValue(':company_id', $id, PDO::PARAM_STR);
+        $stmt->execute();
         if ($stmt->execute(array(":company_id" => $id))) {
             return $stmt->fetchAll();
         }
@@ -51,7 +53,7 @@ function read_objectData($id)//落とし物データの呼び出し
 function delete_userID($id)
 {
     try {
-        global $conn;
+
         $statement = $conn->prepare("DELETE FROM users WHERE id=:id");
         $ret = $statement->execute(array(":id" => $id));
         $count = ($ret) ? $statement->rowCount() : 0;

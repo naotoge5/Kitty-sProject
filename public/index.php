@@ -27,7 +27,7 @@ if (isset($_POST["Serch"])) {//名前で検索する
 
 if ((isset($_POST["category"]))) {//カテゴリー検索
     $category = $_POST['category'];
-    $sql = 'SELECT * FROM objects WHERE  category= :category';
+    $sql = 'SELECT * FROM objects WHERE category= :category';
     $category = array(':category' => $category);
     $stmt = $dbh->prepare($sql);
     $stmt->execute($category);
