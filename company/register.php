@@ -6,3 +6,4 @@ if (isset($_POST['id'])) {
     echo '<h1>新規登録</h1>';
 }
 require 'header.php';
+//ようすけさん
