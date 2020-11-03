@@ -20,11 +20,12 @@
             <td><input type="password" name="password" required></td>
         </tr>
     </table>
-    <input type="submit">
+    <input type="submit"　value="ログイン">
 </form>
 <h2>新規登録</h2>
 <form action="create.php" method="post">
     <table>
+        <p>※パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</p>
         <tr>
             <th>企業名</th>
             <td><input type="text" name="name" required></td>
@@ -43,10 +44,10 @@
         </tr>
         <tr>
             <th>パスワード</th>
-            <td><input type="password" name="password" required></td>
+            <td><input type="password" name="password" required pattern="^[a-zA-Z\d]{8,100}$"></td>
         </tr>
     </table>
-    <input type="submit">
+    <input type="submit"value="登録">
 </form>
 </body>
 </html>
