@@ -104,3 +104,44 @@ function search_userID($keyword)
         die($e->getMessage());
     }
 }
+
+//public-----------------------------------------------------------------------
+function objects_date($flag){ //order by id datetimeで時間順に取りたい
+
+try{
+     $pdo = getPDO();
+     if($flag){
+     $stmt = $pdo->query("SELECT * FROM objects order by datetime");//trueの場合は時間の古い順
+     return $stmt->fetchAll();
+     }else{
+        $stmt = $pdo->query("SELECT * FROM objects order by datetime desc");//falseの場合は最新順
+        return $stmt->fetchAll();
+     }
+}catch(PDOException $e){
+     die($e->getMessage());
+}
+}
+
+function objects_name($name){ //名前検索
+try{
+        $pdo = getPDO();
+        $stmt = $pdo->prepare('SELECT * FROM objects WHERE name=:name');
+        $stmt->bindValue(':name',$name,PDO::PARAM_STR);
+        $stmt->execute();
+       return $stmt->fetchAll();
+}catch(PDOException $e){
+        die($e->getMessage());
+}   
+}
+
+function objects_category($category){//カテゴリー検索
+try{
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT * FROM objects WHERE category=:category");
+        $stmt->bindValue(':category',$category,PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll();
+}catch(PDOException $e){
+        die($e->getMessage());
+}
+}
