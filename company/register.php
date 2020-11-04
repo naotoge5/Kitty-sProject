@@ -1,5 +1,5 @@
 <?php
-include('../assets/functions.php');
+include('header.php');
 if(isset($message)){
     echo $message;
 }
@@ -11,7 +11,6 @@ if (isset($_POST['id'])) {
     //登録
     $title = "登録";
 }
-require 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
