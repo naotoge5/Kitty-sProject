@@ -23,7 +23,8 @@ function read_companyData($id)
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM companies WHERE id=:id");
-        if ($stmt->execute(array(":id" => $id))) {
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+        if ($stmt->execute()) {
             return $stmt->fetchAll();
         }
         return false;
@@ -38,8 +39,7 @@ function read_objectData($id)//落とし物データの呼び出し
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM objects WHERE company_id=:company_id");
         $stmt->bindValue(':company_id', $id, PDO::PARAM_STR);
-        $stmt->execute();
-        if ($stmt->execute(array(":company_id" => $id))) {
+        if ($stmt->execute()) {
             return $stmt->fetchAll();
         }
         return false;
@@ -49,60 +49,3 @@ function read_objectData($id)//落とし物データの呼び出し
 }
 
 /*--データの更新等--*/
-//未着手
-function delete_userID($id)
-{
-    try {
-
-        $statement = $conn->prepare("DELETE FROM users WHERE id=:id");
-        $ret = $statement->execute(array(":id" => $id));
-        $count = ($ret) ? $statement->rowCount() : 0;
-
-        return $count;
-    } catch (PDOException $e) {
-        die($e->getMessage());
-    }
-}
-
-//
-// ユーザを1件更新
-// 成功すれば1を返す。失敗や変更がなければ0を返す。
-function update_userID($id, $userID, $password, $name)
-{
-    try {
-        global $conn;
-
-        $statement = $conn->prepare("UPDATE users 
-			SET userID=:userID , password=:password , name=:name WHERE id=:id");
-        $ret = $statement->execute(
-            array(":id" => $id,
-                ":userID" => $userID,
-                ":password" => $password,
-                ":name" => $name)
-        );
-        $count = ($ret) ? $statement->rowCount() : 0;
-
-        return $count;
-    } catch (PDOException $e) {
-        die($e->getMessage());
-    }
-}
-
-
-//
-// ユーザのキーワード検索
-// 成功すれば，検索結果の連想配列を返す。
-function search_userID($keyword)
-{
-    try {
-        global $conn;
-        $result = $conn->prepare(
-            "SELECT * FROM users WHERE name LIKE :keyword ");
-        $result->execute(array(":keyword" => "%{$keyword}%"));
-
-        return $result;
-
-    } catch (PDOException $e) {
-        die($e->getMessage());
-    }
-}
