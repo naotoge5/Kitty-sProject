@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 <?php
 include('../assets/functions.php');
 if (!isset($_SESSION['id'])) {
@@ -15,5 +12,4 @@ if (!isset($_SESSION['id'])) {
         <input type="submit" value="ログアウト" name="logout">
     </form>
 </header>
->>>>>>> main
 

@@ -1,3 +1,4 @@
+<?php include('header.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,6 @@
     <script src="../assets/js/company.js"></script>
 </head>
 <body>
-<header></header>
 <h1>管理画面</h1>
 <table>
     <thead>
@@ -21,38 +21,47 @@
     </thead>
     <tbody>
     <tr>
-        <?php
-        include('../assets/functions.php');
-        foreach (read_companyData($_SESSION['id']) as $row) {
-            echo '<td>' . htmlspecialchars($row['name']) . '</td>';
-            echo '<td>' . htmlspecialchars($row['tel']) . '</td>';
-            echo '<td>' . htmlspecialchars($row['address']) . '</td>';
-            echo '<td>' . htmlspecialchars($row['mail']) . '</td>';
-        }
-        ?>
+        <?php foreach (read_companyData($_SESSION['id']) as $row): ?>
+            <td><?= $name = htmlspecialchars($row['name']) ?></td>
+            <td><?= htmlspecialchars($row['tel']) ?></td>
+            <td><?= htmlspecialchars($row['address']) ?></td>
+            <td><?= htmlspecialchars($row['mail']) ?></td>
+        <?php endforeach; ?>
     </tr>
     </tbody>
 </table>
+<div>
+    <iframe src="https://maps.google.co.jp/maps?output=embed&q=<?= $name ?>"></iframe>
+</div>
 <a href="">企業データの編集</a>
 <h2>落とし物一覧</h2>
 <a href="register.php">新規登録</a>
-<?php
-if (read_objectData($_SESSION['id'])) {
-    echo '<table><thead><tr><th>名前</th><th>詳細</th><th>ジャンル</th><th>登録日時</th></tr></thead><tbody>';
-    foreach (read_objectData($_SESSION['id']) as $row) {
-        echo '<form name="edit' . htmlspecialchars($row['id']) . '" action="register.php" method="post">';
-        echo '<input type="hidden" name="id" value="' . htmlspecialchars($row['id']) . '"></form>';
-        echo '<tr onClick="document.edit' . htmlspecialchars($row['id']) . '.submit();return false;">';
-        echo '<td>' . htmlspecialchars($row['name']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['details']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['category']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['datetime']) . '</td>';
-        echo '</tr>';
-    }
-    echo '</tbody></table>';
-} else {
-    echo '<p>落とし物が登録されていません。</p>';
-}
-?>
+<?php if (read_objectData($_SESSION['id'])) { ?>
+    <table>
+        <thead>
+        <tr>
+            <th>名前</th>
+            <th>詳細</th>
+            <th>ジャンル</th>
+            <th>登録日時</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach (read_objectData($_SESSION['id']) as $row): ?>
+            <form name="edit<?= htmlspecialchars($row['id']) ?>" action="register.php" method="post">
+                <input type="hidden" name="id" value="<?php htmlspecialchars($row['id']) ?>">
+            </form>
+            <tr onClick="document.edit<?= htmlspecialchars($row['id']) ?>.submit();return false;">
+                <td><?= htmlspecialchars($row['name']) ?></td>
+                <td><?= htmlspecialchars($row['details']) ?></td>
+                <td><?= htmlspecialchars($row['category']) ?></td>
+                <td><?= htmlspecialchars($row['datetime']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php } else { ?>
+    <p>落とし物が登録されていません。</p>
+<?php } ?>
 </body>
 </html>
