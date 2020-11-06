@@ -22,16 +22,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4db9bdc2-f2ed-4d94-b949-2ea0bc0ab17f" name="デフォルト変更リスト" comment="new_change">
-      <change afterPath="$PROJECT_DIR$/assets/js/public.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/company.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/company.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/setupDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/assets/setupDB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/authentication/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/authentication/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/authentication/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/authentication/signup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/management.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/management.php" afterDir="false" />
-    </list>
+    <list default="true" id="4db9bdc2-f2ed-4d94-b949-2ea0bc0ab17f" name="デフォルト変更リスト" comment="new_change" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +84,7 @@
       <workItem from="1604641674376" duration="2994000" />
       <workItem from="1604645189269" duration="1269000" />
       <workItem from="1604646560384" duration="1365000" />
-      <workItem from="1604647998099" duration="2071000" />
+      <workItem from="1604647998099" duration="2133000" />
     </task>
     <task id="LOCAL-00001" summary="sample">
       <created>1604364780830</created>
@@ -116,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604553128088</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="all_change">
+      <created>1604650330324</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604650330324</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +148,8 @@
     <MESSAGE value="sample" />
     <MESSAGE value="why?" />
     <MESSAGE value="new_change" />
-    <option name="LAST_COMMIT_MESSAGE" value="new_change" />
+    <MESSAGE value="all_change" />
+    <option name="LAST_COMMIT_MESSAGE" value="all_change" />
   </component>
   <component name="WindowStateProjectService">
     <state x="472" y="47" key="#PHP" timestamp="1604550615515">
@@ -167,10 +166,11 @@
       <screen x="0" y="23" width="1440" height="757" />
     </state>
     <state x="120" y="88" width="1221" height="627" key="MergeDialog/0.23.1440.757@0.23.1440.757" timestamp="1604549319104" />
-    <state x="320" y="181" key="Vcs.Push.Dialog.v2" timestamp="1604553141197">
-      <screen x="0" y="23" width="1440" height="748" />
+    <state x="320" y="179" key="Vcs.Push.Dialog.v2" timestamp="1604650337827">
+      <screen x="0" y="23" width="1440" height="738" />
     </state>
     <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1604364797707" />
+    <state x="320" y="179" key="Vcs.Push.Dialog.v2/0.23.1440.738@0.23.1440.738" timestamp="1604650337827" />
     <state x="320" y="181" key="Vcs.Push.Dialog.v2/0.23.1440.748@0.23.1440.748" timestamp="1604553141197" />
     <state x="494" y="121" key="git4idea.branch.GitSmartOperationDialog" timestamp="1604547699125">
       <screen x="0" y="23" width="1440" height="757" />
