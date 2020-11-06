@@ -14,51 +14,16 @@ if (isset($_SESSION['id'])) {
 </head>
 <body>
 <header></header>
-<h1>ログインページ</h1>
-<h2>ログイン</h2>
+<h1>ログイン</h1>
 <form id="sign" action="check.php" method="post">
-    <table>
-        <tr>
-            <th>メールアドレス</th>
-            <td><input type="email" name="mail" required></td>
-        </tr>
-        <tr>
-            <th>パスワード</th>
-            <td><input type="password" name="password"></td>
-        </tr>
-    </table>
-    <input type="submit">
-</form>
-<h2>新規登録</h2>
-<form action="create.php" method="post">
-    <table>
-        <tr>
-            <th>企業名</th>
-            <td><input type="text" name="name" required></td>
-        </tr>
-        <tr>
-            <th>電話番号</th>
-            <td><input type="tel" name="tel" required></td>
-        </tr>
-        <tr>
-            <th>郵便番号</th>
-            <td><input type="text" pattern="[0-9]{7}" maxlength="7" minlength="7" name="postal" placeholder="郵便番号"
-                       required></td>
-        </tr>
-        <tr>
-            <th>住所</th>
-            <td><input type="text" name="address" placeholder="例：東京都新宿区西新宿二丁目8番1号" required></td>
-        </tr>
-        <tr>
-            <th>メールアドレス</th>
-            <td><input type="email" name="mail" required></td>
-        </tr>
-        <tr>
-            <th>パスワード</th>
-            <td><input type="password" name="password" required></td>
-        </tr>
-    </table>
+    <dl>
+        <dt>メールアドレス</dt>
+        <dd><input type="email" name="mail" required></dd>
+        <dt>パスワード</dt>
+        <dd><input type="password" name="password"></dd>
+    </dl>
     <input type="submit">
 </form>
 </body>
+<footer><p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p></footer>
 </html>

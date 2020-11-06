@@ -10,12 +10,15 @@ create user 'kitty'@'localhost' identified by 'pro02';
 grant all on kittydb.* to 'kitty'@'localhost';
 create table companies
 (
-    id       int auto_increment primary key,
-    name     varchar(100) not null,
-    tel      varchar(100) not null,
-    address  varchar(100) not null,
-    mail     varchar(100) not null,
-    password varchar(100) not null
+    id             int auto_increment primary key,
+    name           varchar(100) not null,
+    tel            int          not null,
+    postal         int,
+    address_first  varchar(100) not null,
+    address_second varchar(100) not null,
+    address_third  varchar(100) not null,
+    mail           varchar(100) not null,
+    password       varchar(100) not null
 );
 
 create table objects

@@ -63,5 +63,6 @@
 <?php } else { ?>
     <p>落とし物が登録されていません。</p>
 <?php } ?>
+<?= date("Y/m/d H:i:s") ?>
 </body>
 </html>

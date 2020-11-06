@@ -22,17 +22,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4db9bdc2-f2ed-4d94-b949-2ea0bc0ab17f" name="デフォルト変更リスト" comment="">
+    <list default="true" id="4db9bdc2-f2ed-4d94-b949-2ea0bc0ab17f" name="デフォルト変更リスト" comment="new_change">
+      <change afterPath="$PROJECT_DIR$/assets/js/public.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/company.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/company.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/setupDB.sql" beforeDir="false" afterPath="$PROJECT_DIR$/assets/setupDB.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/setupDB_insert.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/authentication/login.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/company/authentication/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/authentication/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/company/authentication/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/authentication/signup.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/company/management.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/management.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/register.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +39,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -67,6 +72,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
+      <recent name="$PROJECT_DIR$/assets/js" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -77,7 +88,12 @@
       <updated>1604364620552</updated>
       <workItem from="1604364622135" duration="355000" />
       <workItem from="1604545250500" duration="33000" />
-      <workItem from="1604545521055" duration="5476000" />
+      <workItem from="1604545521055" duration="8746000" />
+      <workItem from="1604559580195" duration="12274000" />
+      <workItem from="1604641674376" duration="2994000" />
+      <workItem from="1604645189269" duration="1269000" />
+      <workItem from="1604646560384" duration="1365000" />
+      <workItem from="1604647998099" duration="2071000" />
     </task>
     <task id="LOCAL-00001" summary="sample">
       <created>1604364780830</created>
@@ -93,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604545275061</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="new_change">
+      <created>1604553128088</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604553128088</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,21 +149,29 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sample" />
     <MESSAGE value="why?" />
-    <option name="LAST_COMMIT_MESSAGE" value="why?" />
+    <MESSAGE value="new_change" />
+    <option name="LAST_COMMIT_MESSAGE" value="new_change" />
   </component>
   <component name="WindowStateProjectService">
     <state x="472" y="47" key="#PHP" timestamp="1604550615515">
       <screen x="0" y="23" width="1440" height="748" />
     </state>
     <state x="472" y="47" key="#PHP/0.23.1440.748@0.23.1440.748" timestamp="1604550615515" />
+    <state x="458" y="146" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604590248342">
+      <screen x="0" y="23" width="1440" height="748" />
+    </state>
+    <state x="458" y="143" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.733@0.23.1440.733" timestamp="1604581757474" />
+    <state x="458" y="144" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.738@0.23.1440.738" timestamp="1604588303461" />
+    <state x="458" y="146" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.748@0.23.1440.748" timestamp="1604590248342" />
     <state x="120" y="88" width="1221" height="627" key="MergeDialog" timestamp="1604549319104">
       <screen x="0" y="23" width="1440" height="757" />
     </state>
     <state x="120" y="88" width="1221" height="627" key="MergeDialog/0.23.1440.757@0.23.1440.757" timestamp="1604549319104" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1604364797707">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="320" y="181" key="Vcs.Push.Dialog.v2" timestamp="1604553141197">
+      <screen x="0" y="23" width="1440" height="748" />
     </state>
     <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1604364797707" />
+    <state x="320" y="181" key="Vcs.Push.Dialog.v2/0.23.1440.748@0.23.1440.748" timestamp="1604553141197" />
     <state x="494" y="121" key="git4idea.branch.GitSmartOperationDialog" timestamp="1604547699125">
       <screen x="0" y="23" width="1440" height="757" />
     </state>
