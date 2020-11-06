@@ -1,7 +1,7 @@
 <?php
 ?>
 <!DOCTYPE html>
-<html id="backl">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,7 +12,7 @@
 <body>
 <header></header>
 <h1>新規登録</h1>
-<form action="create.php" method="post">
+<form id="signup" action="create.php" method="post">
     <dl>
         <dt>企業名</dt>
         <dd>

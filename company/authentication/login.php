@@ -15,7 +15,7 @@ if (isset($_SESSION['id'])) {
 <body>
 <header></header>
 <h1>ログイン</h1>
-<form id="sign" action="check.php" method="post">
+<form id="login" action="check.php" method="post">
     <dl>
         <dt>メールアドレス</dt>
         <dd><input type="email" name="mail" required></dd>

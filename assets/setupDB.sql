@@ -13,7 +13,7 @@ create table companies
     id             int auto_increment primary key,
     name           varchar(100) not null,
     tel            int          not null,
-    postal         int,
+    postal         varchar(100) not null,
     address_first  varchar(100) not null,
     address_second varchar(100) not null,
     address_third  varchar(100) not null,
@@ -31,10 +31,10 @@ create table objects
     company_id int          not null
 );
 insert into companies
-values (null, '株式会社KCG', 0120123456, '京都市南区西九条寺ノ前町10-5', '10naotoge5.ykputi@gmail.com',
+values (null, '京都コンピュータ学院 京都駅前校', 0120123456, '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '10naotoge5.ykputi@gmail.com',
         '$2y$10$CstYoew/bQ0z7Yjb6T1wh.Z3wfynIEbQ5eySdwN8kyYaekPjfDSxC');
 insert into companies
-values (null, '株式会社KCGI', 0120789111, '京都市左京区田中門前町7', 'st071959@m03.kyoto-kcg.ac.jp',
+values (null, '京都情報大学院大学 百万遍キャンパス', 0120789111, '6068225', '京都府', '京都市左京区', '田中門前町7', 'st071959@m03.kyoto-kcg.ac.jp',
         '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa');
 
 insert into objects
