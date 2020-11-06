@@ -22,7 +22,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="4db9bdc2-f2ed-4d94-b949-2ea0bc0ab17f" name="デフォルト変更リスト" comment="new_change" />
+=======
+    <list default="true" id="4db9bdc2-f2ed-4d94-b949-2ea0bc0ab17f" name="デフォルト変更リスト" comment="no" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,12 +83,16 @@
       <updated>1604364620552</updated>
       <workItem from="1604364622135" duration="355000" />
       <workItem from="1604545250500" duration="33000" />
+<<<<<<< Updated upstream
       <workItem from="1604545521055" duration="8746000" />
       <workItem from="1604559580195" duration="12274000" />
       <workItem from="1604641674376" duration="2994000" />
       <workItem from="1604645189269" duration="1269000" />
       <workItem from="1604646560384" duration="1365000" />
       <workItem from="1604647998099" duration="2133000" />
+=======
+      <workItem from="1604545358590" duration="57000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="sample">
       <created>1604364780830</created>
@@ -100,6 +108,7 @@
       <option name="project" value="LOCAL" />
       <updated>1604545275061</updated>
     </task>
+<<<<<<< Updated upstream
     <task id="LOCAL-00003" summary="new_change">
       <created>1604553128088</created>
       <option name="number" value="00003" />
@@ -115,6 +124,16 @@
       <updated>1604650330324</updated>
     </task>
     <option name="localTasksCounter" value="5" />
+=======
+    <task id="LOCAL-00003" summary="no">
+      <created>1604545387749</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604545387749</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +166,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sample" />
     <MESSAGE value="why?" />
+<<<<<<< Updated upstream
     <MESSAGE value="new_change" />
     <MESSAGE value="all_change" />
     <option name="LAST_COMMIT_MESSAGE" value="all_change" />
@@ -176,5 +196,16 @@
       <screen x="0" y="23" width="1440" height="757" />
     </state>
     <state x="494" y="121" key="git4idea.branch.GitSmartOperationDialog/0.23.1440.757@0.23.1440.757" timestamp="1604547699125" />
+=======
+    <MESSAGE value="no" />
+    <option name="LAST_COMMIT_MESSAGE" value="no" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="183" key="Vcs.Push.Dialog.v2" timestamp="1604545402191">
+      <screen x="0" y="23" width="1440" height="757" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1604364797707" />
+    <state x="320" y="183" key="Vcs.Push.Dialog.v2/0.23.1440.757@0.23.1440.757" timestamp="1604545402191" />
+>>>>>>> Stashed changes
   </component>
 </project>
