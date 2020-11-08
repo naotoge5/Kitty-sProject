@@ -1,6 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
 include('../assets/functions.php');
 ?>
 <!doctype html>
