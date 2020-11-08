@@ -9,7 +9,7 @@ $(function () {
         let password = $('input[name="password"]').val();
         if (password.length == 0) {
             let result = confirm('新規登録でよろしいですか');
-            if (!result) {
+            if (result) {
                 $(this).attr('action', 'signup.php');
             } else {
                 return false;
