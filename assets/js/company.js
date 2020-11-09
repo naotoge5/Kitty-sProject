@@ -30,16 +30,31 @@ $(function () {
     //住所自動入力
     $('#auto').on('click', function () {
         let postal = $('input[name="postal"]').val();
-        let url = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + postal;
-        $.getJSON(url, (data) => {
-            if (data["results"] != null && data["results"][0]["address3"]) {
-                $('input[name="address_first"]').val(data["results"][0]["address1"]);
-                $('input[name="address_second"]').val(data["results"][0]["address2"]);
-                $('input[name="address_third"]').val(data["results"][0]["address3"]);
+        $.ajax({
+            type: "POST", url: "../../assets/ajax.php", data: {postal: postal}
+        }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
+            let data = JSON.parse(response);
+            console.log(data);
+            if (data["results"] != null) {
+                if(data["results"].length == 1) {
+                    $('input[name="address_first"]').val(data["results"][0]["address1"]);
+                    $('input[name="address_second"]').val(data["results"][0]["address2"]);
+                    $('input[name="address_third"]').val(data["results"][0]["address3"]);
+                } else {
+                    alert("複数の市区町村があるため補完できません。");
+                }
             } else {
-                alert("郵便番号が間違っている可能性があります。");
+                alert("郵便番号を見直してください。");
             }
-        })
+        }).fail(function () {
+            // 取得エラー
+            console.log('miss');
+        }).always(function () {
+            // 後処理(処理することが在れば)
+            console.log('always');
+        });
+
+
     });
 });
 

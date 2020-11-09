@@ -31,7 +31,6 @@ function read_companyData($id)
         $stmt = $pdo->prepare("SELECT * FROM companies WHERE id=:id");
         $stmt->bindValue(":id", $id, PDO::PARAM_STR);
         if ($stmt->execute()) {
-
             return $stmt->fetchAll();
         }
         return false;
@@ -46,21 +45,6 @@ function read_objectData($id)//落とし物データの呼び出し
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM objects WHERE company_id=:company_id");
         $stmt->bindValue(":company_id", $id, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            return $stmt->fetchAll();
-        }
-        return false;
-    } catch (PDOException $e) {
-        die($e->getMessage());
-    }
-}
-
-function read_cities($prefecture)
-{
-    try {
-        $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT address_second FROM companies WHERE address_first=:address_first");
-        $stmt->bindValue(":address_first", $prefecture, PDO::PARAM_STR);
         if ($stmt->execute()) {
             return $stmt->fetchAll();
         }

@@ -13,11 +13,12 @@ create table companies
     id             int auto_increment primary key,
     name           varchar(100) not null,
     fulltext (name) with parser ngram,
-    tel            int          not null,
+    tel            varchar(100) not null,
     postal         varchar(100) not null,
     address_first  varchar(100) not null,
     address_second varchar(100) not null,
     address_third  varchar(100) not null,
+    details        text,
     mail           varchar(100) not null,
     password       varchar(100) not null,
     object_update  datetime
@@ -30,18 +31,17 @@ create table objects
     fulltext (name) with parser ngram,
     details    text,
     category   varchar(100) not null,
-    datetime   datetime     not null,
+    datetime   datetime,
     company_id int          not null
 );
 insert into companies
-values (null, '京都コンピュータ学院 京都駅前校', 0120123456, '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '10naotoge5.ykputi@gmail.com',
+values (null, '京都コンピュータ学院 京都駅前校', '0120123456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
+        '10naotoge5.ykputi@gmail.com',
         '$2y$10$CstYoew/bQ0z7Yjb6T1wh.Z3wfynIEbQ5eySdwN8kyYaekPjfDSxC', null);
 insert into companies
-values (null, '京都情報大学院大学 百万遍キャンパス', 0120789111, '6068225', '京都府', '京都市左京区', '田中門前町7', 'st071959@m03.kyoto-kcg.ac.jp',
-        '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa', null);insert into companies
-values (null, '東寺', 0120789222, '6068225', '京都府', '京都市南区', '九条町１', 'st071959@m03.kyoto-kcg.ac.jp',
+values (null, '京都情報大学院大学 百万遍キャンパス', '0120789111', '6068225', '京都府', '京都市左京区', '田中門前町7', null,
+        'st071959@m03.kyoto-kcg.ac.jp',
         '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa', null);
-
 insert into objects
 values (null, 'レインコート', '駐車場', '雨具類', '2020-11-20 13:00:00', 2);
 insert into objects

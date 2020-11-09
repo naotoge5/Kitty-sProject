@@ -1,6 +1,9 @@
-<?php include('header.php'); ?>
+<?php
+include('header.php');
+$company = read_companyData($_SESSION['id'])[0];
+?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -13,25 +16,24 @@
 <table>
     <thead>
     <tr>
-        <th>企業名</th>
-        <th>電話番号</th>
-        <th>住所</th>
-        <th>メールアドレス</th>
+        <th colspan="2"><?= $name = htmlspecialchars($company['name']) ?></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <?php foreach (read_companyData($_SESSION['id']) as $row): ?>
-            <td><?= $name = htmlspecialchars($row['name']) ?></td>
-            <td><?= htmlspecialchars($row['tel']) ?></td>
-            <td><?= htmlspecialchars($row['address']) ?></td>
-            <td><?= htmlspecialchars($row['mail']) ?></td>
-        <?php endforeach; ?>
+        <td><?= htmlspecialchars($company['address_first']) . htmlspecialchars($company['address_second']) . htmlspecialchars($company['address_third']) ?></td>
+        <td>TEL：<a href="tel:<?= htmlspecialchars($company['tel']) . '">' . htmlspecialchars($company['tel']) ?></a></td>
+    </tr>
+    <tr>
+        <td>
+            <iframe src=" https://maps.google.co.jp/maps?output=embed&q=<?= $name ?>"></iframe>
+        </td>
+        <td><?= htmlspecialchars($company['details']) ?></td>
     </tr>
     </tbody>
 </table>
 <div>
-    <iframe src="https://maps.google.co.jp/maps?output=embed&q=<?= $name ?>"></iframe>
+
 </div>
 <a href="">企業データの編集</a>
 <h2>落とし物一覧</h2>
@@ -62,7 +64,8 @@
     </table>
 <?php } else { ?>
     <p>落とし物が登録されていません。</p>
-<?php } ?>
-<?= date("Y/m/d H:i:s") ?>
+<?php }
+date_default_timezone_set('Asia/Tokyo'); ?>
+<?= date("Y-m-d H:i:s") ?>
 </body>
 </html>

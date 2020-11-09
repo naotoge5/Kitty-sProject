@@ -24,6 +24,11 @@ if (isset($_SESSION['id'])) {
     </dl>
     <input type="submit">
 </form>
+<p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p>
 </body>
-<footer><p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p></footer>
+<p>st071959@m03.kyoto-kcg.ac.jp</p>
+<p>kittypro0201</p>
+<p>10naotoge5.ykputi@gmail.com</p>
+<p>kittypro02</p>
+<footer></footer>
 </html>
