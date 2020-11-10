@@ -44,7 +44,7 @@ require 'header.php';
                 <td>
                     <select name="category" required>
                          <option disabled selected value>未選択</option>
-                            <?php foreach($categorys as $category): ?>
+                            <?php foreach($categories as $category): ?>
                                 <!-- データベースから
                                 <?php //if($category == ) ?>
                                 -->
