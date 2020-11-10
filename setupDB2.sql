@@ -22,7 +22,7 @@ create table companies
     mail           varchar(100) not null,
     password       varchar(100) not null,
     object_update  datetime
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table objects
 (
@@ -33,7 +33,7 @@ create table objects
     category   varchar(100) not null,
     datetime   datetime,
     company_id int          not null
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into companies
 values (null, '京都コンピュータ学院 京都駅前校', '0120123456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
         '10naotoge5.ykputi@gmail.com',
