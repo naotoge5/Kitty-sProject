@@ -9,7 +9,7 @@ try {
     $mail = $_POST['mail'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     //insert文の発行
-    $stmt = $pdo->prepare("INSERT INTO companies VALUES(null, :name  , :tel , :address, :mail, :password )");
+    $stmt = $pdo->prepare("INSERT INTO companies VALUES(null, :name  , :tel ,:postal, :address_first,:address_second,:address_third,:details, :mail, :password )");
     $stmt->execute(array(":name" => $name, ":tel" => $tel, ":address" => $address, ":mail" => $mail, ":password" => $password));
     $_SESSION['id'] = $pdo->lastInsertId();
 } catch (PDOException $e) {
