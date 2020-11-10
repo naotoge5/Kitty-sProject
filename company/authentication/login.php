@@ -2,6 +2,13 @@
 if (isset($_SESSION['id'])) {
     header('../management.php');
 }
+
+//クロスサイトリクエストフォージェリ（CSRF）対策
+$_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(32));
+$token = $_SESSION['token'];
+ 
+//クリックジャッキング対策
+header('X-FRAME-OPTIONS: SAMEORIGIN');
 ?>
 <!DOCTYPE html>
 <html>

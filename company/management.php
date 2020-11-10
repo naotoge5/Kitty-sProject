@@ -1,6 +1,5 @@
 <?php
-include('header.php');
-$company = read_companyData($_SESSION['id'])[0];
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">

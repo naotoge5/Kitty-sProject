@@ -39,7 +39,24 @@ function read_companyData($id)
     }
 }
 
-function read_objectData($id)//落とし物データの呼び出し
+//仮登録アドレスデータの呼び出し
+function read_pre_mailData($id)
+{
+    try {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT * FROM pre_mails WHERE id=:id");
+        $stmt->bindValue(":id", $id, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return $stmt->fetchAll();
+        }
+        return false;
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+}
+
+//落とし物データの呼び出し
+function read_objectData($id)
 {
     try {
         $pdo = getPDO();

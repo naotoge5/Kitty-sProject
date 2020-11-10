@@ -1,6 +1,7 @@
 <?php
 ?>
 <!DOCTYPE html>
+<!--本登録-->
 <html>
 <head>
     <meta charset="utf-8">

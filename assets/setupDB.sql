@@ -12,7 +12,7 @@ create table companies
 (
     id             int auto_increment primary key,
     name           varchar(100) not null,
-    fulltext (name) with parser ngram,
+    /*fulltext (name) with parser ngram,*/
     tel            varchar(100) not null,
     postal         varchar(100) not null,
     address_first  varchar(100) not null,
@@ -28,11 +28,20 @@ create table objects
 (
     id         int auto_increment primary key,
     name       varchar(100) not null,
-    fulltext (name) with parser ngram,
+    /*fulltext (name) with parser ngram,*/
     details    text,
     category   varchar(100) not null,
     datetime   datetime,
     company_id int          not null
+);
+
+create table pre_mails
+(
+     id             int auto_increment primary key,
+     mail           varchar(100) not null,
+     urltoken       varchar(128) not null, /*URLに含めるトークン*/
+     date           datetime     not null,
+     flag           tinyint(1)   not null   default  0, /*flagカラムはデフォルトが0の状態で自動入力され、会員登録が完了した時に、値を1に置き換え*/
 );
 insert into companies
 values (null, '京都コンピュータ学院 京都駅前校', '0120123456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
