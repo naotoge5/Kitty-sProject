@@ -39,7 +39,7 @@ function read_companyData($id)
     }
 }
 
-function read_objectData($id)//落とし物データの呼び出し
+function read_objectList($id)//落とし物データの呼び出し
 {
     try {
         $pdo = getPDO();
@@ -47,6 +47,21 @@ function read_objectData($id)//落とし物データの呼び出し
         $stmt->bindValue(":company_id", $id, PDO::PARAM_STR);
         if ($stmt->execute()) {
             return $stmt->fetchAll();
+        }
+        return false;
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+}
+
+function read_objectData($id)//落とし物データの呼び出し
+{
+    try {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("SELECT * FROM objects WHERE id=:id");
+        $stmt->bindValue("id", $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return $stmt->fetch();
         }
         return false;
     } catch (PDOException $e) {

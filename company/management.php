@@ -12,7 +12,6 @@ $company = read_companyData($_SESSION['id'])[0];
     <script src="../assets/js/company.js"></script>
 </head>
 <body>
-<h1>管理画面</h1>
 <table>
     <thead>
     <tr>
@@ -49,9 +48,9 @@ $company = read_companyData($_SESSION['id'])[0];
         </tr>
         </thead>
         <tbody>
-        <?php foreach (read_objectData($_SESSION['id']) as $row): ?>
+        <?php foreach (read_objectList($_SESSION['id']) as $row): ?>
             <form name="edit<?= htmlspecialchars($row['id']) ?>" action="register.php" method="post">
-                <input type="hidden" name="id" value="<?php htmlspecialchars($row['id']) ?>">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
             </form>
             <tr onClick="document.edit<?= htmlspecialchars($row['id']) ?>.submit();return false;">
                 <td><?= htmlspecialchars($row['name']) ?></td>

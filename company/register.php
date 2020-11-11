@@ -1,10 +1,12 @@
 <?php
 include('header.php');
+$id = 2;
 if (isset($message)) {
     echo $message;
 }
 if (isset($_POST['id'])) {
     //編集
+    echo $_POST['id'];
     $id = $_POST['id'];
     $title = "編集";
 } else {
@@ -12,6 +14,7 @@ if (isset($_POST['id'])) {
     $title = "登録";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -30,7 +33,9 @@ if (isset($_POST['id'])) {
                 <th>名前</th>
                 <td>
                     <input type="text" name="name" placeholder="名前を入力してください" size="25" maxlength="100"
-                           value="<?php if (isset($id))//データベースからnameを持ってくる ?>" required>
+                           value="<?php if (isset($id)): ?>
+                               <?= read_objectData($id)['name']; ?>
+                           <?php endif;//データベースからnameを持ってくる ?>" required>
                 </td>
             </tr>
             <tr>
