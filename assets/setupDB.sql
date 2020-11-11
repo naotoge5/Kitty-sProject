@@ -12,7 +12,6 @@ create table companies
 (
     id             int auto_increment primary key,
     name           varchar(100) not null,
-    fulltext (name) with parser ngram,
     tel            varchar(100) not null,
     postal         varchar(100) not null,
     address_first  varchar(100) not null,
@@ -28,7 +27,6 @@ create table objects
 (
     id         int auto_increment primary key,
     name       varchar(100) not null,
-    fulltext (name) with parser ngram,
     details    text,
     category   varchar(100) not null,
     datetime   datetime,
