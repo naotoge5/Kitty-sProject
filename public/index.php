@@ -11,7 +11,7 @@ include('../assets/functions.php');
     <script src="../assets/js/public.js"></script>
 </head>
 <body>
-<form id="search" method="post" action="">
+<form id="search" method="get" action="">
     <input type="search" name="name" placeholder="店舗名,お忘れ物名">
     <p>複数入力はスペースで区切る。</p>
     <h6>絞り込み↓</h6>
