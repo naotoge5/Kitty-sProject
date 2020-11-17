@@ -44,8 +44,8 @@ function read_pre_mailData($id)
 {
     try {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT * FROM pre_mails WHERE id=:id");
-        $stmt->bindValue(":id", $id, PDO::PARAM_STR);
+        $stmt = $pdo->prepare("SELECT * FROM pre_companies WHERE id=:id");
+        $stmt->bindValue(":mail_id", $id, PDO::PARAM_STR);
         if ($stmt->execute()) {
             return $stmt->fetchAll();
         }

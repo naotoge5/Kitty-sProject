@@ -2,13 +2,6 @@
 if (isset($_SESSION['id'])) {
     header('../management.php');
 }
-
-//クロスサイトリクエストフォージェリ（CSRF）対策
-$_SESSION['token'] = base64_encode(openssl_random_pseudo_bytes(32));
-$token = $_SESSION['token'];
- 
-//クリックジャッキング対策
-header('X-FRAME-OPTIONS: SAMEORIGIN');
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,6 +24,7 @@ header('X-FRAME-OPTIONS: SAMEORIGIN');
     </dl>
     <input type="submit">
 </form>
+<p>※パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</p>
 <p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p>
 </body>
 <p>st071959@m03.kyoto-kcg.ac.jp</p>
