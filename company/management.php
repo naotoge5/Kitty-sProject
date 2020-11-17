@@ -38,7 +38,7 @@ $company = read_companyData($_SESSION['id'])[0];
 <a href="">企業データの編集</a>
 <h2>落とし物一覧</h2>
 <a href="register.php">新規登録</a>
-<?php if (read_objectData($_SESSION['id'])) { ?>
+<?php if (read_objectList($_SESSION['id'])) { ?>
     <table>
         <thead>
         <tr>
@@ -49,9 +49,9 @@ $company = read_companyData($_SESSION['id'])[0];
         </tr>
         </thead>
         <tbody>
-        <?php foreach (read_objectData($_SESSION['id']) as $row): ?>
+        <?php foreach (read_objectList($_SESSION['id']) as $row): ?>
             <form name="edit<?= htmlspecialchars($row['id']) ?>" action="register.php" method="post">
-                <input type="hidden" name="id" value="<?php htmlspecialchars($row['id']) ?>">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($row['id']) ?>">
             </form>
             <tr onClick="document.edit<?= htmlspecialchars($row['id']) ?>.submit();return false;">
                 <td><?= htmlspecialchars($row['name']) ?></td>
