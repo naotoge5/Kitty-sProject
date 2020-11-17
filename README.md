@@ -1,7 +1,7 @@
 # Kitty-sProject
 プロジェクト演習2
 
-setupDB.sql-ダミーデータ（初期）
+setupDB.sql-ダミーデータ（初期）  
 メール：10naotoge5.ykputi@gmail.com
 パスワード：kittypro02
 
