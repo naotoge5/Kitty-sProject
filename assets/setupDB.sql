@@ -1,10 +1,6 @@
 drop database if exists kittydb;
-
 create database kittydb;
-
 use kittydb;
-
-/*create user 'kitty' @'localhost' identified by 'pro02';*/
 /*↓を使う*/
 create user 'kitty'@'localhost' identified by 'pro02';
 
