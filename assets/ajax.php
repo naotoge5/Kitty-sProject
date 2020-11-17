@@ -1,7 +1,6 @@
 <?php
-include('functions.php');
-if (isset($_POST['postal'])) {
-    $url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=' . $_POST['postal'];
+if (isset($_GET['postal'])) {
+    $url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=' . $_GET['postal'];
     $response = getJSON_forAPI($url, true);
     echo $response;
 }

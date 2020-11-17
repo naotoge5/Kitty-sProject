@@ -1,4 +1,6 @@
 <?php
+echo $_GET['name'];
+echo $_GET['prefectures'];
 
 $name=$_GET['name'];
 $prefecture=$_GET['prefectures'];
