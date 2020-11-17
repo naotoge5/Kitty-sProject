@@ -3,8 +3,10 @@ create database kittydb;
 use kittydb;
 /*↓を使う*/
 create user 'kitty'@'localhost' identified by 'pro02';
+/*mysql8.0~*/
+/*create user 'kitty'@'localhost' identified with mysql_native_password by 'pro02';*/
 
-/*mysqlデフォルト認証方式がcaching_sha2_password,PHPのMySQL接続方式が未対応のため*/
+/*権限の付与*/
 grant all on kittydb.* to 'kitty'@'localhost';
 create table companies
 (
@@ -31,6 +33,14 @@ create table objects
     company_id int          not null
 );
 
+create table pre_companies
+(
+     id             int auto_increment primary key,
+     urltoken       varchar(128) not null, /*URLに含めるトークン*/
+     mail           varchar(100) not null,
+     date           datetime     not null,
+     flag           tinyint(1)   not null   default  0 /*flagカラムはデフォルトが0の状態で自動入力され、会員登録が完了した時に、値を1に置き換え*/
+);
 
 insert into companies
 values (null, '京都コンピュータ学院 京都駅前校', '0120123456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
@@ -54,4 +64,3 @@ insert into objects
 values (null, '財布', '駐車場', '財布類', '2020-11-20 15:00:00', 2);
 insert into objects
 values (null, 'シャープペン', '駐車場', '手帳・文具類', '2020-11-21 16:00:00', 2);
-

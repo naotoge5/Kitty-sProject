@@ -10,7 +10,7 @@ $(function () {
         if (password.length == 0) {
             let result = confirm('新規登録でよろしいですか');
             if (result) {
-                $(this).attr('action', 'signup.php');
+                $(this).attr('action', 'mail_check.php');
             } else {
                 return false;
             }
