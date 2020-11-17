@@ -12,7 +12,6 @@ $company = read_companyData($_SESSION['id'])[0];
     <script src="../assets/js/company.js"></script>
 </head>
 <body>
-<h1>管理画面</h1>
 <table>
     <thead>
     <tr>

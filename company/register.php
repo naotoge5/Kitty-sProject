@@ -2,6 +2,7 @@
 include('header.php');
 if (isset($_POST['id'])) {
     //編集
+    echo $_POST['id'];
     $id = $_POST['id'];
     $title = "編集";
 } else {
@@ -9,6 +10,7 @@ if (isset($_POST['id'])) {
     $title = "登録";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
