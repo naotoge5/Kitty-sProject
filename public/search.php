@@ -14,7 +14,7 @@ $categorie=$_GET['categories'];
     var_dump($categorie);*/
 
 
-
+/*
     if($prefecture!=='都道府県を選択してください'){
         
     }
@@ -22,7 +22,7 @@ $categorie=$_GET['categories'];
     if(isset()){
         
     }
-
+*/
 
 
 

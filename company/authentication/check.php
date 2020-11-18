@@ -1,6 +1,6 @@
 <?php
+include('../../assets/functions.php');
 try {
-    include('../../assets/functions.php');
     $pdo = getPDO();//pdo取得
     //変数に格納
     $mail = $_POST['mail'];
@@ -15,10 +15,12 @@ try {
     // 可否を判断する
     if (password_verify($password, $result['password'])) {
         $_SESSION['id'] = $result['id'];
+        $_SESSION['notice'] = 'ログインしました';
         // ログイン成功
         header("Location:../management.php");
     } else {// ログイン失敗
-        header("Location:failure.html");
+        $_SESSION['alert'] = 'メールアドレス、パスワードが違います';
+        header('login.php');
     };
 
 } catch (PDOException $e) {

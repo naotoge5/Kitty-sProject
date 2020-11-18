@@ -1,5 +1,5 @@
 $(function () {
-    $('tbody tr').css("cursor", "pointer");
+    $('.edit').css("cursor", "pointer");
     //form#signにEnterKey無効&submitの制御
     $("#login").keypress(function (e) {
         if (e.which === 13) {
@@ -10,7 +10,7 @@ $(function () {
         if (password.length == 0) {
             let result = confirm('新規登録でよろしいですか');
             if (result) {
-                $(this).attr('action', 'mail_check.php');
+                $(this).attr('action', 'mail.php');
             } else {
                 return false;
             }
@@ -31,7 +31,7 @@ $(function () {
     $('#auto').click(function () {
         let postal = $('input[name="postal"]').val();
         $.ajax({
-            type: "GET", url: "../../assets/ajax.php", data: {postal: postal}
+            type: "GET", url: "ajax.php", data: {postal: postal}
         }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
             setAddress(response)
         }).fail(function () {
