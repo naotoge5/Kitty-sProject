@@ -17,10 +17,10 @@ try {
         $_SESSION['id'] = $result['id'];
         $_SESSION['notice'] = 'ログインしました';
         // ログイン成功
-        header("Location:../management.php");
+        header('Location:../management.php');
     } else {// ログイン失敗
-        $_SESSION['alert'] = 'メールアドレス、パスワードが違います';
-        header('login.php');
+        $_SESSION['alert'] = 'メールアドレス、またはパスワードが違います';
+        header('Location:login.php');
     };
 
 } catch (PDOException $e) {

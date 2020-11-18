@@ -37,7 +37,7 @@ function read_companyData($id)
         $stmt = $pdo->prepare("SELECT * FROM companies WHERE id=:id limit 1");
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     } catch (PDOException $e) {
         die($e->getMessage());
     }
@@ -76,7 +76,7 @@ function read_preCompanyData($token)
 {
     try {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT mail FROM pre_companies WHERE token = :token AND flag = 0 AND date > now() - interval 24 hour limit 1");
+        $stmt = $pdo->prepare("SELECT mail FROM pre_companies WHERE token = :token AND datetime > now() - interval 24 hour limit 1");
         $stmt->bindValue(":token", $token, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch();

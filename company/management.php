@@ -3,7 +3,7 @@ include('../assets/functions.php');
 $title = '管理画面';
 include('../assets/_inc/header.php');
 include('nav.php');
-$company = read_companyData($_SESSION['id'])[0];
+$company = read_companyData($_SESSION['id']);
 ?>
     <main>
         <h1><?= $title ?></h1>

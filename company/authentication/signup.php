@@ -1,6 +1,7 @@
 <?php
 include('../../assets/functions.php');
 $title = 'サインアップ';
+$level = '../';
 include('../../assets/_inc/header.php');
 if (isset($_GET['token'])) {
     $mail = read_preCompanyData($_GET['token'])['mail'];
