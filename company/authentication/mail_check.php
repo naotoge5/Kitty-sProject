@@ -79,20 +79,20 @@ try {
 
 	//受信者設定
 	//差出人アドレス, 差出人名 
-	$mail->setFrom('st031959@m03.kyoto-kcg.ac.jp', mb_encode_mimeheader('kitty-s project')); 
+	$mail->setFrom("st031959@m03.kyoto-kcg.ac.jp", mb_encode_mimeheader('kitty-s project')); 
 	// 受信者アドレス, 受信者名（受信者名はオプション）
 	$mail->addAddress($tomail); 
 
 	 //コンテンツ設定
 	 $mail->isHTML(true);   // HTML形式を指定
 	 //メール表題（タイトル）
-	 $mail->Subject = mb_encode_mimeheader('【落とし物検索サービス】会員登録用URLのお知らせ'); 
+	 $mail->Subject = mb_encode_mimeheader(mb_convert_encoding("【落とし物検索サービス】会員登録用URLのお知らせ","JIS","UTF-8")); 
 	 //本文（HTML用）
 	 //$mail->Body  = mb_convert_encoding('HTML メッセージ <b>BOLD</b>',"JIS","UTF-8");  
 	 //テキスト表示の本文
 	 $mail->AltBody = mb_convert_encoding("24時間以内に下記のURLからご登録下さい。{$url} ","JIS","UTF-8"); 
 		
-	 $mail->send();  //送信
+	 $mail->Send();  //送信
 	//送信判定
 	echo "送信が成功したよ！";
 }catch (Exception $e) {
