@@ -12,7 +12,6 @@ create table companies
 (
     id             int auto_increment primary key,
     name           varchar(100) not null,
-    /*fulltext (name) with parser ngram,*/
     tel            varchar(100) not null,
     postal         varchar(100) not null,
     address_first  varchar(100) not null,
@@ -28,7 +27,6 @@ create table objects
 (
     id         int auto_increment primary key,
     name       varchar(100) not null,
-    /*fulltext (name) with parser ngram,*/
     details    text,
     category   varchar(100) not null,
     datetime   datetime,
@@ -37,11 +35,10 @@ create table objects
 
 create table pre_companies
 (
-     id             int auto_increment primary key,
-     urltoken       varchar(128) not null, /*URLに含めるトークン*/
-     mail           varchar(100) not null,
-     date           datetime     not null,
-     flag           tinyint(1)   not null   default  0 /*flagカラムはデフォルトが0の状態で自動入力され、会員登録が完了した時に、値を1に置き換え*/
+    id       int auto_increment primary key,
+    token    varchar(128) not null,
+    mail     varchar(100) not null,
+    datetime datetime     not null
 );
 
 insert into companies

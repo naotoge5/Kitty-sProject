@@ -1,5 +1,5 @@
 $(function () {
-    $('tbody tr').css("cursor", "pointer");
+    $('.edit').css("cursor", "pointer");
     //form#signにEnterKey無効&submitの制御
     $("#login").keypress(function (e) {
         if (e.which === 13) {
@@ -10,13 +10,19 @@ $(function () {
         if (password.length == 0) {
             let result = confirm('新規登録でよろしいですか');
             if (result) {
-                $(this).attr('action', 'mail_check.php');
+                $(this).attr('action', 'mail.php');
             } else {
                 return false;
             }
         }
     });
     $("#signup").submit(function () {
+        let password = $('input[name="password"]').val();
+        let password_check = $('input[name="password_check"]').val();
+        if (password !== password_check) {
+            alert('パスワードが一致しません');
+            return false;
+        }
         let name = $('input[name="name_first"]').val() + ' ' + $('input[name="name_second"]').val();
         let tel = $('input[name="tel"]').val();
         let postal = $('input[name="postal"]').val();
@@ -28,33 +34,29 @@ $(function () {
         }
     });
     //住所自動入力
-    $('#auto').on('click', function () {
+    $('#auto').click(function () {
         let postal = $('input[name="postal"]').val();
         $.ajax({
-            type: "POST", url: "../../assets/ajax.php", data: {postal: postal}
+            type: "GET", url: "ajax.php", data: {postal: postal}
         }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
-            let data = JSON.parse(response);
-            console.log(data);
-            if (data["results"] != null) {
-                if(data["results"].length == 1) {
-                    $('input[name="address_first"]').val(data["results"][0]["address1"]);
-                    $('input[name="address_second"]').val(data["results"][0]["address2"]);
-                    $('input[name="address_third"]').val(data["results"][0]["address3"]);
-                } else {
-                    alert("複数の市区町村があるため補完できません。");
-                }
-            } else {
-                alert("郵便番号を見直してください。");
-            }
+            setAddress(response)
         }).fail(function () {
-            // 取得エラー
-            console.log('miss');
-        }).always(function () {
-            // 後処理(処理することが在れば)
-            console.log('always');
+            alert('自動入力に失敗しました。');
         });
-
-
     });
 });
 
+function setAddress(response) {
+    let data = JSON.parse(response);
+    if (data["results"] != null) {
+        if (data["results"].length == 1) {
+            $('input[name="address_first"]').val(data["results"][0]["address1"]);
+            $('input[name="address_second"]').val(data["results"][0]["address2"]);
+            $('input[name="address_third"]').val(data["results"][0]["address3"]);
+        } else {
+            alert("複数の市区町村があるため補完できません。");
+        }
+    } else {
+        alert("郵便番号を見直してください。");
+    }
+}
