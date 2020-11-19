@@ -14,12 +14,9 @@ $level = isset($level) ? $level : '';
 <body>
 <div id="alert">
     <?php
-    if (isset($_SESSION['notice'])) {
-        echo '<p class="notice">' . $_SESSION['notice'] . '</p>';
-        unset($_SESSION['notice']);
-    } else if (isset($_SESSION['alert'])) {
-        echo '<p class="alert">' . $_SESSION['alert'] . '</p>';
-        unset($_SESSION['alert']);
-    }
-    ?>
+    if (isset($_SESSION['alert'])):?>
+        <p class="alert" style="background: <?= $_SESSION['alert']['color'] ?>"><?= $_SESSION['alert']['message'] ?></p>
+        <?php unset($_SESSION['alert']);
+    endif; ?>
+
 </div>

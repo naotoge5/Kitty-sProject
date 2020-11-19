@@ -17,6 +17,12 @@ $(function () {
         }
     });
     $("#signup").submit(function () {
+        let password = $('input[name="password"]').val();
+        let password_check = $('input[name="password_check"]').val();
+        if (password !== password_check) {
+            alert('パスワードが一致しません');
+            return false;
+        }
         let name = $('input[name="name_first"]').val() + ' ' + $('input[name="name_second"]').val();
         let tel = $('input[name="tel"]').val();
         let postal = $('input[name="postal"]').val();

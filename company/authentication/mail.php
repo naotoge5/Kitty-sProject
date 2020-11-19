@@ -9,58 +9,80 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-$mail = $_POST['mail'];
-$message = check_mail($mail) ? null : 'このメールアドレスはすでに利用されている可能性があります。';
-if (is_null($message)) {
-    $token = hash('sha256', uniqid(rand(), 1));
-    $url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+$mail = isset($_POST['mail']) ? $_POST['mail'] : null;
+$token = hash('sha256', uniqid(rand(), 1));
+$url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+static $alert;
+if (is_null($mail)) {
+    $alert = messageType('不正なアクセスです');
+} else {
+    switch (check_mail()) {
+        case -1:
+            $alert = messageType('データベース接続エラー');
+            break;
+        case 0:
+            $alert = messageType('このメールアドレスはすでに利用されている可能性があります');
+            break;
+        case 1:
+            switch (white_preCompany()) {
+                case -1:
+                    $alert = messageType('データベース接続エラー');
+                    break;
+                case 1:
+                    if (send_mail()) {
+                        $alert = messageType('メールアドレスに新規登録のURLを送信しました', true);
+                    } else {
+                        $alert = messageType('メールの送信に失敗しました');
+                    }
+            }
+    }
+}
+$_SESSION['alert'] = $alert;
+header('Location:login.php');
+
+function white_preCompany()
+{
+    global $token;
+    global $mail;
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("insert into pre_companies values(null, :token, :mail, now())");
         $stmt->execute(array(":token" => $token, ":mail" => $mail));
-        //データベース接続切断
-        $pdo = null;
-        $message = send_mail($mail, $url) ? null : 'メールの送信に失敗しました。';
+        return 1;
     } catch (PDOException $e) {
-        //die($e->getMessage());
-        $message = 'メールの送信に失敗しました。' . $e->getMessage();
+        return -1;
+    } finally {
+        unset($pdo);
     }
-    if (is_null($message)) $message = 'メールアドレスに新規登録のURLを送信しました';
-
 }
 
-function check_mail($mail)
+function check_mail()
 {
+    global $mail;
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare('SELECT mail FROM companies WHERE mail = :mail limit 1');
         $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            return $stmt->fetch() ? false : true;
-        }
-        return false;
+        $stmt->execute();
+        return $stmt->fetch() ? 0 : 1;//データが存在した場合false
     } catch (PDOException $e) {
-        die($e->getMessage());
+        return -1;
+    } finally {
+        unset($pdo);
     }
 }
 
-function send_mail($mail, $url)
+function send_mail()
 {
-    //文字エンコードを指定
-    mb_language('uni');
-    mb_internal_encoding('UTF-8');
-
-    //インスタンスを生成（true指定で例外を有効化）
-    $mailer = new PHPMailer(true);
-
-    //文字エンコードを指定
-    $mailer->CharSet = 'utf-8';
-
+    global $mail;
+    global $url;
     try {
-        // デバッグ設定
-        // $mail->SMTPDebug = 2; // デバッグ出力を有効化（レベルを指定）
-        // $mail->Debugoutput = function($str, $level) {echo "debug level $level; message: $str<br>";};
+        $mailer = new PHPMailer(true);//インスタンスを生成（true指定で例外を有効化）
 
+        //文字エンコードを指定
+        mb_language('uni');
+        mb_internal_encoding('UTF-8');
+        $mailer->CharSet = 'utf-8';
         // SMTPサーバの設定
         $mailer->isSMTP();                          // SMTPの使用宣言
         $mailer->Host = 'smtp.kcg.ac.jp';   // SMTPサーバーを指定
@@ -80,22 +102,10 @@ function send_mail($mail, $url)
 
         // 送信
         $mailer->send();
-        return true;
+        return 1;
     } catch (Exception $e) {
-        //echo "Message could not be sent. Mailer Error: {$mailer->ErrorInfo}";
-        return false;
+        return 0;
+    } finally {
+        unset($mailer);
     }
 }
-
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>メール確認画面</title>
-    <meta charset="utf-8">
-</head>
-<body>
-<h1><?= $message ?></h1>
-<input type="button" value="戻る" onClick="history.back()">
-</body>
-</html>
