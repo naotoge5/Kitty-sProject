@@ -32,6 +32,15 @@ create table objects
     datetime   datetime,
     company_id int          not null
 );
+
+create table pre_companies
+(
+    id       int auto_increment primary key,
+    token    varchar(128) not null,
+    mail     varchar(100) not null,
+    datetime datetime     not null
+);
+
 insert into companies
 values (null, '京都コンピュータ学院 京都駅前校', '0120123456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
         '10naotoge5.ykputi@gmail.com',
