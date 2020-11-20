@@ -1,7 +1,7 @@
 # 落とし物検索システム
 ### （Kitty-sProject/プロジェクト演習2）
 Build Status:
-https://img.shields.io/badge/PHPMailer-v6.1.8-informational
+https://img.shields.io/badge/sample-good-green.svg
 
 ## 概要
  - 落とし物、お忘れ物などを探したい時に使う。
