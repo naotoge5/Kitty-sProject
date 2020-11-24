@@ -30,8 +30,10 @@ include('nav.php');
     <main>
     <div class="container">
     <div class="card">
+    <div class="card-header mb-3" >
+    <h3 class="card-title"><?= $title ?></h3>
+    </div>
     <div class="card-body">
-        <h3 class="card-header mb-3" ><?= $title ?></h3>
         <?php if ($flag): ?>
             <div class="ml-3">
                 <form action="update.php" method="POST">
