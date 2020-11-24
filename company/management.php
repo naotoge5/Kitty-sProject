@@ -1,4 +1,5 @@
 <?php
+//ログイン成功後　管理ページ
 include('../assets/functions.php');
 $flag = true;
 switch ($company = read_companyData($_SESSION['id'])) {
@@ -60,9 +61,8 @@ include('nav.php');
                                 <td><?= h($row['details']) ?></td>
                                 <td><?= h($row['category']) ?></td>
                                 <td><?= h($row['datetime']) ?></td>
-                                <td class="edit" onClick="document.edit<?= h($row['id']) ?>.submit();return false;">編集
+                                <td input class="edit" onClick="document.edit<?= h($row['id']) ?>.submit();return false;">編集/削除
                                 </td>
-                                <td class="delete">削除</td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

@@ -1,4 +1,5 @@
 <?php
+//新規登録
 include('../../assets/functions.php');
 $flag = true;
 if (!isset($_GET['token'])) {
