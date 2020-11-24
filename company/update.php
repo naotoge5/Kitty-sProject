@@ -10,7 +10,7 @@ static $alert;
 if (is_null($name)) {
     $alert = messageType('不正なアクセスです');
 } else {
-    switch (empty($object_id) ? updateObject($company_id, 0) : updateObject($object_id)) {
+    switch () {
         case -1:
             $_SESSION['alert'] = messageType('データベース接続エラー');
             $url = empty($object_id) ? 'Location:register.php' : 'Location:register.php?id=' . $object_id;
