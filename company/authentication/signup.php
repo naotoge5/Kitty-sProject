@@ -24,9 +24,11 @@ $level = '../';
 include('../../assets/_inc/header.php');
 ?>
 <main>
+<div class="container">
+    <div class="card">
+    <div class="card-body">
     <h1><?= $title ?></h1>
     <?php if ($flag): ?>
-        <div>
             <form id="signup" action="create.php" method="post">
                 <dl>
                     <dt>企業名</dt>
@@ -57,12 +59,12 @@ include('../../assets/_inc/header.php');
                         <input type="password" name="password" placeholder="半角英数" required>
                     </dd>
                     <dt>パスワード（確認）</dt>
-                    <dd>
-                        <input type="password" name="password_check" placeholder="半角英数" required>
-                    </dd>
-                </dl>
-                <input type="submit">
-            </form>
+                            <input type="password" name="password_check" placeholder="半角英数" required>
+                    </dl>
+                    <input type="submit">
+                </form>
+                </div>
+            </div>
         </div>
     <?php else: ?>
         <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
