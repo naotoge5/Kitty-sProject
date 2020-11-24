@@ -28,6 +28,7 @@ include('../assets/_inc/header.php');
 include('nav.php');
 ?>
     <main>
+    <div class="container">
     <div class="card">
     <div class="card-body">
         <h3 class="card-header mb-3" ><?= $title ?></h3>
@@ -71,6 +72,7 @@ include('nav.php');
                 </form>
             </div>
         </div>
+    </div>
     </div>
         <?php else: ?>
             <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>

@@ -11,9 +11,9 @@ $level = isset($level) ? $level : '';
     <title><?= $title ?> </title>
     <link rel="stylesheet" href="<?= $level ?>../assets/css/style.css">
     <!-- BootstrapのCSS読み込み -->
-    <link href="../assets/bootstrap-4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- BootstrapのJS読み込み -->
-    <script src="../assets/bootstrap-4.5.3/js/bootstrap.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div id="alert">
