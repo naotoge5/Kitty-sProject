@@ -5,18 +5,18 @@ $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
 $password = $_POST['password'];
 static $alert;
 if (is_null($mail)) {
-    $alert = messageType('不正なアクセスです');
+    $alert = alertType('不正なアクセスです', 'ERROR');
 } else {
     switch ($id = login_check()) {
         case -1:
-            $alert = messageType('データベース接続エラー');
+            $alert = alertType('データベース接続エラー', 'ERROR');
             break;
         case 0:
-            $alert = messageType('メールアドレス、またはパスワードが違います');
+            $alert = alertType('メールアドレス、またはパスワードが違います', 'ERROR');
             break;
         default:
             $_SESSION['id'] = $id;
-            $_SESSION['alert'] = messageType('ログインしました', true);
+            $_SESSION['alert'] = alertType('ログインしました', 'SUCCESS');
             header('Location:../management.php');
             exit;
     }

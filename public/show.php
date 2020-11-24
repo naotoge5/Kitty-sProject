@@ -3,14 +3,14 @@ include('../assets/functions.php');
 $flag = true;
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 /*if (is_null($id)) {
-    $_SESSION['alert'] = messageType('不正なアクセスです');
+    $_SESSION['alert'] = alertType('不正なアクセスです','ERROR');
     header('Location:top.php');
     exit;
 } else {
-switch ($company = read_companyData($id)) {
+switch ($company = readCompanyData($id)) {
     case -1:
         $flag = false;
-        $_SESSION['alert'] = messageType('データーベース接続エラー');
+        $_SESSION['alert'] = alertType('データーベース接続エラー','ERROR');
         break;
     }
 }*/
@@ -45,6 +45,4 @@ include('../assets/_inc/header.php');
         </table>
     </div>
 </main>
-<script src="../assets/js/jquery-3.5.1.js"></script>
-<script src="../assets/js/public.js"></script>
 <?php include('../assets/_inc/footer.php') ?>

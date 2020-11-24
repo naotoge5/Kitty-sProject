@@ -13,17 +13,17 @@ create database kittydb;
 grant all on kittydb.* to 'kitty'@'localhost';
 create table companies
 (
-    id             int auto_increment primary key,
-    name           varchar(100) not null,
-    tel            varchar(100) not null,
-    postal         varchar(100) not null,
-    prefecture  varchar(100) not null,
-    city varchar(100) not null,
-    town varchar(100) not null,
-    details        text,
-    mail           varchar(100) not null,
-    password       varchar(100) not null,
-    object_update  datetime
+    id            int auto_increment primary key,
+    name          varchar(100) not null,
+    tel           varchar(100) not null,
+    postal        varchar(100) not null,
+    prefecture    varchar(100) not null,
+    city          varchar(100) not null,
+    town          varchar(100) not null,
+    details       text,
+    mail          varchar(100) not null,
+    password      varchar(100) not null,
+    object_update datetime
 );
 
 create table objects

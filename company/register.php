@@ -8,14 +8,14 @@ if (isset($_GET['id'])) {
     switch ($object = read_objectData($id)) {
         case -1:
             $flag = false;
-            $_SESSION['alert'] = messageType('データーベース接続エラー');
+            $_SESSION['alert'] = alertType('データーベース接続エラー', 'ERROR');
             break;
         case 0:
             $title = 'non';
             break;
         default:
             if ($object['company_id'] != $_SESSION['id']) {
-                $_SESSION['alert'] = messageType('不正なアクセスです。');
+                $_SESSION['alert'] = alertType('不正なアクセスです。', 'ERROR');
                 header('Location:management.php');
                 exit;
             }
@@ -26,30 +26,32 @@ if (isset($_GET['id'])) {
     $object = null;
 }
 include('../assets/_inc/header.php');
-include('nav.php');
 ?>
     <main>
-    <div class="container">
-    <div class="card">
-    <div class="card-header mb-3" >
-    <h3 class="card-title"><?= $title ?></h3>
-    </div>
-    <div class="card-body">
-        <?php if ($flag): ?>
-            <div class="ml-3">
-                <form action="update.php" method="POST">
-                    <input type="hidden" name="id" value="<?= $id ?>">
-                        <div class="form-group">
-                            <h5 class="card-title">名前</h5>
-                                <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25" maxlength="100"
+        <div class="container">
+            <div class="card">
+                <div class="card-header mb-3">
+                    <h3 class="card-title"><?= $title ?></h3>
+                </div>
+                <div class="card-body">
+                    <?php if ($flag): ?>
+                    <div class="ml-3">
+                        <form action="update.php" method="POST">
+                            <input type="hidden" name="id" value="<?= $id ?>">
+                            <div class="form-group">
+                                <h5 class="card-title">名前</h5>
+                                <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25"
+                                       maxlength="100"
                                        value="<?php if (isset($object)) echo h($object['name']); ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <h5 class="card-title">詳細</h5>
-                                <textarea name="details" class="form-control" placeholder="落し物の詳細を入力してください" rows="4" cols="60"value=""><?php if (isset($object)) echo h($object['details']); ?></textarea>
-                        </div>
-                        <div class="form-group">
-                            <h5 class="card-title">カテゴリー</h5>
+                            </div>
+                            <div class="form-group">
+                                <h5 class="card-title">詳細</h5>
+                                <textarea name="details" class="form-control" placeholder="落し物の詳細を入力してください" rows="4"
+                                          cols="60"
+                                          value=""><?php if (isset($object)) echo h($object['details']); ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <h5 class="card-title">カテゴリー</h5>
                                 <select name="category" class="form-control" required>
                                     <?php if (!isset($object)): ?>
                                         <option disabled selected value>未選択</option>
@@ -63,30 +65,30 @@ include('nav.php');
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
-                        </div>
-                        <div class="form-group">
-                            <h5>発見時刻</h5>
+                            </div>
+                            <div class="form-group">
+                                <h5>発見時刻</h5>
                                 <!--後々カレンダーから選択できるように 2020-10-20 13:00:00-->
-                                <input type="datetime" name="datetime" class="form-control" placeholder="発見時刻を入力してください" size="25"
+                                <input type="datetime" name="datetime" class="form-control" placeholder="発見時刻を入力してください"
+                                       size="25"
                                        maxlength="100"
                                        value="<?php if (isset($object)) echo h($object['datetime']) ?>" required>
-                         </div>
-                    <input type="submit" class="btn btn-success" value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
-                </form>
+                            </div>
+                            <input type="submit" class="btn btn-success"
+                                   value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
+                        </form>
 
-                <form action="delete.php" method="POST">
-                <?php if (empty($id)); else echo '<input type="submit" value="削除">' ?> 
-                <input type="hidden" name="id" value="<?= $id ?>">
-                </form>
+                        <form action="delete.php" method="POST">
+                            <?php if (empty($id)) ; else echo '<input type="submit" value="削除">' ?>
+                            <input type="hidden" name="id" value="<?= $id ?>">
+                        </form>
 
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
         <?php else: ?>
             <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
         <?php endif; ?>
     </main>
-    <script src="../assets/js/jquery-3.5.1.js"></script>
-    <script src="../assets/js/company.js"></script>
 <?php include('../assets/_inc/footer.php') ?>

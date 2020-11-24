@@ -1,36 +1,34 @@
 <?php
 include('../../assets/functions.php');
-$title = 'ログイン';
-$level = '../';
+$title = 'ログイン ／ ご新規';
 include('../../assets/_inc/header.php');
 ?>
     <main>
-    <div class="container">
-        <div class="card">
-            <div class="card-header mb-3" >
-            <h3 class="card-title"><?= $title ?></h3>
-            </div>
-            <div class="card-body">
-            <form id="login" action="check.php" method="post">
-                <div class="form-group">
-                    <h5 class="card-title">メールアドレス</h5>
-                    <input type="email" name="mail" required>
-                    <h5 class="card-title">パスワード</h5>
-                    <input type="password" name="password">
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><?= $title ?></h3>
                 </div>
-                <input type="submit"class="btn btn-success">
-            </form>
-            <p>※パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</p>
-            <p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p>
+                <div class="card-body">
+                    <form id="login" action="check.php" method="post">
+                        <div class="form-group">
+                            <label>メールアドレス</label>
+                            <input type="email" class="form-control" name="mail" required>
+                            <small class="form-text text-muted">新規の企業様はメールアドレスを入力後、<br>送信ボタンをクリックしてください。確認のメールが送信されます。</small>
+                        </div>
+                        <div class="form-group">
+                            <label>パスワード</label>
+                            <input type="password" class="form-control" name="password">
+                            <small class="form-text text-muted">パスワードを忘れた<a href="">場合</a></small>
+                        </div>
+                        <input type="submit" class="btn btn-success">
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </main>
-            <p>st071959@m03.kyoto-kcg.ac.jp</p>
-            <p>kittypro0201</p>
-            <p>10naotoge5.ykputi@gmail.com</p>
-            <p>kittypro02</p>
-    </body>
-    <script src="../../assets/js/jquery-3.5.1.js"></script>
-    <script src="../../assets/js/company.js"></script>
+    <p>st071959@m03.kyoto-kcg.ac.jp</p>
+    <p>kittypro0201</p>
+    <p>10naotoge5.ykputi@gmail.com</p>
+    <p>kittypro02</p>
 <?php include('../../assets/_inc/footer.php') ?>
