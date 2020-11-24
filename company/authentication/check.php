@@ -1,4 +1,5 @@
 <?php
+//遷移ページのチェック
 include('../../assets/functions.php');
 $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
 $password = $_POST['password'];

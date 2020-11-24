@@ -1,4 +1,5 @@
 <?php
+//メール設定
 include '../../assets/functions.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
