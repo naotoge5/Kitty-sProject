@@ -1,6 +1,15 @@
 <?php
 include('../assets/functions.php');
 include('../assets/_inc/header.php');
+//var_dump($_SESSION['companies']);
+
+if( isset($_SESSION['results'])){    
+    switch($_SESSION['results']){
+case -1:    
+    $_SESSION['alert'] = messageType('データーベース接続エラー');
+    break;
+    }
+}
 ?>
 <main>
     <h1>落とし物検索</h1>
@@ -16,7 +25,7 @@ include('../assets/_inc/header.php');
                         <?php foreach ($prefectures as $prefecture): ?>
                             <option value="<?= $prefecture ?>"><?= $prefecture ?></option>
                         <?php endforeach; ?>
-                    </optgroup> git checkout
+                    </optgroup> 
                 <?php endforeach; ?>
             </select>
             <select name="cities" required>
@@ -34,11 +43,14 @@ include('../assets/_inc/header.php');
             <input type="submit" value="絞り込み">
         </form>
         <table>
-            <?php foreach (($_SESSION['companies']) as $row): ; ?>
+
+            <?php if(isset($_SESSION['results'])):?>
+            <?php foreach ($_SESSION['results'] as $row): ; ?>
                 <tr>
                     <td><?= htmlspecialchars($row['name']) ?></td>
                 </tr>
             <?php endforeach; ?>
+            <?php endif;?>
         </table>
     </div>
 </main>
