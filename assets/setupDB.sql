@@ -1,18 +1,17 @@
-drop database if exists kittydb;
-create database kittydb;
 use kittydb;
 /*↓を使う*/
 create user 'kitty'@'localhost' identified by 'pro02';
 /*mysql8.0~*/
 /*create user 'kitty'@'localhost' identified with mysql_native_password by 'pro02';*/
 
-/*権限の付与*/
+/*権限の付drop database if exists kittydb;
+create database kittydb;
+与*/
 grant all on kittydb.* to 'kitty'@'localhost';
 create table companies
 (
     id             int auto_increment primary key,
     name           varchar(100) not null,
-    fulltext (name) with parser ngram,
     tel            varchar(100) not null,
     postal         varchar(100) not null,
     address_first  varchar(100) not null,
@@ -28,7 +27,6 @@ create table objects
 (
     id         int auto_increment primary key,
     name       varchar(100) not null,
-    fulltext (name) with parser ngram,
     details    text,
     category   varchar(100) not null,
     datetime   datetime,
