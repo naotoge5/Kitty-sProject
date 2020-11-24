@@ -1,4 +1,5 @@
 <?php
+//manegementの編集ボタンから
 include('../assets/functions.php');
 $flag = true;
 if (isset($_GET['id'])) {
@@ -78,6 +79,12 @@ include('nav.php');
                     </table>
                     <input type="submit" value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
                 </form>
+
+                <form action="delete.php" method="POST">
+                <?php if (empty($id)); else echo '<input type="submit" value="削除">' ?> 
+                <input type="hidden" name="id" value="<?= $id ?>">
+                </form>
+
             </div>
         <?php else: ?>
             <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
