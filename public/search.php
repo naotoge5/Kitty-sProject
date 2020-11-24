@@ -29,7 +29,7 @@ if($category!=="カテゴリーを選択してください"){
     
 }
 $_SESSION['results']=searchName($query,$value);
-var_dump($_SESSION['results']);
+header("Location:top.php");
 }
     
 
