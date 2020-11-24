@@ -1,5 +1,19 @@
 <?php
 include('../assets/functions.php');
+$flag = true;
+$id = isset($_GET['id']) ? $_GET['id'] : null;
+/*if (is_null($id)) {
+    $_SESSION['alert'] = messageType('不正なアクセスです');
+    header('Location:top.php');
+    exit;
+} else {
+switch ($company = read_companyData($id)) {
+    case -1:
+        $flag = false;
+        $_SESSION['alert'] = messageType('データーベース接続エラー');
+        break;
+    }
+}*/
 $title = '企業情報';
 include('../assets/_inc/header.php');
 ?>
@@ -11,7 +25,7 @@ include('../assets/_inc/header.php');
                 <th>店名</th>
                 <th>お店の電話番号</th>
             </tr>
-            <?php foreach (read_companyData($_POST['id']) as $contact): ?>
+            <?php foreach ($company as $contact): ?>
                 <tr>
                     <td>
                     </td>

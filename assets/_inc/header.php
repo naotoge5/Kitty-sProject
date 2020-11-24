@@ -9,11 +9,10 @@ $level = isset($level) ? $level : '';
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $title ?> </title>
-    <link rel="stylesheet" href="<?= $level ?>../assets/css/style.css">
     <!-- BootstrapのCSS読み込み -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= $level ?>../assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- BootstrapのJS読み込み -->
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="<?= $level ?>../assets/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div id="alert">

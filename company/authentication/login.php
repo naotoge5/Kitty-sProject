@@ -1,5 +1,4 @@
 <?php
-//最初のログインページ
 include('../../assets/functions.php');
 $title = 'ログイン';
 $level = '../';
@@ -7,8 +6,6 @@ include('../../assets/_inc/header.php');
 ?>
     <main>
         <h1>ログイン</h1>
-        <p>※パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</p>
-        <p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p>
         <div>
             <form id="login" action="check.php" method="post">
                 <dl>
@@ -19,7 +16,8 @@ include('../../assets/_inc/header.php');
                 </dl>
                 <input type="submit">
             </form>
-            
+            <p>※パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</p>
+            <p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p>
             </body>
             <p>st071959@m03.kyoto-kcg.ac.jp</p>
             <p>kittypro0201</p>
