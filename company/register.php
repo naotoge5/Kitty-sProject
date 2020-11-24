@@ -28,30 +28,26 @@ include('../assets/_inc/header.php');
 include('nav.php');
 ?>
     <main>
-        <h1><?= $title ?></h1>
+    <div class="container">
+    <div class="card">
+    <div class="card-body">
+        <h3 class="card-header mb-3" ><?= $title ?></h3>
         <?php if ($flag): ?>
-            <div>
+            <div class="ml-3">
                 <form action="update.php" method="POST">
                     <input type="hidden" name="id" value="<?= $id ?>">
-                    <table>
-                        <tr>
-                            <th>名前</th>
-                            <td>
-                                <input type="text" name="name" placeholder="名前を入力してください" size="25" maxlength="100"
+                        <div class="form-group">
+                            <h5 class="card-title">名前</h5>
+                                <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25" maxlength="100"
                                        value="<?php if (isset($object)) echo h($object['name']); ?>" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>詳細</th>
-                            <td>
-                    <textarea name="details" placeholder="落し物の詳細を入力してください" rows="6" cols="60"
-                              value=""><?php if (isset($object)) echo h($object['details']); ?></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>カテゴリー</th>
-                            <td>
-                                <select name="category" required>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="card-title">詳細</h5>
+                                <textarea name="details" class="form-control" placeholder="落し物の詳細を入力してください" rows="4" cols="60"value=""><?php if (isset($object)) echo h($object['details']); ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="card-title">カテゴリー</h5>
+                                <select name="category" class="form-control" required>
                                     <?php if (!isset($object)): ?>
                                         <option disabled selected value>未選択</option>
                                     <?php endif; ?>
@@ -64,21 +60,20 @@ include('nav.php');
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>発見時刻</th>
-                            <td>
+                        </div>
+                        <div class="form-group">
+                            <h5>発見時刻</h5>
                                 <!--後々カレンダーから選択できるように 2020-10-20 13:00:00-->
-                                <input type="datetime" name="datetime" placeholder="発見時刻を入力してください" size="25"
+                                <input type="datetime" name="datetime" class="form-control" placeholder="発見時刻を入力してください" size="25"
                                        maxlength="100"
                                        value="<?php if (isset($object)) echo h($object['datetime']) ?>" required>
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="submit" value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
+                         </div>
+                    <input type="submit" class="btn btn-success" value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
                 </form>
             </div>
+        </div>
+    </div>
+    </div>
         <?php else: ?>
             <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
         <?php endif; ?>
