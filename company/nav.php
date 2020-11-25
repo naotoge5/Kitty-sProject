@@ -3,7 +3,7 @@ if (!isset($_SESSION['id'])) {
     header('Location:authentication/login.php');
 } else if (isset($_POST['logout'])) {
     unset($_SESSION['id']);
-    $_SESSION['alert'] = messageType('ログアウトしました', true);
+    $_SESSION['alert'] = alertType('ログアウトしました', 'SUCCESS');
     header('Location:authentication/login.php');
 }
 ?>

@@ -3,11 +3,11 @@ include('../assets/functions.php');
 include('../assets/_inc/header.php');
 //var_dump($_SESSION['companies']);
 
-if( isset($_SESSION['results'])){    
-    switch($_SESSION['results']){
-case -1:    
-    $_SESSION['alert'] = messageType('データーベース接続エラー');
-    break;
+if (isset($_SESSION['results'])) {
+    switch ($_SESSION['results']) {
+        case -1:
+            $_SESSION['alert'] = alertType('データーベース接続エラー', 'ERROR');
+            break;
     }
 }
 ?>
@@ -25,7 +25,7 @@ case -1:
                         <?php foreach ($prefectures as $prefecture): ?>
                             <option value="<?= $prefecture ?>"><?= $prefecture ?></option>
                         <?php endforeach; ?>
-                    </optgroup> 
+                    </optgroup>
                 <?php endforeach; ?>
             </select>
             <select name="cities" required>
@@ -44,16 +44,14 @@ case -1:
         </form>
         <table>
 
-            <?php if(isset($_SESSION['results'])):?>
-            <?php foreach ($_SESSION['results'] as $row): ; ?>
-                <tr>
-                    <td><?= htmlspecialchars($row['name']) ?></td>
-                </tr>
-            <?php endforeach; ?>
-            <?php endif;?>
+            <?php if (isset($_SESSION['results'])): ?>
+                <?php foreach ($_SESSION['results'] as $row): ; ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['name']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </table>
     </div>
 </main>
-<script src="../assets/js/jquery-3.5.1.js"></script>
-<script src="../assets/js/public.js"></script>
 <?php include('../assets/_inc/footer.php') ?>

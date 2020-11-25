@@ -26,7 +26,7 @@ $(function () {
         let name = $('input[name="name_first"]').val() + ' ' + $('input[name="name_second"]').val();
         let tel = $('input[name="tel"]').val();
         let postal = $('input[name="postal"]').val();
-        let address = $('input[name="address_first"]').val() + $('input[name="address_second"]').val() + $('input[name="address_third"]').val();
+        let address = $('input[name="prefecture"]').val() + $('input[name="city"]').val() + $('input[name="town"]').val();
         let mail = $('input[name="mail"]').val();
         let result = confirm('企業名\n' + name + '\n電話番号\n' + tel + '\n郵便番号\n' + postal + '\n住所\n' + address + '\nメールアドレス\n' + mail + '\nパスワード\n' + '*****');
         if (!result) {
@@ -50,9 +50,9 @@ function setAddress(response) {
     let data = JSON.parse(response);
     if (data["results"] != null) {
         if (data["results"].length == 1) {
-            $('input[name="address_first"]').val(data["results"][0]["address1"]);
-            $('input[name="address_second"]').val(data["results"][0]["address2"]);
-            $('input[name="address_third"]').val(data["results"][0]["address3"]);
+            $('input[name="prefecture"]').val(data["results"][0]["address1"]);
+            $('input[name="city"]').val(data["results"][0]["address2"]);
+            $('input[name="town"]').val(data["results"][0]["address3"]);
         } else {
             alert("複数の市区町村があるため補完できません。");
         }

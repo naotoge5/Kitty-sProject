@@ -15,25 +15,25 @@ $token = hash('sha256', uniqid(rand(), 1));
 $url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 static $alert;
 if (is_null($mail)) {
-    $alert = messageType('不正なアクセスです');
+    $alert = alertType('不正なアクセスです', 'ERROR');
 } else {
     switch (check_mail()) {
         case -1:
-            $alert = messageType('データベース接続エラー');
+            $alert = alertType('データベース接続エラー', 'ERROR');
             break;
         case 0:
-            $alert = messageType('このメールアドレスはすでに利用されている可能性があります');
+            $alert = alertType('"' . $mail . '"はすでに利用されています', 'ERROR');
             break;
         case 1:
             switch (white_preCompany()) {
                 case -1:
-                    $alert = messageType('データベース接続エラー');
+                    $alert = alertType('データベース接続エラー', 'ERROR');
                     break;
                 case 1:
                     if (send_mail()) {
-                        $alert = messageType('メールアドレスに新規登録のURLを送信しました', true);
+                        $alert = alertType('メールアドレスに新規登録のURLを送信しました', 'SUCCESS');
                     } else {
-                        $alert = messageType('メールの送信に失敗しました');
+                        $alert = alertType('メールの送信に失敗しました');
                     }
             }
     }

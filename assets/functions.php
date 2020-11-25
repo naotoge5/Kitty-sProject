@@ -19,13 +19,28 @@ function h($s)
     return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
 }
 
-function messageType($message, $type = false)
+/**
+ *
+ * @param string $message alert message
+ * @param string $type SUCCESS or ERROR
+ * @return array
+ */
+function alertType(string $message, string $type)
 {
-    return $type ? ['message' => $message, 'color' => 'darkseagreen'] : ['message' => $message, 'color' => 'palevioletred'];
+    static $message_type;
+    switch ($type) {
+        case 'SUCCESS':
+            $message_type = ['message' => $message, 'class' => 'alert alert-success'];
+            break;
+        case 'ERROR':
+            $message_type = ['message' => $message, 'class' => 'alert alert-danger'];
+            break;
+    }
+    return $message_type;
 }
 
 //企業情報の呼び出し
-function read_companyData($id)
+function readCompanyData($id)
 {
     try {
         $pdo = getPDO();
@@ -41,7 +56,7 @@ function read_companyData($id)
 }
 
 //拾得物一覧の呼び出し
-function read_objectList($id)
+function readObjectList($id)
 {
     try {
         $pdo = getPDO();
@@ -50,7 +65,9 @@ function read_objectList($id)
         $stmt->execute();
         return $stmt->fetchAll();
     } catch (PDOException $e) {
-        die($e->getMessage());
+        return -1;
+    } finally {
+        unset($pdo);
     }
 }
 

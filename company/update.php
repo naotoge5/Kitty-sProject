@@ -8,19 +8,19 @@ $object_id = $_POST['id'];
 $company_id = $_SESSION['id'];
 static $alert;
 if (is_null($name)) {
-    $alert = messageType('不正なアクセスです');
+    $alert = alertType('不正なアクセスです');
 } else {
-    switch () {
+    switch (empty($object_id) ? updateObject($company_id, 0) : updateObject($object_id)) {
         case -1:
-            $_SESSION['alert'] = messageType('データベース接続エラー');
+            $_SESSION['alert'] = alertType('データベース接続エラー', 'ERROR');
             $url = empty($object_id) ? 'Location:register.php' : 'Location:register.php?id=' . $object_id;
             header($url);
             exit;
         case 0:
-            $alert = messageType('落し物の登録が完了しました', true);
+            $alert = alertType('落し物の登録が完了しました', 'SUCCESS');
             break;
         case 1:
-            $alert = messageType('落し物の編集が完了しました', true);
+            $alert = alertType('落し物の編集が完了しました', 'SUCCESS');
             break;
     }
 }
