@@ -11,25 +11,15 @@ $city = $_POST['city'];
 $town = $_POST['town'];
 $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-static $alert;
+$url = 'Location:login.php';
 if (is_null($mail)) {
-    $alert = alertType('不正なアクセスです', 'ERROR');
-} else {
-    switch ($id = white_Company()) {
-        case -1:
-            $alert = alertType('データベース接続エラー', 'ERROR');
-            break;
-        default:
-            $_SESSION['id'] = $id;
-            $_SESSION['alert'] = alertType('新規登録が完了しました', 'SUCCESS');
-            header('Location:../management.php');
-            exit;
-    }
+    alert('不正なアクセスです', 'CAUTION');
+} else if (writeCompany()) {
+    $url = 'Location:../management.php';
 }
-header('Location:login.php');
+header($url);
 
-function white_Company()
+function writeCompany()
 {
     global $name;
     global $tel;
@@ -44,14 +34,15 @@ function white_Company()
         //insert文の発行
         $stmt = $pdo->prepare("insert into companies values(null, :name, :tel ,:postal, :prefecture, :city,:town, null, :mail, :password ,null)");
         $stmt->execute(array(":name" => $name, ":tel" => $tel, ":postal" => $postal, ":prefecture" => $prefecture, ":city" => $city, ":town" => $town, ":mail" => $mail, ":password" => $password));
-        $id = $pdo->lastInsertId();
+        $_SESSION['id'] = $pdo->lastInsertId();
         $stmt = $pdo->prepare("delete from pre_companies where mail = :mail");
         $stmt->bindValue(":mail", $mail, PDO::PARAM_STR);
         $stmt->execute();
-        return $id;
+        return 1;
     } catch (PDOException $e) {
-        return -1;
+        alert('データベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }

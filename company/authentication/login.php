@@ -1,13 +1,14 @@
 <?php
 include('../../assets/functions.php');
+
 $title = 'ログイン ／ ご新規';
 include('../../assets/_inc/header.php');
 ?>
     <main>
         <div class="container">
-            <div class="card">
+            <div class="card my-4">
                 <div class="card-header">
-                    <h3 class="card-title"><?= $title ?></h3>
+                    <h3 class="card-title mb-0"><?= $title ?></h3>
                 </div>
                 <div class="card-body">
                     <form id="login" action="check.php" method="post">
@@ -22,13 +23,11 @@ include('../../assets/_inc/header.php');
                             <small class="form-text text-muted">パスワードを忘れた<a href="">場合</a></small>
                         </div>
                         <input type="submit" class="btn btn-success">
+                        <small class="text-muted">st071959@m03.kyoto-kcg.ac.jp kittypro0201</small>
+                        <small class="text-muted">10naotoge5.ykputi@gmail.com kittypro02</small>
                     </form>
                 </div>
             </div>
         </div>
     </main>
-    <p>st071959@m03.kyoto-kcg.ac.jp</p>
-    <p>kittypro0201</p>
-    <p>10naotoge5.ykputi@gmail.com</p>
-    <p>kittypro02</p>
 <?php include('../../assets/_inc/footer.php') ?>

@@ -20,43 +20,48 @@ function h($s)
 }
 
 /**
- *
  * @param string $message alert message
- * @param string $type SUCCESS or ERROR
- * @return array
+ * @param string $type SUCCESS or ERROR or CAUTION
  */
-function alertType(string $message, string $type)
+function alert(string $message, string $type)
 {
-    static $message_type;
+    unset($_SESSION['alert']);
+    static $alert;
     switch ($type) {
         case 'SUCCESS':
-            $message_type = ['message' => $message, 'class' => 'alert alert-success'];
+            $alert = ['message' => $message, 'class' => 'alert alert-success', 'continue' => true];
+            break;
+        case 'CAUTION':
+            $alert = ['message' => $message, 'class' => 'alert alert-warning', 'continue' => true];
             break;
         case 'ERROR':
-            $message_type = ['message' => $message, 'class' => 'alert alert-danger'];
+            $alert = ['message' => $message, 'class' => 'alert alert-danger', 'continue' => false];
             break;
     }
-    return $message_type;
+    $_SESSION['alert'] = $alert;
 }
 
 //企業情報の呼び出し
-function readCompanyData($id)
+function readCompanyData(int $id)
 {
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM companies WHERE id=:id limit 1");
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch();
+        if ($result = $stmt->fetch()) {
+            if ($result) return $result;
+        }
     } catch (PDOException $e) {
-        return -1;
+        alert('データーベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }
 
 //拾得物一覧の呼び出し
-function readObjectList($id)
+function readObjectList(int $id)
 {
     try {
         $pdo = getPDO();
@@ -65,39 +70,50 @@ function readObjectList($id)
         $stmt->execute();
         return $stmt->fetchAll();
     } catch (PDOException $e) {
-        return -1;
+        alert('データーベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }
 
 //拾得物の呼び出し
-function read_objectData($id)
+function readObjectData(int $id)
 {
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT * FROM objects WHERE id =:id limit 1");
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch();
+        if ($result = $stmt->fetch()) {
+            if ($result['company_id'] === $_SESSION['id']) return $result;
+        }
+        alert('不正なアクセスです', 'CAUTION');
+        return null;
     } catch (PDOException $e) {
-        return -1;
+        alert('データーベース接続エラー', 'ERROR');
+        return 0;
     } finally {
         unset($pdo);
     }
 }
 
 //仮登録情報の呼び出し
-function read_preCompanyData($token)
+function readPreCompanyData(string $token)
 {
     try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("SELECT mail FROM pre_companies WHERE token = :token AND datetime > now() - interval 24 hour limit 1");
         $stmt->bindValue(":token", $token, PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt->fetch();
+        if ($result = $stmt->fetch()) {
+            if ($result) return $result['mail'];
+        }
+        alert('無効なURLです', 'CAUTION');
+        return 0;
     } catch (PDOException $e) {
-        return -1;
+        alert('データーベース接続エラー', 'ERROR');
+        return 0;
     } finally {
         unset($pdo);
     }

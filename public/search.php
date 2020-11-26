@@ -1,7 +1,7 @@
 <?php
-echo $_GET['name'];
-echo $_GET['prefectures'];
-$name = empty($_GET['name']) ? '' : "%" . $_GET['name'] . "%";
+include('../assets/functions.php');
+
+$name = "%" . $_GET['name'] . "%";
 $prefecture = isset($_GET['prefectures']) ? $_GET['prefectures'] : null;
 $city = $_GET['cities'];
 $town = $_GET['towns'] . '%';
@@ -11,12 +11,10 @@ $value = [];
 
 
 if (is_null($prefecture)) {
-    $alert = alertType('不正なアクセスです', 'ERROR');
-    header("Location:top.php");
-    exit;
+    alert('不正なアクセスです', 'CAUTION');
 } else {
     if ($prefecture !== '都道府県を選択してください') {
-        $query .= " or prefecture=:prefecture and city=:city and town  like :town";
+        $query .= " and prefecture=:prefecture and city=:city and town  like :town";
         $value = array_merge(array(":prefecture" => $prefecture,
             ":city" => $city,
             ":town" => $town
@@ -24,32 +22,34 @@ if (is_null($prefecture)) {
 
     }
     if ($category !== "カテゴリーを選択してください") {
-        $query .= "  or category=:category";
+        $query .= "  and category=:category";
         $value = array_merge($value, array("category" => $category));
 
     }
-    $_SESSION['results'] = searchName($query, $value);
-    header("Location:top.php");
+    $_SESSION['results'] = searchCompanies($query, $value);
 }
+header("Location:top.php");
 
-
-function searchName($plus_query = "", $plus_value = [])
+/**
+ * @param string $plus_query
+ * @param array $plus_value
+ * @return array|int
+ */
+function searchCompanies(string $plus_query, array $plus_value)
 {
     global $name;
-    $query = "SELECT distinct companies.name  FROM objects JOIN companies ON objects.company_id=companies.id WHERE companies.name LIKE :name OR objects.name LIKE :name" . $plus_query;
+    $query = "select distinct companies.name from objects join companies on objects.company_id = companies.id where (companies.name like :name or objects.name like :name)" . $plus_query;
     $value = array_merge(array(":name" => $name), $plus_value);
     print_r($value);
     try {
-        include('../assets/functions.php');
         $pdo = getPDO();//pdo取得         
         $stmt = $pdo->prepare($query);
         $stmt->execute($value);
         return $stmt->fetchAll();
     } catch (PDOException $e) {
-        return -1;
+        alert('データーベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }
-
-?>

@@ -44,6 +44,12 @@ $(function () {
             alert('自動入力に失敗しました。');
         });
     });
+
+    $('#delete').click(function () {
+        if (confirm('削除してもよろしいですか？')) {
+            $("form[name='delete']").submit();
+        }
+    });
 });
 
 function setAddress(response) {
@@ -59,4 +65,9 @@ function setAddress(response) {
     } else {
         alert("郵便番号を見直してください。");
     }
+}
+
+function toEdit(element) {
+    name = '#edit_' + element.value;
+    $(name).submit();
 }
