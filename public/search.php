@@ -28,7 +28,7 @@ if (is_null($prefecture)) {
     }
     $_SESSION['results'] = searchCompanies($query, $value);
 }
-header("Location:top.php");
+header("Location:result.php");
 
 /**
  * @param string $plus_query
@@ -38,7 +38,7 @@ header("Location:top.php");
 function searchCompanies(string $plus_query, array $plus_value)
 {
     global $name;
-    $query = "select distinct companies.name from objects join companies on objects.company_id = companies.id where (companies.name like :name or objects.name like :name)" . $plus_query;
+    $query = "select distinct companies.id, companies.name, companies.details from objects join companies on objects.company_id = companies.id where (companies.name like :name or objects.name like :name)" . $plus_query;
     $value = array_merge(array(":name" => $name), $plus_value);
     print_r($value);
     try {

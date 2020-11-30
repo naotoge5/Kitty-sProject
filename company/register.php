@@ -13,7 +13,7 @@ include('../assets/_inc/header.php');
                 <div class="card-header pb-0"><!--pb-0:card-header内の下の空間を無視-->
                     <h3 class="card-title"><?= $title ?></h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-none d-sm-block">
                     <form action="update.php" method="POST">
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <div class="form-group">
@@ -62,6 +62,11 @@ include('../assets/_inc/header.php');
                     <form method="POST" name="delete" action="delete.php" class="mb-0">
                         <input type="hidden" name="id" value="<?= $id ?>">
                     </form>
+                </div>
+                <div class="card-body d-block d-sm-none">
+                    <p class="card-text">
+                        この画面ではご利用になれません
+                    </p>
                 </div>
             </div>
         </div>

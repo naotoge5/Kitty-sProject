@@ -10,7 +10,7 @@ include('../../assets/_inc/header.php');
                 <div class="card-header">
                     <h3 class="card-title mb-0"><?= $title ?></h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-none d-sm-block">
                     <form id="login" action="check.php" method="post">
                         <div class="form-group">
                             <label>メールアドレス</label>
@@ -26,6 +26,11 @@ include('../../assets/_inc/header.php');
                         <small class="text-muted">st071959@m03.kyoto-kcg.ac.jp kittypro0201</small>
                         <small class="text-muted">10naotoge5.ykputi@gmail.com kittypro02</small>
                     </form>
+                </div>
+                <div class="card-body d-block d-sm-none">
+                    <p class="card-text">
+                        この画面ではご利用になれません
+                    </p>
                 </div>
             </div>
         </div>
