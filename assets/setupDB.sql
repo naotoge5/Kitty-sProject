@@ -15,7 +15,7 @@ create table companies
 (
     id            int auto_increment primary key,
     name          varchar(100) not null,
-    tel           varchar(100) not null,
+    tel           varchar(100) null,
     postal        varchar(100) not null,
     prefecture    varchar(100) not null,
     city          varchar(100) not null,

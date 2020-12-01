@@ -1,5 +1,5 @@
 <?php
-//遷移ページのチェック
+//遷移ページのチェック　ログイン可否
 include('../../assets/functions.php');
 $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
 $password = $_POST['password'];

@@ -1,4 +1,5 @@
 <?php
+//企業管理ページ
 include('../assets/functions.php');
 
 $id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
@@ -19,11 +20,7 @@ include('../assets/_inc/header.php');
                         <h5 class="card-title">住所</h5>
                         <p class="card-text">〒&nbsp;<?= substr(h($company['postal']), 0, 3) . '-' . substr(h($company['postal']), -4) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?></p>
                         <h5 class="card-title">電話番号</h5>
-                        <?php if (strlen($company['tel']) === 10): ?>
-                                TEL：<a href="tel:<?= h($company['tel']) ?>"><?= substr(h($company['tel']), 0, 4) . '-' . substr(h($company['tel']), 4, 3) . '-' . substr(h($company['tel']), 7, 3) ?></a>
-                        <?php else: ?>
-                                TEL：<a href="tel:<?= h($company['tel']) ?>"><?= substr(h($company['tel']), 0, 3) . '-' . substr(h($company['tel']), 3, 4) . '-' . substr(h($company['tel']), 6, 4) ?></a>
-                        <?php endif; ?>
+                        <p class="card-text">TEL：<a href="tel:(str_replace('-', '', h($company['tel'])))"><?= h($company['tel']) ?></a></p>
                     </div>
                     <div class="col-6">
                         <h5 class="card-title">営業時間等</h5>
@@ -41,7 +38,7 @@ include('../assets/_inc/header.php');
             </div>
             <div class="card my-4 d-none d-sm-block">
                 <div class="card-header">
-                    <h3 class="card-title mb-0" style="display: inline;"> 拾得物一覧 ／ </h3><h3 class="new-objects" style="display: inline;"><a style="color: #FFCC66" href="register.php">新規追加</a></h3>
+                    <h3 class="card-title mb-0" style="display: inline;"> 拾得物一覧 ／ </h3><h3 class="new-objects" style="display: inline;"><a style="color: #FFAA66" href="register.php">新規追加</a></h3>
                 </div>
                 <div class="card-body">
                     <?php if ($objects): ?>

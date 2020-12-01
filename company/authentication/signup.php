@@ -36,7 +36,7 @@ if (!$mail) {
                         </div>
                         <div class="form-group">
                             <h5 class="card-title">電話番号</h5>
-                            <input type="tel" name="tel" class="form-control" placeholder="ハイフン無し,半角" required>
+                            <input type="text" name="tel" class="form-control" placeholder="ハイフン有り,半角" pattern="\d{2,4}-\d{2,4}-\d{3,4}" required>
                         </div>
                         <div class="form-group">
                             <h5 class="card-title">郵便番号</h5>
