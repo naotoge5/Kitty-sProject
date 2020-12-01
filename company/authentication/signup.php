@@ -35,12 +35,11 @@ include('../../assets/_inc/header.php');
                         </div>
                         <div class="form-group">
                             <h5 class="card-title">電話番号</h5>
-                            <input type="text" name="tel" class="form-control" placeholder="ハイフン有り,半角" pattern="\d{2,4}-\d{2,4}-\d{3,4}" required>
+                            <input type="text" name="tel" class="form-control" placeholder="ハイフン有,半角" pattern="\d{2,4}-\d{2,4}-\d{3,4}" maxlength="13" required>
                         </div>
                         <div class="form-group">
                             <h5 class="card-title">郵便番号</h5>
-                            <input type="text" class="form-control" pattern="[0-9]{7}" maxlength="7" minlength="7"
-                                   name="postal" placeholder="ハイフン無し,半角" required>
+                            <input type="text" class="form-control" pattern="\d{3}-\d{4}" maxlength="8" name="postal" placeholder="ハイフン有,半角" required>
                             <input type="button" class="form-control" id="auto" value="住所自動入力">
                         </div>
                         <div class="form-group">

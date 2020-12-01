@@ -6,7 +6,7 @@ $(function () {
         "paging": false,
         "info": false,
         columnDefs: [
-            { targets: 0, width: "50%" }
+            {targets: 0, width: "50%"}
         ],
         oLanguage: {
             /* 日本語化設定 */
@@ -57,9 +57,11 @@ $(function () {
     });
     //住所自動入力
     $('#auto').click(function () {
-        let postal = $('input[name="postal"]').val();
+        let postal = $('input[name="postal"]').val().replace('-', '');
         $.ajax({
-            type: "GET", url: "ajax.php", data: {postal: postal}
+            type: "GET",
+            url: "ajax.php",
+            data: {request_url: "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + postal}
         }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
             setAddress(response)
         }).fail(function () {

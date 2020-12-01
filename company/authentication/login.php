@@ -16,7 +16,7 @@ include('../../assets/_inc/header.php');
                         <div class="form-group">
                             <label>メールアドレス</label>
                             <input type="email" class="form-control" name="mail" required>
-                            <small class="form-text text-muted"><P style="color: #FFAA66">新規の企業様はメールアドレスを入力後、<br>送信ボタンをクリックしてください。確認のメールが送信されます。</p></small>
+                            <small class="form-text text-warning">新規の企業様はメールアドレスを入力後、<br>送信ボタンをクリックしてください。確認のメールが送信されます。</small>
                         </div>
                         <div class="form-group">
                             <label>パスワード</label>
