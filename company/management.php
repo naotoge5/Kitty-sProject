@@ -20,7 +20,7 @@ include('../assets/_inc/header.php');
                         <h5 class="card-title">住所</h5>
                         <p class="card-text">〒&nbsp;<?= substr(h($company['postal']), 0, 3) . '-' . substr(h($company['postal']), -4) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?></p>
                         <h5 class="card-title">電話番号</h5>
-                        <p class="card-text">TEL：<a href="tel:(str_replace('-', '', h($company['tel'])))"><?= h($company['tel']) ?></a></p>
+                        <p class="card-text">TEL：<a href="tel:<?= str_replace('-', '', h($company['tel']))?>"><?= h($company['tel']) ?></a></p>
                     </div>
                     <div class="col-6">
                         <h5 class="card-title">営業時間等</h5>
