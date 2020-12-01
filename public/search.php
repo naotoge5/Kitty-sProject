@@ -2,7 +2,7 @@
 include '../assets/functions.php';
 
 $name = $_GET['name'];
-$prefecture = isset($_GET['prefectures']) ? $_GET['prefectures'] : null;
+$prefecture = isset($_GET['prefectures']) ? $_GET['prefectures'] : 0;
 $city = $_GET['cities'];
 $town = $_GET['towns'];
 $category = $_GET['categories'];
@@ -10,9 +10,7 @@ $query = "";
 $value = [];
 $keywords = [$name];
 
-if (is_null($prefecture)) {
-    alert('不正なアクセスです', 'CAUTION');
-} else {
+if ($prefecture) {
     if ($prefecture !== '都道府県を選択してください') {
         $query .= " and prefecture=:prefecture and city=:city and town  like :town";
         $value = array_merge(array(":prefecture" => $prefecture,
@@ -28,6 +26,8 @@ if (is_null($prefecture)) {
     }
     $_SESSION['data']['keywords'] = $keywords;
     $_SESSION['data']['results'] = searchCompanies($query, $value);
+} else {
+    alert('不正なアクセスです', 'CAUTION');
 }
 header("Location:result.php");
 
@@ -41,7 +41,6 @@ function searchCompanies(string $plus_query, array $plus_value)
     global $name;
     $query = "select distinct companies.id, companies.name, companies.details from objects join companies on objects.company_id = companies.id where (companies.name like :name or objects.name like :name)" . $plus_query . " order by objects.datetime desc";
     $value = array_merge(array(":name" => "%" . $name . "%"), $plus_value);
-    print_r($value);
     try {
         $pdo = getPDO();//pdo取得         
         $stmt = $pdo->prepare($query);

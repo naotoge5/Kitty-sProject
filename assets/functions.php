@@ -46,12 +46,11 @@ function readCompanyData(int $id)
 {
     try {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT * FROM companies WHERE id=:id limit 1");
+        $stmt = $pdo->prepare("select * from companies where id=:id limit 1");
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        if ($result = $stmt->fetch()) {
-            if ($result) return $result;
-        }
+        $result = $stmt->fetch();
+        if ($result) return $result;
         alert('不正なアクセスです', 'CAUTION');
     } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');
@@ -66,7 +65,7 @@ function readObjectList(int $id)
 {
     try {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT * FROM objects WHERE company_id=:company_id");
+        $stmt = $pdo->prepare("select * from objects where company_id=:company_id");
         $stmt->bindValue(":company_id", $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -83,12 +82,11 @@ function readObjectData(int $id)
 {
     try {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT * FROM objects WHERE id =:id limit 1");
+        $stmt = $pdo->prepare("select * from objects where id =:id limit 1");
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        if ($result = $stmt->fetch()) {
-            if ($result['company_id'] === $_SESSION['id']) return $result;
-        }
+        $result = $stmt->fetch();
+        if ($result and ($result['company_id'] === $_SESSION['id'])) return $result;
         alert('不正なアクセスです', 'CAUTION');
     } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');
@@ -103,12 +101,11 @@ function readPreCompanyData(string $token)
 {
     try {
         $pdo = getPDO();
-        $stmt = $pdo->prepare("SELECT mail FROM pre_companies WHERE token = :token AND datetime > now() - interval 24 hour limit 1");
+        $stmt = $pdo->prepare("select mail from pre_companies where token = :token and datetime > now() - interval 24 hour limit 1");
         $stmt->bindValue(":token", $token, PDO::PARAM_STR);
         $stmt->execute();
-        if ($result = $stmt->fetch()) {
-            if ($result) return $result['mail'];
-        }
+        $result = $stmt->fetch();
+        if ($result) return $result['mail'];
         alert('無効なURLです', 'CAUTION');
     } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');

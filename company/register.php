@@ -2,9 +2,9 @@
 include('../assets/functions.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
-$object = empty($id) ? null : readObjectData($id);
+$object = $id ? readObjectData($id) : 0;
 
-$title = empty($id) ? '拾得物-新規' : '拾得物-編集';
+$title = $id ? '拾得物-編集' : '拾得物-新規';
 include('../assets/_inc/header.php');
 ?>
     <main>
@@ -19,18 +19,18 @@ include('../assets/_inc/header.php');
                         <div class="form-group">
                             <label>名前</label>
                             <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25"
-                                   maxlength="100" value="<?php if (isset($object)) echo h($object['name']) ?>"
+                                   maxlength="100" value="<?php if ($object) echo h($object['name']) ?>"
                                    required>
                         </div>
                         <div class="form-group">
                             <label>詳細</label>
                             <textarea name="details" class="form-control" placeholder="落し物の詳細を入力してください" rows="4"
-                                      cols="60"><?php if (isset($object)) echo h($object['details']); ?></textarea>
+                                      cols="60"><?php if ($object) echo h($object['details']); ?></textarea>
                         </div>
                         <div class="form-group">
                             <label>カテゴリー</label>
                             <select name="category" class="form-control" required>
-                                <?php if (!isset($object)): ?>
+                                <?php if (!$object): ?>
                                     <option disabled selected value>未選択</option>
                                 <?php endif; ?>
                                 <?php foreach ($categories as $category): ?>
@@ -49,12 +49,12 @@ include('../assets/_inc/header.php');
                             <input type="datetime" name="datetime" class="form-control" placeholder="発見時刻を入力してください"
                                    size="25"
                                    maxlength="100"
-                                   value="<?php if (isset($object)) echo h($object['datetime']) ?>" required>
+                                   value="<?php if ($object) echo h($object['datetime']) ?>" required>
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-success"
                                    value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
-                            <?php if (!empty($id)): ?>
+                            <?php if ($id): ?>
                                 <input type="button" id="delete" class="btn btn-danger" value="削除">
                             <?php endif; ?>
                         </div>

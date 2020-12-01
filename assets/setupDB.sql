@@ -45,11 +45,11 @@ create table pre_companies
 );
 
 insert into companies
-values (null, '京都コンピュータ学院 京都駅前校', '0120-123-456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
+values (null, '京都コンピュータ学院 京都駅前校', '0120-123-456', '601-8407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
         '10naotoge5.ykputi@gmail.com',
         '$2y$10$CstYoew/bQ0z7Yjb6T1wh.Z3wfynIEbQ5eySdwN8kyYaekPjfDSxC', null);
 insert into companies
-values (null, '京都情報大学院大学 百万遍キャンパス', '012-078-9111', '6068225', '京都府', '京都市左京区', '田中門前町7', null,
+values (null, '京都情報大学院大学 百万遍キャンパス', '012-078-9111', '606-8225', '京都府', '京都市左京区', '田中門前町7', null,
         'st071959@m03.kyoto-kcg.ac.jp',
         '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa', null);
 insert into objects

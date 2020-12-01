@@ -17,7 +17,7 @@ include('../assets/_inc/header.php');
                     <div class="row">
                     <div class="col-6">
                         <h5 class="card-title">住所</h5>
-                        <p class="card-text">〒&nbsp;<?= substr(h($company['postal']), 0, 3) . '-' . substr(h($company['postal']), -4) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?></p>
+                        <p class="card-text">〒&nbsp;<?= h($company['postal']) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?></p>
                         <h5 class="card-title">電話番号</h5>
                         <p class="card-text">TEL：<a href="tel:<?= str_replace('-', '', h($company['tel']))?>"><?= h($company['tel']) ?></a></p>
                     </div>

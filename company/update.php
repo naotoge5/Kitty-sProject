@@ -10,7 +10,7 @@ $object_id = $_POST['id'];
 if (is_null($name)) {
     alert('不正なアクセスです', 'CAUTION');
 } else {//編集
-    empty($object_id) ? updateObject($_SESSION['id'], false) : updateObject($object_id);
+    $object_id ? updateObject($object_id) : updateObject($_SESSION['id'], false);
 }
 
 header('Location:management.php');

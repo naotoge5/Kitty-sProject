@@ -1,10 +1,12 @@
 <?php
 include '../assets/functions.php';
-$companies = isset($_SESSION['data']['results']) ? $_SESSION['data']['results'] : null;
-//unset($_SESSION['data']['results']);
+$companies = isset($_SESSION['data']['results']) ? $_SESSION['data']['results'] : 0;
+if (!isset($_SESSION['data']['keywords'])) {
+
+}
+unset($_SESSION['data']['results']);
 $title = '落とし物検索';
 include '../assets/_inc/header.php';
-//print_r($_SESSION['data']['keywords']);
 $keywords = '';
 foreach ($_SESSION['data']['keywords'] as $index => $keyword) {
     if ($index == count(['keywords']) + 1) {
