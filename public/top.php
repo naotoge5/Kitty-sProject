@@ -3,6 +3,17 @@ include('../assets/functions.php');
 $title = '落とし物検索';
 include('../assets/_inc/header.php');
 ?>
+<script type="text/javascript">
+$(function(){
+  $("input").on("keydown",function(ev){
+    if ((ev.which && ev.which === 13) ||(ev.keyCode && ev.keyCode === 13)){
+      return false;
+    } else {
+      return true;
+    }
+  });
+});
+</script>
 <main>
     <form id="search" method="get" action="search.php">
         <div class="container">
@@ -65,13 +76,13 @@ include('../assets/_inc/header.php');
                 </div>
             </div>
         </div>
-    </form>
     </div>
     <div class="m-2">
         &nbsp;
     </div>
     <div class="fixed-bottom m-2">
-        <button class="btn btn-success btn-block">検索する</button>
+        <button type="submit" class="btn btn-success btn-block">検索する</button>
     </div>
+    </form>
 </main>
 <?php include('../assets/_inc/footer.php') ?>

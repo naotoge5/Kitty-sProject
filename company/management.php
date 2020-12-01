@@ -41,7 +41,7 @@ include('../assets/_inc/header.php');
             </div>
             <div class="card my-4 d-none d-sm-block">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">拾得物</h3>
+                    <h3 class="card-title mb-0" style="display: inline;"> 拾得物一覧 ／ </h3><h3 class="new-objects" style="display: inline;"><a style="color: #FFCC66" href="register.php">新規追加</a></h3>
                 </div>
                 <div class="card-body">
                     <?php if ($objects): ?>

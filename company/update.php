@@ -37,7 +37,7 @@ function updateObject(int $id, $type = true)
         $stmt->bindValue(":id", $company_id, PDO::PARAM_INT);
         $stmt->execute();
         */
-        $type ? alert('落し物の編集が完了しました', 'SUCCESS') : alert('落し物の登録が完了しました', 'SUCCESS');
+        $type ? alert('落とし物の編集が完了しました', 'SUCCESS') : alert('落とし物の登録が完了しました', 'SUCCESS');
     } catch (PDOException $e) {
         alert('データベース接続エラー', 'ERROR');
     } finally {
