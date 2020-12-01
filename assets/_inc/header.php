@@ -9,7 +9,7 @@ $flag = true;
     <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <title><?= $title ?></title>
         <!-- jQueryの読み込み -->
         <script src="<?= $level ?>../assets/js/jquery-3.5.1.js"></script>
