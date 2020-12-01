@@ -52,6 +52,7 @@ function readCompanyData(int $id)
         if ($result = $stmt->fetch()) {
             if ($result) return $result;
         }
+        alert('不正なアクセスです', 'CAUTION');
     } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');
     } finally {
@@ -89,13 +90,12 @@ function readObjectData(int $id)
             if ($result['company_id'] === $_SESSION['id']) return $result;
         }
         alert('不正なアクセスです', 'CAUTION');
-        return null;
     } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');
-        return 0;
     } finally {
         unset($pdo);
     }
+    return 0;
 }
 
 //仮登録情報の呼び出し
@@ -110,11 +110,10 @@ function readPreCompanyData(string $token)
             if ($result) return $result['mail'];
         }
         alert('無効なURLです', 'CAUTION');
-        return 0;
     } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');
-        return 0;
     } finally {
         unset($pdo);
     }
+    return 0;
 }

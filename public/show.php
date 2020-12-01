@@ -3,7 +3,12 @@ include('../assets/functions.php');
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $company = readCompanyData($id);
 $objects = readObjectList($id);
+if (!$company) {
+    header("Location:top.php");
+    exit;
+}
 $title = '企業情報';
+
 include('../assets/_inc/header.php');
 ?>
 <main>
