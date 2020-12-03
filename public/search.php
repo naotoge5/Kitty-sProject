@@ -40,14 +40,16 @@ function searchCompanies(string $plus_query, array $plus_value)
 {
     global $name;
     $query = "select distinct companies.id, companies.name, companies.details from objects join companies on objects.company_id = companies.id where (companies.name like :name or objects.name like :name)" . $plus_query . " order by objects.datetime desc";
-    $value = array_merge(array(":name" => "%" . $name . "%"), $plus_value);
+    $value = array_merge(array(":name" => $name), $plus_value);
+    print_r($value);
     try {
-        $pdo = getPDO();//pdo取得         
+        $pdo = getPDO();//pdo取得
+        //$pdo->query("set session sql_mode=(select replace(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
         $stmt = $pdo->prepare($query);
         $stmt->execute($value);
         return $stmt->fetchAll();
     } catch (PDOException $e) {
-        alert('データーベース接続エラー', 'ERROR');
+        alert($e.'データーベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
