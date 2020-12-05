@@ -67,7 +67,7 @@ include('../assets/_inc/header.php');
                         <div class="form-group col-sm-6">
                             <h5 class="card-title">発見時刻</h5>
                             <div class="input-group date" id="datetimepicker1">
-                                <label for="datetimepicker1" class="pt-2 pr-2">日付:</label>
+                                <label for="datetimepicker1" class="pt-2 pr-2">日付</label>
                                 <input type="text" name="date" class="form-control" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
@@ -77,7 +77,7 @@ include('../assets/_inc/header.php');
                         <div class="form-group col-sm-6">
                         <h5 class="card-title">&nbsp;</h5>
                             <div class="input-group date" id="datetimepicker2">
-                                <label for="datetimepicker2" class="pt-2 pr-2">時間:</label>
+                                <label for="datetimepicker2" class="pt-2 pr-2">時間</label>
                                 <input type="text" name="time" class="form-control" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
