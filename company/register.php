@@ -53,7 +53,6 @@ include('../assets/_inc/header.php');
                                 <span class="input-group-append ">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </span>
-                                </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
