@@ -3,7 +3,7 @@ include('../assets/functions.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $object = $id ? readObjectData($id) : 0;
-$datetime = $id ? explode(' ', $object['datetime']) : 0;
+$datetime = $object ? explode(' ', $object['datetime']) : 0;
 
 $title = $id ? '拾得物-編集' : '拾得物-新規';
 include('../assets/_inc/header.php');
@@ -49,7 +49,7 @@ include('../assets/_inc/header.php');
                             <label>発見時刻</label>
                             <div class="input-group date" id="date">
                                 <label for="date" class="pr-2 pt-1" >日付</label>
-                                <input type="text" name="date" class="form-control rounded-left" value="<?php if (isset($object)) echo h($datetime[0]); ?>" required />
+                                <input type="text" name="date" class="form-control rounded-left" value="<?php if ($object) echo h($datetime[0]); ?>" required />
                                 <span class="input-group-append ">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </span>
@@ -59,7 +59,7 @@ include('../assets/_inc/header.php');
                         <label>&nbsp;</label>
                             <div class="input-group date" id="time">
                                 <label for="time" class="pr-2 pt-1">時間</label>
-                                <input type="text" name="time" class="form-control rounded-left" value="<?php if (isset($object)) echo h($datetime[1]); ?>" required />
+                                <input type="text" name="time" class="form-control rounded-left" value="<?php if ($object) echo h($datetime[1]); ?>" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                                 </span>
