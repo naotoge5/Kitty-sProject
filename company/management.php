@@ -24,7 +24,7 @@ include('../assets/_inc/header.php');
                     <div class="col-6">
                         <h5 class="mb-0 card-title ">営業時間等</h5>
                         <form name="opening-hours">
-                        <textarea id ="details" cols="30" rows="3"><?= h($company['details']); ?></textarea>
+                        <textarea id ="details" class="w-100" rows="4"><?= h($company['details']); ?></textarea>
                         </form>
                         <button type = "button" class = "btn btn-success  btn-sm "  onclick="update()">更新</ button>
                     </div>
@@ -44,7 +44,7 @@ include('../assets/_inc/header.php');
                 </div>
                 <div class="card-body">
                     <?php if ($objects): ?>
-                        <table id="objects_table" class="table">
+                        <table id="objects_table" class="table w-100">
                             <thead>
                             <tr>
                                 <th>名前</th>
