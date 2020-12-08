@@ -24,34 +24,34 @@ if (!$mail) {
                     <form id="signup" action="create.php" method="post">
                         <div class="form-row">
                             <div class="form-group col-sm-6">
-                                <h5 class="card-title">企業名</h5>
+                                <label>企業名</label>
                                 <input type="text" name="name_first" class="form-control" placeholder="会社名,チェーン名"
                                        required>
                             </div>
                             <div class="form-group col-sm-6">
-                                <h5 class="card-title">&nbsp;</h5>
+                                <label>&nbsp;</label>
                                 <input type="text" name="name_second" class="form-control" placeholder="支店名,店舗名"
                                        required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">電話番号</h5>
+                            <label>電話番号</label>
                             <input type="tel" name="tel" class="form-control" placeholder="ハイフン無し,半角" required>
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">郵便番号</h5>
+                            <label>郵便番号</label>
                             <input type="text" class="form-control" pattern="[0-9]{7}" maxlength="7" minlength="7"
                                    name="postal" placeholder="ハイフン無し,半角" required>
                             <input type="button" class="form-control" id="auto" value="住所自動入力">
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">住所</h5>
+                            <label>住所</label>
                             <input type="text" name="prefecture" class="form-control" placeholder="都道府県" required>
                             <input type="text" name="city" class="form-control" placeholder="市区町村" required>
                             <input type="text" name="town" class="form-control" placeholder="町名番地" required>
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">メールアドレス</h5>
+                            <label>メールアドレス</label>
                             <input type="email" name="mail" readonly class="form-control" value="<?= $mail ?>" required>
                         </div>
                         <div class="form-group">

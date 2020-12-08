@@ -36,18 +36,18 @@ include('../assets/_inc/header.php');
                     <form action="update.php" method="POST">
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <div class="form-group">
-                            <h5 class="cord-title">名前</h5>
+                            <label>名前</label>
                             <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25"
                                    maxlength="100" value="<?php if (isset($object)) echo h($object['name']) ?>"
                                    required>
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">詳細</h5>
+                            <label>詳細</label>
                             <textarea name="details" class="form-control" placeholder="落し物の詳細を入力してください" rows="4"
                                       cols="60"><?php if (isset($object)) echo h($object['details']); ?></textarea>
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">カテゴリー</h5>
+                            <label>カテゴリー</label>
                             <select name="category" class="form-control" required>
                                 <?php if (!isset($object)): ?>
                                     <option disabled selected value>未選択</option>
@@ -64,7 +64,7 @@ include('../assets/_inc/header.php');
                         </div>
                         <div class="form-row">
                         <div class="form-group col-sm-6">
-                            <h5 class="card-title">発見時刻</h5>
+                            <label>発見時刻</label>
                             <div class="input-group date" id="date">
                                 <label for="date" class="pt-2 pr-2">日付</label>
                                 <input type="text" name="date" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[0]); ?>" required />
@@ -74,7 +74,7 @@ include('../assets/_inc/header.php');
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                        <h5 class="card-title">&nbsp;</h5>
+                        <label>&nbsp;</label>
                             <div class="input-group date" id="time">
                                 <label for="time" class="pt-2 pr-2">時間</label>
                                 <input type="text" name="time" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[1]); ?>" required />
