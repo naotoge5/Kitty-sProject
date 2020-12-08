@@ -98,7 +98,7 @@ $(function () {
                  url: "ajax.php",  
                 data:{details: detail}
              }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
-                 alert('内容を更新しました。');
+                 
              }).fail(function () {
                  alert('更新に失敗しました。');
              });

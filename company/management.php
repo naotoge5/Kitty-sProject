@@ -11,25 +11,25 @@ include('../assets/_inc/header.php');
         <div class="container">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0"><?= h($company['name']) ?></h4>
+                    <h3 class="card-title mb-0"><?= h($company['name']) ?></h3>
                 </div>
                 <div class="card-body d-none d-sm-block">
                     <div class="row">
                     <div class="col-6">
-                        <h5 class="card-title">住所</h5>
+                        <h5 class="mb-0 card-title " >住所</h5>
                         <p class="card-text">〒&nbsp;<?= h($company['postal']) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?></p>
-                        <h5 class="card-title">電話番号</h5>
+                        <h5 class="mb-0 card-title ">電話番号</h5>
                         <p class="card-text">TEL：<a href="tel:<?= str_replace('-', '', h($company['tel']))?>"><?= h($company['tel']) ?></a></p>
                     </div>
                     <div class="col-6">
-                        <h5 class="card-title">営業時間等</h5>
+                        <h5 class="mb-0 card-title ">営業時間等</h5>
                         <form name="opening-hours">
-                        <textarea id ="details" cols="30" rows="3"></textarea>
+                        <textarea id ="details" cols="30" rows="3"><?= h($company['details']); ?></textarea>
                         </form>
-                        <button type = "button" class = "btn btn-success" onclick="update()">更新</ button>
+                        <button type = "button" class = "btn btn-success  btn-sm "  onclick="update()">更新</ button>
                     </div>
                     </div>
-                    <iframe width="100%" height="100%"
+                    <iframe class ="mt-2 "width="100%" height="100%"
                             src=" https://maps.google.co.jp/maps?output=embed&q=<?= h($company['name']) ?>"></iframe>
                 </div>
                 <div class="card-body d-block d-sm-none">
@@ -40,7 +40,7 @@ include('../assets/_inc/header.php');
             </div>
             <div class="card my-4 d-none d-sm-block">
                 <div class="card-header">
-                    <h3 class="card-title mb-0 d-inline"> 拾得物一覧 ／ </h3><h3 class="d-inline"><a href="register.php" class="text-decoration-none text-warning">新規追加</a></h3>
+                    <h4 class="card-title mb-0 d-inline"> 拾得物一覧 ／ </h4><h4 class="d-inline"><a href="register.php" class="text-decoration-none text-primary">新規追加</a></h4>
                 </div>
                 <div class="card-body">
                     <?php if ($objects): ?>
