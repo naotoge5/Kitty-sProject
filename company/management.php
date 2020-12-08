@@ -55,7 +55,7 @@ include('../assets/_inc/header.php');
                             <?php foreach ($objects as $row): ?>
                                 <tr class="edit list-group-item-action" data-href="register.php?id=<?= h($row['id']) ?>">
                                     <td><?= h($row['name']) ?></td>
-                                    <td><?= date('Y年m月d日 H時i分s秒', strtotime(h($row['datetime']))) ?></td>
+                                    <td><?= date('Y年m月d日 H時i分', strtotime(h($row['datetime']))) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

@@ -76,6 +76,18 @@ $(function () {
             $("form[name='delete']").submit();
         }
     });
+
+    $('#date').datetimepicker({
+        dayViewHeaderFormat: 'YYYY年 MMMM',
+        format: 'YYYY-MM-DD',
+        locale: 'ja',
+        showClose: true
+    });
+    $('#time').datetimepicker({
+        format: 'HH:mm',
+        locale: 'ja',
+        showClose: true
+    });
 });
 
     //営業時間等　buttonで更新
