@@ -9,10 +9,8 @@ $title = empty($id) ? '拾得物-新規' : '拾得物-編集';
 include('../assets/_inc/header.php');
 ?>
 <header>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/ja.js" type="text/javascript"></script>
     <script src="../assets/js/bootstrap-datetimepicker.min.js">
@@ -67,8 +65,8 @@ include('../assets/_inc/header.php');
                         <div class="form-row">
                         <div class="form-group col-sm-6">
                             <h5 class="card-title">発見時刻</h5>
-                            <div class="input-group date" id="datetimepicker1">
-                                <label for="datetimepicker1" class="pt-2 pr-2">日付</label>
+                            <div class="input-group date" id="date">
+                                <label for="date" class="pt-2 pr-2">日付</label>
                                 <input type="text" name="date" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[0]); ?>" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
@@ -77,8 +75,8 @@ include('../assets/_inc/header.php');
                         </div>
                         <div class="form-group col-sm-6">
                         <h5 class="card-title">&nbsp;</h5>
-                            <div class="input-group date" id="datetimepicker2">
-                                <label for="datetimepicker2" class="pt-2 pr-2">時間</label>
+                            <div class="input-group date" id="time">
+                                <label for="time" class="pt-2 pr-2">時間</label>
                                 <input type="text" name="time" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[1]); ?>" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
@@ -108,7 +106,7 @@ include('../assets/_inc/header.php');
     </main>
     <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({
+        $('#date').datetimepicker({
             dayViewHeaderFormat: 'YYYY年 MMMM',
             tooltips: {
                 close: '閉じる',
@@ -130,7 +128,7 @@ include('../assets/_inc/header.php');
             locale: 'ja',
             showClose: true
         });
-        $('#datetimepicker2').datetimepicker({
+        $('#time').datetimepicker({
             tooltips: {
                 close: '閉じる',
                 pickHour: '時間を取得',
