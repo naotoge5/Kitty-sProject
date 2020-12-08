@@ -23,7 +23,10 @@ include('../assets/_inc/header.php');
                     </div>
                     <div class="col-6">
                         <h5 class="card-title">営業時間等</h5>
-                        <p class="card-text"><?= h($company['details']) ?></p>
+                        <form name="opening-hours">
+                        <textarea id ="details" cols="30" rows="3"></textarea>
+                        </form>
+                        <button type = "button" class = "btn btn-success" onclick="update()">更新</ button>
                     </div>
                     </div>
                     <iframe width="100%" height="100%"

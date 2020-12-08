@@ -65,6 +65,8 @@ $(function () {
         }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
             setAddress(response)
         }).fail(function () {
+            setAddress(response)
+        }).fail(function () {   
             alert('自動入力に失敗しました。');
         });
     });
@@ -75,6 +77,20 @@ $(function () {
         }
     });
 });
+
+    //営業時間等　buttonで更新
+   function update() {
+        let detail = document.getElementById("details").value;
+            $.ajax({
+                type: "POST",
+                 url: "ajax.php",  
+                data:{details: detail}
+             }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
+                 alert('内容を更新しました。');
+             }).fail(function () {
+                 alert('更新に失敗しました。');
+             });
+    };
 
 function setAddress(response) {
     let data = JSON.parse(response);
