@@ -66,9 +66,9 @@ include('../assets/_inc/header.php');
                         <div class="form-group col-sm-6">
                             <label>発見時刻</label>
                             <div class="input-group date" id="date">
-                                <label for="date" class="pt-2 pr-2">日付</label>
-                                <input type="text" name="date" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[0]); ?>" required />
-                                <span class="input-group-append">
+                                <label for="date" class="pr-2 pt-1" >日付</label>
+                                <input type="text" name="date" class="form-control rounded-left" value="<?php if (isset($object)) echo h($datetime[0]); ?>" required />
+                                <span class="input-group-append ">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </span>
                             </div>
@@ -76,8 +76,8 @@ include('../assets/_inc/header.php');
                         <div class="form-group col-sm-6">
                         <label>&nbsp;</label>
                             <div class="input-group date" id="time">
-                                <label for="time" class="pt-2 pr-2">時間</label>
-                                <input type="text" name="time" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[1]); ?>" required />
+                                <label for="time" class="pr-2 pt-1">時間</label>
+                                <input type="text" name="time" class="form-control rounded-left" value="<?php if (isset($object)) echo h($datetime[1]); ?>" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                                 </span>
@@ -108,41 +108,11 @@ include('../assets/_inc/header.php');
     $(function () {
         $('#date').datetimepicker({
             dayViewHeaderFormat: 'YYYY年 MMMM',
-            tooltips: {
-                close: '閉じる',
-                selectMonth: '月を選択',
-                prevMonth: '前月',
-                nextMonth: '次月',
-                selectYear: '年を選択',
-                prevYear: '前年',
-                nextYear: '次年',
-                selectTime: '時間を選択',
-                selectDate: '日付を選択',
-                prevDecade: '前期間',
-                nextDecade: '次期間',
-                selectDecade: '期間を選択',
-                prevCentury: '前世紀',
-                nextCentury: '次世紀'
-            },
             format: 'YYYY-MM-DD',
             locale: 'ja',
             showClose: true
         });
         $('#time').datetimepicker({
-            tooltips: {
-                close: '閉じる',
-                pickHour: '時間を取得',
-                incrementHour: '時間を増加',
-                decrementHour: '時間を減少',
-                pickMinute: '分を取得',
-                incrementMinute: '分を増加',
-                decrementMinute: '分を減少',
-                pickSecond: '秒を取得',
-                incrementSecond: '秒を増加',
-                decrementSecond: '秒を減少',
-                togglePeriod: '午前/午後切替',
-                selectTime: '時間を選択'
-            },
             format: 'HH:mm',
             locale: 'ja',
             showClose: true
