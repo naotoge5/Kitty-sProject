@@ -37,7 +37,7 @@ include('../assets/_inc/header.php');
                     <form action="update.php" method="POST">
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <div class="form-group">
-                            <label>名前</label>
+                            <h5 class="card-title">名前</h5>
                             <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25"
                                    maxlength="100" value="<?php if ($object) echo h($object['name']) ?>"
                                    required>
@@ -48,7 +48,7 @@ include('../assets/_inc/header.php');
                                       cols="60"><?php if ($object) echo h($object['details']); ?></textarea>
                         </div>
                         <div class="form-group">
-                            <label>カテゴリー</label>
+                            <h5 class="card-title">カテゴリー</h5>
                             <select name="category" class="form-control" required>
                                 <?php if (!$object): ?>
                                     <option disabled selected value>未選択</option>

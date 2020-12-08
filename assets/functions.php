@@ -114,3 +114,7 @@ function readPreCompanyData(string $token)
     }
     return 0;
 }
+
+function updateDetails(string $details) {
+
+}
