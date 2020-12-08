@@ -4,7 +4,7 @@ include('../assets/functions.php');
 $name = isset($_POST['name']) ? $_POST['name'] : null;
 $details = $_POST['details'];
 $category = $_POST['category'];
-$datetime = $_POST['datetime'];
+$datetime = $_POST['date'] . ' ' . $_POST['time'];
 $object_id = $_POST['id'];
 
 if (is_null($name)) {

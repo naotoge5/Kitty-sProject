@@ -3,6 +3,7 @@ include('../assets/functions.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $object = empty($id) ? null : readObjectData($id);
+$datetime = explode(' ',$object['datetime']);
 
 $title = empty($id) ? '拾得物-新規' : '拾得物-編集';
 include('../assets/_inc/header.php');
@@ -68,7 +69,7 @@ include('../assets/_inc/header.php');
                             <h5 class="card-title">発見時刻</h5>
                             <div class="input-group date" id="datetimepicker1">
                                 <label for="datetimepicker1" class="pt-2 pr-2">日付</label>
-                                <input type="text" name="date" class="form-control" required />
+                                <input type="text" name="date" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[0]); ?>" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                 </span>
@@ -78,14 +79,13 @@ include('../assets/_inc/header.php');
                         <h5 class="card-title">&nbsp;</h5>
                             <div class="input-group date" id="datetimepicker2">
                                 <label for="datetimepicker2" class="pt-2 pr-2">時間</label>
-                                <input type="text" name="time" class="form-control" required />
+                                <input type="text" name="time" class="form-control" value="<?php if (isset($datetime)) echo h($datetime[1]); ?>" required />
                                 <span class="input-group-append">
                                     <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                                 </span>
                             </div>
                         </div>
                         </div>
-                       <!--  value="<?php if (isset($object)) echo h($object['datetime']) ?>" required> -->
                         <div class="form-group">
                             <input type="submit" class="btn btn-success"
                                    value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
