@@ -115,6 +115,17 @@ function readPreCompanyData(string $token)
     return 0;
 }
 
-function updateDetails(string $details) {
-
+function updateDetails(string $details, int $id) {
+//detailsを更新
+    try{
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("update companies set details = :details  where id = :id");
+        $stmt->execute(array(":details" => $details, ":id" => $id));
+        alert('更新が完了しました','SUCCESS');
+    }catch(PDOException $e){
+        alert('データーベース接続エラー', 'ERROR');
+    }finally{
+        unset($pdo);
+    }
+    return 0;
 }
