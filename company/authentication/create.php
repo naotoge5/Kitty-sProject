@@ -1,7 +1,6 @@
 <?php
 //サインアップから遷移
 include('../../assets/functions.php');
-
 //変数に格納
 $name = $_POST['name_first'] . ' ' . $_POST['name_second'];
 $tel = $_POST['tel'];

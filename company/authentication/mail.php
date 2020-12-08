@@ -1,5 +1,5 @@
 <?php
-//メール設定
+//メール設定 接続
 include '../../assets/functions.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -10,14 +10,13 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-$mail = isset($_POST['mail']) ? $_POST['mail'] : null;
+$mail = isset($_POST['mail']) ? $_POST['mail'] : 0;
 $token = hash('sha256', uniqid(rand(), 1));
 $url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-static $alert;
-if (is_null($mail)) {
+if ($mail) {
+    if (check_mail() and write_preCompany()) send_mail();
+} else {
     alert('不正なアクセスです', 'CAUTION');
-} else if (check_mail()) {
-    if (write_preCompany()) send_mail();
 }
 header('Location:login.php');
 

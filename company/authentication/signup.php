@@ -4,14 +4,13 @@ include('../../assets/functions.php');
 
 $token = isset($_GET['token']) ? $_GET['token'] : '';
 $mail = readPreCompanyData($token);
-
-$title = 'サインアップ';
-include('../../assets/_inc/header.php');
-
 if (!$mail) {
     header("Location:login.php");
     exit;
 }
+
+$title = 'サインアップ';
+include('../../assets/_inc/header.php');
 ?>
 <main>
     <div class="container">
