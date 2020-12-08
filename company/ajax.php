@@ -8,6 +8,7 @@ if ($url) {
     echo file_get_contents($url);
 } else if ($details) {
     //updateDetailsの呼び出し
+    if ($details === 'none') $details = '';
     updateDetails($details,$_SESSION['id']);
 } else {
     alert('不正なアクセスです', 'CAUTION');

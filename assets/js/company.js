@@ -77,6 +77,23 @@ $(function () {
         }
     });
 
+    $("#update").click(function () {
+        let details = $("textarea[name='details']").val();
+        if(details === '') {
+            details = 'none';
+        }
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data:{details: details}
+        }).done(function (response) {
+            //これはよくない
+            window.location.reload();
+        }).fail(function () {
+            alert('更新に失敗しました。');
+        });
+    });
+
     $('#date').datetimepicker({
         dayViewHeaderFormat: 'YYYY年 MMMM',
         format: 'YYYY-MM-DD',
@@ -91,18 +108,6 @@ $(function () {
 });
 
     //営業時間等　buttonで更新
-   function update() {
-        let detail = document.getElementById("details").value;
-            $.ajax({
-                type: "POST",
-                 url: "ajax.php",  
-                data:{details: detail}
-             }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
-                 
-             }).fail(function () {
-                 alert('更新に失敗しました。');
-             });
-    };
 
 function setAddress(response) {
     let data = JSON.parse(response);

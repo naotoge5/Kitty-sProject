@@ -74,9 +74,7 @@ $flag = true;
                         <input type="hidden" name="logout">
                     </form>
                     <nav class="navbar navbar-dark bg-dark py-3">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarContent" aria-controls="navbarContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <a class="navbar-brand" href="#">管理画面</a>
@@ -89,8 +87,7 @@ $flag = true;
                             exit;
                         }
                         ?>
-                        <a href="management.php"
-                           class="list-group-item list-group-flush list-group-item-action">ホーム</a>
+                        <a href="management.php" class="list-group-item list-group-flush list-group-item-action">ホーム</a>
                         <a href="#" class="list-group-item list-group-flush list-group-item-action">メール、パスワード変更</a>
                         <a href="register.php" class="list-group-item list-group-flush list-group-item-action">新規登録</a>
                         <a href="javascript:logout.submit()"
@@ -113,7 +110,7 @@ $flag = true;
         <?php endif; ?>
     </header>
     <div class="py-4">&nbsp;</div>
-    <div class="py-1">&nbsp;</div>
+    <div class="py-4">&nbsp;</div>
 <?php if (!$flag): ?>
     <main>
         <div class="container">
