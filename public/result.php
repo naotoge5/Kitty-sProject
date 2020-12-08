@@ -1,7 +1,6 @@
 <?php
 include('../assets/functions.php');
 $companies = isset($_SESSION['results']) ? $_SESSION['results'] : null;
-unset($_SESSION['results']);
 $title = '落とし物検索';
 include('../assets/_inc/header.php');
 ?>
