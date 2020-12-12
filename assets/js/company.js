@@ -1,27 +1,40 @@
 $(function () {
+    $("#menu a:last").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: { logout: '' }
+        }).done(function (response) {
+            console.log('ログアウト');
+        }).fail(function () {
+            console.log('error');
+        });
+    });
     $(".edit").css("cursor", "pointer").click(function () {
         location.href = $(this).data("href");
     });
-    $("#objects_table").DataTable({
-        "paging": false,
-        "info": false,
-        columnDefs: [
-            {targets: 0, width: "50%"}
-        ],
-        oLanguage: {
-            /* 日本語化設定 */
-            sLengthMenu: "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
-            oPaginate: { // ページネーション欄
-                sNext: "次へ",
-                sPrevious: "前へ"
-            },
-            sInfo: "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
-            sSearch: "検索 ", // 検索欄(例 = 検索 --)
-            sZeroRecords: "表示するデータがありません", // 表示する行がない場合
-            sInfoEmpty: "0 件中 0件 を表示しています", // 行が表示されていない場合
-            sInfoFiltered: "全 _MAX_ 件から絞り込み" // 検索後に総件数を表示する場合
-        }
-    });
+    if ($("#management").length) {
+        $("#objects_table").DataTable({
+            "paging": false,
+            "info": false,
+            columnDefs: [
+                { targets: 0, width: "50%" }
+            ],
+            oLanguage: {
+                /* 日本語化設定 */
+                sLengthMenu: "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+                oPaginate: { // ページネーション欄
+                    sNext: "次へ",
+                    sPrevious: "前へ"
+                },
+                sInfo: "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+                sSearch: "検索 ", // 検索欄(例 = 検索 --)
+                sZeroRecords: "表示するデータがありません", // 表示する行がない場合
+                sInfoEmpty: "0 件中 0件 を表示しています", // 行が表示されていない場合
+                sInfoFiltered: "全 _MAX_ 件から絞り込み" // 検索後に総件数を表示する場合
+            }
+        });
+    }
     //form#signにEnterKey無効&submitの制御
     $("#login").keypress(function (e) {
         if (e.which === 13) {
@@ -61,12 +74,12 @@ $(function () {
         $.ajax({
             type: "GET",
             url: "../ajax.php",
-            data: {request_url: "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + postal}
+            data: { request_url: "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + postal }
         }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
             setAddress(response)
         }).fail(function () {
             setAddress(response)
-        }).fail(function () {   
+        }).fail(function () {
             alert('自動入力に失敗しました。');
         });
     });
@@ -79,13 +92,13 @@ $(function () {
 
     $("#update").click(function () {
         let details = $("textarea[name='details']").val();
-        if(details === '') {
+        if (details === '') {
             details = 'none';
         }
         $.ajax({
             type: "POST",
             url: "ajax.php",
-            data:{details: details}
+            data: { details: details }
         }).done(function (response) {
             //これはよくない
             window.location.reload();
@@ -93,21 +106,22 @@ $(function () {
             alert('更新に失敗しました。');
         });
     });
-
-    $('#date').datetimepicker({
-        dayViewHeaderFormat: 'YYYY年 MMMM',
-        format: 'YYYY-MM-DD',
-        locale: 'ja',
-        showClose: true
-    });
-    $('#time').datetimepicker({
-        format: 'HH:mm',
-        locale: 'ja',
-        showClose: true
-    });
+    if ($("#register").length) {
+        $('#date').datetimepicker({
+            dayViewHeaderFormat: 'YYYY年 MMMM',
+            format: 'YYYY-MM-DD',
+            locale: 'ja',
+            showClose: true
+        });
+        $('#time').datetimepicker({
+            format: 'HH:mm',
+            locale: 'ja',
+            showClose: true
+        });
+    }
 });
 
-    //営業時間等　buttonで更新
+//営業時間等　buttonで更新
 
 function setAddress(response) {
     let data = JSON.parse(response);
@@ -122,9 +136,4 @@ function setAddress(response) {
     } else {
         alert("郵便番号を見直してください。");
     }
-}
-
-function toEdit(element) {
-    name = '#edit_' + element.value;
-    $(name).submit();
 }

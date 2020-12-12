@@ -1,9 +1,16 @@
 $(function () {
-    $('#search').change(function (e) {
+    $("input[name='search']").on("keydown",function(ev){
+        if ((ev.which && ev.which === 13) ||(ev.keyCode && ev.keyCode === 13)){
+          return false;
+        } else {
+          return true;
+        }
+      });
+    $("#search").change(function (e) {
         let target = $(e.target)
-        if (target.attr('name') === 'prefectures') {
+        if (target.attr("name") === 'prefectures') {
             changePrefecture();
-        } else if (target.attr('name') === 'cities') {
+        } else if (target.attr("name") === 'cities') {
             changeCity();
         }
     });
@@ -29,14 +36,14 @@ $(function () {
     });
 });
 
-let url = 'http://geoapi.heartrails.com/api/json?jsonp=?';
+let url = "http://geoapi.heartrails.com/api/json?jsonp=?";
 
 function changePrefecture() {
-    let prefecture = $('select[name="prefectures"] option:selected').val();
+    let prefecture = $("select[name='prefectures'] option:selected").val();
     resetCities();
     resetTowns();
     if (prefecture !== '都道府県を選択してください') {
-        $.getJSON(url, {'method': 'getCities', 'prefecture': prefecture}, setCities);
+        $.getJSON(url, {"method": "getCities", "prefecture": prefecture}, setCities);
     }
 }
 

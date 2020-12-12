@@ -19,6 +19,37 @@ function h($s)
     return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
 }
 
+function accessCheck($target, $require)
+{
+    switch ($target) {
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+        case 'check':
+    }
+}
+
+function getNav($target)
+{
+    static $nav;
+    if (preg_match('/authentication/', $target)) {
+        $nav = 0;
+    } elseif (preg_match('/public/', $target)) {
+        $nav = [['link' => 'top.php', 'name' => '検索TOP'], ['link' => '#', 'name' => '地域から探す'], ['link' => '#', 'name' => 'カテゴリから探す']];
+    } else {
+        $nav = [['link' => 'management.php', 'name' => '管理画面'], ['link' => 'authentication/login.php', 'name' => 'ログアウト']];
+    };
+    return $nav;
+}
+
 /**
  * @param string $message alert message
  * @param string $type SUCCESS or ERROR or CAUTION
@@ -115,16 +146,17 @@ function readPreCompanyData(string $token)
     return 0;
 }
 
-function updateDetails(string $details, int $id) {
-//detailsを更新
-    try{
+function updateDetails(string $details, int $id)
+{
+    //detailsを更新
+    try {
         $pdo = getPDO();
         $stmt = $pdo->prepare("update companies set details = :details  where id = :id");
         $stmt->execute(array(":details" => $details, ":id" => $id));
-        alert('更新が完了しました','SUCCESS');
-    }catch(PDOException $e){
+        alert('更新が完了しました', 'SUCCESS');
+    } catch (PDOException $e) {
         alert('データーベース接続エラー', 'ERROR');
-    }finally{
+    } finally {
         unset($pdo);
     }
     return 0;

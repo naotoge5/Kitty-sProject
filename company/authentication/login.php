@@ -1,15 +1,32 @@
 <?php
-//会社側のログイン・新規登録ページ
 include('../../assets/functions.php');
-
-$title = 'ログイン ／ ご新規';
-include('../../assets/_inc/header.php');
+unset($_SESSION['id']);
+if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
 ?>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>ログイン ／ ご新規</title>
+
+    <!-- css読み込み -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- 外部js読み込み -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- script -->
+    <script src="../../assets/js/company.js"></script>
+</head>
+
+<body>
+    <?php include('../../assets/_inc/header.php') ?>
     <main>
         <div class="container">
             <div class="card my-4">
                 <div class="card-header">
-                    <h3 class="card-title mb-0"><?= $title ?></h3>
+                    <h3 class="card-title mb-0">ログイン ／ ご新規</h3>
                 </div>
                 <div class="card-body d-none d-sm-block">
                     <form id="login" action="check.php" method="post">
@@ -36,4 +53,7 @@ include('../../assets/_inc/header.php');
             </div>
         </div>
     </main>
-<?php include('../../assets/_inc/footer.php') ?>
+    <?php include('../../assets/_inc/footer.php') ?>
+</body>
+
+</html>
