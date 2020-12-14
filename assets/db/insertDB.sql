@@ -1,3 +1,4 @@
+/*localhostで読み込み*/
 insert into companies
 values (
         null,

@@ -16,7 +16,7 @@ if (!$mail) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>'サインアップ'</title>
+    <title>サインアップ</title>
 
     <!-- style -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -32,7 +32,7 @@ if (!$mail) {
         <div class="container">
             <div class="card my-4">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">'サインアップ'</h3>
+                    <h3 class="card-title mb-0">サインアップ</h3>
                 </div>
                 <div class="card-body">
                     <div class="ml-3">
@@ -49,11 +49,11 @@ if (!$mail) {
                             </div>
                             <div class="form-group">
                                 <label>電話番号</label>
-                                <input type="tel" name="tel" class="form-control" placeholder="ハイフン無し,半角" required>
+                                <input type="text" name="tel" class="form-control"pattern="\d{3,4}-\d{3,4}-\d{3,4}" maxlength="13" minlength="12" placeholder="ハイフン有り,半角" required>
                             </div>
                             <div class="form-group">
                                 <label>郵便番号</label>
-                                <input type="text" class="form-control" pattern="[0-9]{7}" maxlength="7" minlength="7" name="postal" placeholder="ハイフン無し,半角" required>
+                                <input type="text" class="form-control" pattern="\d{3}-\d{4}" maxlength="8" minlength="8" name="postal" placeholder="ハイフン有り,半角" required>
                                 <input type="button" class="form-control" id="auto" value="住所自動入力">
                             </div>
                             <div class="form-group">
