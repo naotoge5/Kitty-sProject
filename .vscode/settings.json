@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "us-cdbr-east-02.cleardb.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Kitty-sProject",
+            "database": "heroku_c356dc99892b5ac",
+            "username": "b4f8ee3200a178",
+            "password": "41b5b3b6"
+        }
+    ]
+}
