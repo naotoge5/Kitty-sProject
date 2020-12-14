@@ -64,7 +64,7 @@ function send_mail()
 
         //文字エンコードを指定
         //mb_language('uni');
-        mb_internal_encoding('UTF-8');
+        //mb_internal_encoding('UTF-8');
         $mailer->CharSet = 'utf-8';
         // SMTPサーバの設定
         $mailer->isSMTP();                          // SMTPの使用宣言
