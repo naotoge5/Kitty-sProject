@@ -19,6 +19,7 @@
             <div class="card p-4 m-4">
                 <h1 class="text-center"><a href="company/management.php">企業側</a></h1>
                 <h1 class="text-center"><a href="public/top.php">サイト</a></h1>
+                <?= $_SERVER['REQUEST_URI'] ?>
             </div>
         </div>
     </main>
