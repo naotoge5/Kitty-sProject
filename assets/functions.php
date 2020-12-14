@@ -11,7 +11,7 @@ function getPDO()
 {
     static $pdo;
     $option = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-    if (preg_match('/heroku/', $_SERVER['REQUEST_URI'])) {
+    if (preg_match('/heroku/', $_SERVER['HTTP_HOST'])) {
         $pdo = new PDO('mysql:host=us-cdbr-east-02.cleardb.com;dbname=heroku_c356dc99892b5ac', 'b4f8ee3200a178', '41b5b3b6', $option);
     } else {
         $pdo = new PDO('mysql:host=localhost;dbname=kittydb', 'kitty', 'pro02', $option);
