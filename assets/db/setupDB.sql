@@ -2,6 +2,7 @@ drop database if exists kittydb;
 create database kittydb;
 use kittydb;
 /*↓を使う*/
+drop user if exists kitty@localhost;
 create user 'kitty'@'localhost' identified by 'pro02';
 /*mysql8.0~*/
 /*create user 'kitty'@'localhost' identified with mysql_native_password by 'pro02';*/
