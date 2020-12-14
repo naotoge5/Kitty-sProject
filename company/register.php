@@ -1,88 +1,113 @@
 <?php
 include('../assets/functions.php');
-$flag = true;
-if (isset($_GET['id'])) {
-    $title = '拾得物-編集';
-    $id = $_GET['id'];
-    switch ($object = read_objectData($id)) {
-        case -1:
-            $flag = false;
-            $_SESSION['alert'] = messageType('データーベース接続エラー');
-            break;
-        case 0:
-            $title = 'non';
-            break;
-        default:
-            if ($object['company_id'] != $_SESSION['id']) {
-                $_SESSION['alert'] = messageType('不正なアクセスです。');
-                header('Location:management.php');
-                exit;
-            }
-    }
-} else {
-    $title = '拾得物-新規';
-    $id = '';
-    $object = null;
+if (!isset($_SESSION['id'])) {
+    header('Location:authentication/login.php');
+    exit;
 }
-include('../assets/_inc/header.php');
-include('nav.php');
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
+$object = $id ? readObjectData($id) : 0;
+$datetime = $object ? explode(' ', $object['datetime']) : 0;
+
+$title = $id ? '編集' : '新規登録　';
+//include('../assets/_inc/header.php');
 ?>
-    <main>
-        <h1><?= $title ?></h1>
-        <?php if ($flag): ?>
-            <div>
-                <form action="update.php" method="POST">
-                    <input type="hidden" name="id" value="<?= $id ?>">
-                    <table>
-                        <tr>
-                            <th>名前</th>
-                            <td>
-                                <input type="text" name="name" placeholder="名前を入力してください" size="25" maxlength="100"
-                                       value="<?php if (isset($object)) echo h($object['name']); ?>" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>詳細</th>
-                            <td>
-                    <textarea name="details" placeholder="落し物の詳細を入力してください" rows="6" cols="60"
-                              value=""><?php if (isset($object)) echo h($object['details']); ?></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>カテゴリー</th>
-                            <td>
-                                <select name="category" required>
-                                    <?php if (!isset($object)): ?>
-                                        <option disabled selected value>未選択</option>
-                                    <?php endif; ?>
-                                    <?php foreach ($categories as $category): ?>
-                                        <?php if ($category == $object['category']): ?>
-                                            <option selected="selected"
-                                                    value="<?= $category ?>"><?= $category ?></option>
-                                        <?php else: ?>
-                                            <option value="<?= $category; ?>"><?= $category; ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>発見時刻</th>
-                            <td>
-                                <!--後々カレンダーから選択できるように 2020-10-20 13:00:00-->
-                                <input type="datetime" name="datetime" placeholder="発見時刻を入力してください" size="25"
-                                       maxlength="100"
-                                       value="<?php if (isset($object)) echo h($object['datetime']) ?>" required>
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="submit" value="<?php if (empty($id)) echo '登録'; else echo '更新' ?>">
-                </form>
-            </div>
-        <?php else: ?>
-            <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
-        <?php endif; ?>
-    </main>
-    <script src="../assets/js/jquery-3.5.1.js"></script>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title><?= $title ?></title>
+    <!-- style -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="../assets/js/company.js"></script>
-<?php include('../assets/_inc/footer.php') ?>
+</head>
+
+<body>
+    <?php include("../assets/_inc/header.php") ?>
+    <main id="register">
+        <div class="container">
+            <div class="card my-4">
+                <!--my-4:card外の上下に空間-->
+                <div class="card-header pb-0">
+                    <h3 class="card-title"><?= $title ?></h3>
+                </div>
+                <div class="card-body d-none d-sm-block">
+                    <form action="update.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                        <div class="form-group">
+                            <label>名前</label>
+                            <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25" maxlength="100" value="<?php if ($object) echo h($object['name']) ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>詳細</label>
+                            <textarea name="details" class="form-control" placeholder="落し物の詳細を入力してください" rows="4" cols="60"><?php if ($object) echo h($object['details']); ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>カテゴリー</label>
+                            <select name="category" class="form-control" required>
+                                <?php if (!$object) : ?>
+                                    <option disabled selected value>未選択</option>
+                                <?php endif; ?>
+                                <?php foreach ($categories as $category) : ?>
+                                    <?php if ($category == $object['category']) : ?>
+                                        <option selected="selected" value="<?= $category ?>"><?= $category ?></option>
+                                    <?php else : ?>
+                                        <option value="<?= $category; ?>"><?= $category; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <label>発見時刻</label>
+                                <div class="input-group date" id="date">
+                                    <label for="date" class="pr-2 pt-1">日付</label>
+                                    <input type="text" name="date" class="form-control rounded-left" value="<?php if ($object) echo h($datetime[0]); ?>" required />
+                                    <span class="input-group-append ">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label>&nbsp;</label>
+                                <div class="input-group date" id="time">
+                                    <label for="time" class="pr-2 pt-1">時間</label>
+                                    <input type="text" name="time" class="form-control rounded-left" value="<?php if ($object) echo h($datetime[1]); ?>" required />
+                                    <span class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="<?php if ($id) echo '更新';
+                                                                                else echo '登録' ?>">
+                            <?php if ($id) : ?>
+                                <input type="button" id="delete" class="btn btn-danger" value="削除">
+                            <?php endif; ?>
+                        </div>
+                    </form>
+                    <form method="POST" name="delete" action="delete.php" class="mb-0">
+                        <input type="hidden" name="id" value="<?= $id ?>">
+                    </form>
+                </div>
+                <div class="card-body d-block d-sm-none">
+                    <p class="card-text">
+                        この画面ではご利用になれません
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <?php include('../assets/_inc/footer.php') ?>
+</body>
+
+</html>

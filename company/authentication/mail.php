@@ -1,4 +1,5 @@
 <?php
+//メール設定 接続
 include '../../assets/functions.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -9,38 +10,17 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-$mail = isset($_POST['mail']) ? $_POST['mail'] : null;
+$mail = isset($_POST['mail']) ? $_POST['mail'] : 0;
 $token = hash('sha256', uniqid(rand(), 1));
 $url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-static $alert;
-if (is_null($mail)) {
-    $alert = messageType('不正なアクセスです');
+if ($mail) {
+    if (check_mail() and write_preCompany()) send_mail();
 } else {
-    switch (check_mail()) {
-        case -1:
-            $alert = messageType('データベース接続エラー');
-            break;
-        case 0:
-            $alert = messageType('このメールアドレスはすでに利用されている可能性があります');
-            break;
-        case 1:
-            switch (white_preCompany()) {
-                case -1:
-                    $alert = messageType('データベース接続エラー');
-                    break;
-                case 1:
-                    if (send_mail()) {
-                        $alert = messageType('メールアドレスに新規登録のURLを送信しました', true);
-                    } else {
-                        $alert = messageType('メールの送信に失敗しました');
-                    }
-            }
-    }
+    alert('不正なアクセスです', 'CAUTION');
 }
-$_SESSION['alert'] = $alert;
 header('Location:login.php');
 
-function white_preCompany()
+function write_preCompany()
 {
     global $token;
     global $mail;
@@ -50,10 +30,11 @@ function white_preCompany()
         $stmt->execute(array(":token" => $token, ":mail" => $mail));
         return 1;
     } catch (PDOException $e) {
-        return -1;
+        alert('データベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }
 
 function check_mail()
@@ -64,12 +45,14 @@ function check_mail()
         $stmt = $pdo->prepare('SELECT mail FROM companies WHERE mail = :mail limit 1');
         $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt->fetch() ? 0 : 1;//データが存在した場合false
+        if (!$stmt->fetch()) return 1;
+        alert('"' . $mail . '"はすでに利用されています', 'CAUTION');
     } catch (PDOException $e) {
-        return -1;
+        alert('データベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }
 
 function send_mail()
@@ -102,10 +85,12 @@ function send_mail()
 
         // 送信
         $mailer->send();
+        alert('メールアドレスに新規登録のURLを送信しました', 'SUCCESS');
         return 1;
     } catch (Exception $e) {
-        return 0;
+        alert('メールの送信に失敗しました', 'CAUTION');
     } finally {
         unset($mailer);
     }
+    return 0;
 }

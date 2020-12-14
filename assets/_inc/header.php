@@ -1,22 +1,47 @@
 <?php
-$title = isset($title) ? $title : '落とし物検索';
-$level = isset($level) ? $level : '';
+$nav = getNav($_SERVER['REQUEST_URI']);
+$alert = isset($_SESSION['alert']) ? $_SESSION['alert'] : 0;
+unset($_SESSION['alert']);
 ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?= $title ?> </title>
-    <link rel="stylesheet" href="<?= $level ?>../assets/css/style.css">
-</head>
-<body>
-<div id="alert">
-    <?php
-    if (isset($_SESSION['alert'])):?>
-        <p class="alert" style="background: <?= $_SESSION['alert']['color'] ?>"><?= $_SESSION['alert']['message'] ?></p>
-        <?php unset($_SESSION['alert']);
-    endif; ?>
-
-</div>
+<header class="fixed-top">
+    <?php if ($nav) : ?>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <?php foreach ($nav as $item) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $item['link'] ?>"><?= $item['name'] ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </nav>
+    <?php endif; ?>
+    <?php if ($alert) : ?>
+        <div class="<?= $alert['class'] ?> fade show text-center mb-0" role="alert">
+            <strong><?= $alert['message'] ?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+</header>
+<div class="my-4 py-4">&nbsp;</div>
+<?php if ($alert and !$alert['continue']) : ?>
+    <main>
+        <div class="container">
+            <div class="card my-4">
+                <div class="card-header pb-0">
+                    <h3 class="card-title">読み込みエラー</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-subtitle">申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
+                </div>
+            </div>
+        </div>
+    </main>
+<?php exit;
+endif; ?>

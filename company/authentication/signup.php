@@ -1,73 +1,88 @@
 <?php
+//新規登録
 include('../../assets/functions.php');
-$flag = true;
-if (!isset($_GET['token'])) {
-    $_SESSION['alert'] = messageType('無効なURLです');
+
+$token = isset($_GET['token']) ? $_GET['token'] : '';
+$mail = readPreCompanyData($token);
+if (!$mail) {
     header("Location:login.php");
     exit;
-} else {
-    switch ($result = read_preCompanyData($_GET['token'])) {
-        case 0:
-            $_SESSION['alert'] = messageType('トークンが違うか、24時間以上経っている可能性があります');
-            header('Location:login.php');
-            exit;
-        case -1:
-            $flag = false;
-            $_SESSION['alert'] = messageType('データベース接続エラー');
-            break;
-        default:
-            $mail = $result['mail'];
-    }
 }
-$title = 'サインアップ';
-$level = '../';
-include('../../assets/_inc/header.php');
+
 ?>
-<main>
-    <h1><?= $title ?></h1>
-    <?php if ($flag): ?>
-        <div>
-            <form id="signup" action="create.php" method="post">
-                <dl>
-                    <dt>企業名</dt>
-                    <dd>
-                        <input type="text" name="name_first" placeholder="会社名,チェーン名" required>
-                        <input type="text" name="name_second" placeholder="支店名,店舗名" required>
-                    </dd>
-                    <dt>電話番号</dt>
-                    <dd><input type="tel" name="tel" placeholder="ハイフン無し,半角" required></dd>
-                    <dt>郵便番号</dt>
-                    <dd>
-                        <input type="text" pattern="[0-9]{7}" maxlength="7" minlength="7"
-                               name="postal" placeholder="ハイフン無し,半角" required>
-                        <input type="button" id="auto" value="住所自動入力">
-                    </dd>
-                    <dt>住所</dt>
-                    <dd>
-                        <input type="text" name="address_first" placeholder="都道府県" required>
-                        <input type="text" name="address_second" placeholder="市区町村" required>
-                        <input type="text" name="address_third" placeholder="町名番地" required>
-                    </dd>
-                    <dt>メールアドレス</dt>
-                    <dd>
-                        <input type="email" name="mail" value="<?= $mail ?>" required>
-                    </dd>
-                    <dt>パスワード</dt>
-                    <dd>
-                        <input type="password" name="password" placeholder="半角英数" required>
-                    </dd>
-                    <dt>パスワード（確認）</dt>
-                    <dd>
-                        <input type="password" name="password_check" placeholder="半角英数" required>
-                    </dd>
-                </dl>
-                <input type="submit">
-            </form>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>'サインアップ'</title>
+
+    <!-- style -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/company.js"></script>
+</head>
+
+<body>
+    <?php include('../../assets/_inc/header.php') ?>
+    <main>
+        <div class="container">
+            <div class="card my-4">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">'サインアップ'</h3>
+                </div>
+                <div class="card-body">
+                    <div class="ml-3">
+                        <form id="signup" action="create.php" method="post">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label>企業名</label>
+                                    <input type="text" name="name_first" class="form-control" placeholder="会社名,チェーン名" required>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>&nbsp;</label>
+                                    <input type="text" name="name_second" class="form-control" placeholder="支店名,店舗名" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>電話番号</label>
+                                <input type="tel" name="tel" class="form-control" placeholder="ハイフン無し,半角" required>
+                            </div>
+                            <div class="form-group">
+                                <label>郵便番号</label>
+                                <input type="text" class="form-control" pattern="[0-9]{7}" maxlength="7" minlength="7" name="postal" placeholder="ハイフン無し,半角" required>
+                                <input type="button" class="form-control" id="auto" value="住所自動入力">
+                            </div>
+                            <div class="form-group">
+                                <label>住所</label>
+                                <input type="text" name="prefecture" class="form-control" placeholder="都道府県" required>
+                                <input type="text" name="city" class="form-control" placeholder="市区町村" required>
+                                <input type="text" name="town" class="form-control" placeholder="町名番地" required>
+                            </div>
+                            <div class="form-group">
+                                <label>メールアドレス</label>
+                                <input type="email" name="mail" readonly class="form-control" value="<?= $mail ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>パスワード</label>
+                                <input type="password" name="password" class="form-control" placeholder="半角英数" pattern="^(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{8,20}$" required>
+                                <small class="form-text text-muted">パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</small>
+                            </div>
+                            <div class="form-group">
+                                <label>パスワード（確認）</label>
+                                <input type="password" name="password_check" class="form-control" placeholder="半角英数" required>
+                            </div>
+                            <input type="submit" class="btn btn-success">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    <?php else: ?>
-        <h4>申し訳ございません、<br>しばらくしてからもう一度お試しください。</h4>
-    <?php endif; ?>
-</main>
-<script src="../../assets/js/jquery-3.5.1.js"></script>
-<script src="../../assets/js/company.js"></script>
-<?php include('../../assets/_inc/footer.php') ?>
+    </main>
+    <?php include('../../assets/_inc/footer.php') ?>
+</body>
+
+</html>

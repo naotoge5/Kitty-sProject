@@ -1,33 +1,26 @@
 <?php
 include('../assets/functions.php');
-$name = isset($_POST['name']) ? $_POST['name'] : null;
+
+$name = isset($_POST['name']) ? $_POST['name'] : 0;
 $details = $_POST['details'];
 $category = $_POST['category'];
-$datetime = $_POST['datetime'];
+$datetime = $_POST['date'] . ' ' . $_POST['time'];
 $object_id = $_POST['id'];
-$company_id = $_SESSION['id'];
-static $alert;
-if (is_null($name)) {
-    $alert = messageType('不正なアクセスです');
+
+if ($name) {
+    $object_id ? updateObject($object_id) : updateObject($_SESSION['id'], false);
 } else {
-    switch (empty($object_id) ? updateObject($company_id, 0) : updateObject($object_id)) {
-        case -1:
-            $_SESSION['alert'] = messageType('データベース接続エラー');
-            $url = empty($object_id) ? 'Location:register.php' : 'Location:register.php?id=' . $object_id;
-            header($url);
-            exit;
-        case 0:
-            $alert = messageType('落し物の登録が完了しました', true);
-            break;
-        case 1:
-            $alert = messageType('落し物の編集が完了しました', true);
-            break;
-    }
+    alert('不正なアクセスです', 'CAUTION');
 }
-$_SESSION['alert'] = $alert;
+
 header('Location:management.php');
 
-function updateObject($id, $type = 1)//update=1|insert=0
+
+/**
+ * @param int $id edit => object_id, new => company_id
+ * @param boolean $type edit => true, new => false
+ */
+function updateObject(int $id, $type = true)
 {
     global $name;
     global $details;
@@ -39,12 +32,14 @@ function updateObject($id, $type = 1)//update=1|insert=0
         $pdo = getPDO();//pdo取得
         $stmt = $pdo->prepare($query);
         $stmt->execute(array(":name" => $name, ":details" => $details, ":category" => $category, ":datetime" => $datetime, ":id" => $id));
+        /* bootstrapによる日時の入力ができるようになればcompanies->object_updateはカラムから削除
         $stmt = $pdo->prepare("update companies set object_update = now() where id = :id");
         $stmt->bindValue(":id", $company_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $type;
+        */
+        $type ? alert('落とし物の編集が完了しました', 'SUCCESS') : alert('落とし物の新規登録が完了しました', 'SUCCESS');
     } catch (PDOException $e) {
-        return -1;
+        alert('データベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }

@@ -1,70 +1,57 @@
 <?php
-echo $_GET['name'];
-echo $_GET['prefectures'];
+include '../assets/functions.php';
 
-$name=$_GET['name'];
-$prefecture=$_GET['prefectures'];
-$citie=$_GET['cities'];
-$town=$_GET['towns'];
-$categorie=$_GET['categories'];
-    /*var_dump($name);
-    var_dump($prefecture);
-    var_dump($citie);
-    var_dump($town);
-    var_dump($categorie);*/
+$name = $_GET['name'];
+$prefecture = isset($_GET['prefectures']) ? $_GET['prefectures'] : 0;
+$city = $_GET['cities'];
+$town = $_GET['towns'];
+$category = $_GET['categories'];
+$query = "";
+$value = [];
+$keywords = [$name];
 
-
-/*
-    if($prefecture!=='都道府県を選択してください'){
-        
+if ($prefecture) {
+    if ($prefecture !== '都道府県を選択してください') {
+        $query .= " and prefecture=:prefecture and city=:city and town  like :town";
+        $value = array_merge(array(":prefecture" => $prefecture,
+            ":city" => $city,
+            ":town" => $town . "%",
+        ));
+        array_push($keywords, $prefecture . $city . $town);
     }
-
-    if(isset()){
-        
+    if ($category !== "カテゴリーを選択してください") {
+        $query .= "  and category=:category";
+        $value = array_merge($value, array("category" => $category));
+        array_push($keywords, $category);
     }
-*/
+    $_SESSION['data']['keywords'] = $keywords;
+    $_SESSION['data']['results'] = searchCompanies($query, $value);
+} else {
+    alert('不正なアクセスです', 'CAUTION');
+}
+header("Location:result.php");
 
-
-
-
-$_SESSION['companies']=search_name($name);
-header("Location:top.php");
-
-function search_name($name){//落とし物店舗名検索
-
-try {
-    include('../assets/functions.php');
-    $pdo = getPDO();//pdo取得
-    $stmt = $pdo->prepare("SELECT distinct companies.name  FROM objects JOIN companies ON objects.company_id=companies.id WHERE companies.name LIKE :name OR objects.name LIKE :name");
-    $stmt->bindValue(":name",'%'.$name.'%', PDO::PARAM_STR);
-    if ($stmt->execute()) {
+/**
+ * @param string $plus_query
+ * @param array $plus_value
+ * @return array|int
+ */
+function searchCompanies(string $plus_query, array $plus_value)
+{
+    global $name;
+    $query = "select distinct companies.id, companies.name, companies.details from objects join companies on objects.company_id = companies.id where (companies.name like :name or objects.name like :name)" . $plus_query . " order by objects.datetime desc";
+    $value = array_merge(array(":name" => $name), $plus_value);
+    print_r($value);
+    try {
+        $pdo = getPDO();//pdo取得
+        //$pdo->query("set session sql_mode=(select replace(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($value);
         return $stmt->fetchAll();
+    } catch (PDOException $e) {
+        alert($e.'データーベース接続エラー', 'ERROR');
+    } finally {
+        unset($pdo);
     }
-    return false;
-} catch (PDOException $e) {
-    die($e->getMessage());
+    return 0;
 }
-}
-
-
-function  category(){//カテゴリでの検索
-try{
-   $pdo = getPDO();//pdo取得
-   $sql='SELECT * FROM objects INNER JOIN  companies  on  company_id = id';
-   $pdo->query($sql);
-}catch(PDOException $e){
-        die($e->getMessage());
-}
-}
-
-
-
-function  prefectures(){//町域検索
-
-try{
-    $pdo = getPDO();//pdo取得
-}catch(PDOException $e){
-        die($e->getMessage());
-}
-}
-?>

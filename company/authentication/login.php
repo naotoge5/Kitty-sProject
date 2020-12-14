@@ -1,30 +1,59 @@
 <?php
 include('../../assets/functions.php');
-$title = 'ログイン';
-$level = '../';
-include('../../assets/_inc/header.php');
+unset($_SESSION['id']);
+if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
 ?>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>ログイン ／ ご新規</title>
+
+    <!-- css読み込み -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- 外部js読み込み -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- script -->
+    <script src="../../assets/js/company.js"></script>
+</head>
+
+<body>
+    <?php include('../../assets/_inc/header.php') ?>
     <main>
-        <h1>ログイン</h1>
-        <div>
-            <form id="login" action="check.php" method="post">
-                <dl>
-                    <dt>メールアドレス</dt>
-                    <dd><input type="email" name="mail" required></dd>
-                    <dt>パスワード</dt>
-                    <dd><input type="password" name="password"></dd>
-                </dl>
-                <input type="submit">
-            </form>
-            <p>※パスワードは半角英数字をそれぞれ1種類以上含む8文字以上</p>
-            <p>新規登録の企業様はメールアドレスを入力後、送信ボタンをクリックしてください。</p>
-            </body>
-            <p>st071959@m03.kyoto-kcg.ac.jp</p>
-            <p>kittypro0201</p>
-            <p>10naotoge5.ykputi@gmail.com</p>
-            <p>kittypro02</p>
+        <div class="container">
+            <div class="card my-4">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">ログイン ／ ご新規</h3>
+                </div>
+                <div class="card-body d-none d-sm-block">
+                    <form id="login" action="check.php" method="post">
+                        <div class="form-group">
+                            <label>メールアドレス</label>
+                            <input type="email" class="form-control" name="mail" required>
+                            <small class="form-text text-warning">新規の企業様はメールアドレスを入力後、<br>送信ボタンをクリックしてください。確認のメールが送信されます。</small>
+                        </div>
+                        <div class="form-group">
+                            <label>パスワード</label>
+                            <input type="password" class="form-control" name="password">
+                            <small class="form-text text-muted">パスワードを忘れた<a href="">場合</a></small>
+                        </div>
+                        <input type="submit" class="btn btn-success">
+                        <small class="text-muted">st071959@m03.kyoto-kcg.ac.jp kittypro0201</small>
+                        <small class="text-muted">10naotoge5.ykputi@gmail.com kittypro02</small>
+                    </form>
+                </div>
+                <div class="card-body d-block d-sm-none">
+                    <p class="card-text">
+                        この画面ではご利用になれません
+                    </p>
+                </div>
+            </div>
         </div>
     </main>
-    <script src="../../assets/js/jquery-3.5.1.js"></script>
-    <script src="../../assets/js/company.js"></script>
-<?php include('../../assets/_inc/footer.php') ?>
+    <?php include('../../assets/_inc/footer.php') ?>
+</body>
+
+</html>

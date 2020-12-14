@@ -1,69 +1,47 @@
 <?php
+//サインアップから遷移
 include('../../assets/functions.php');
-
 //変数に格納
 $name = $_POST['name_first'] . ' ' . $_POST['name_second'];
 $tel = $_POST['tel'];
 $postal = $_POST['postal'];
-$address_first = $_POST['address_first'];
-$address_second = $_POST['address_second'];
-$address_third = $_POST['address_third'];
+$prefecture = $_POST['prefecture'];
+$city = $_POST['city'];
+$town = $_POST['town'];
 $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-static $alert;
+$url = 'Location:login.php';
 if (is_null($mail)) {
-    $alert = messageType('不正なアクセスです');
-} else {
-    switch ($id = white_Company()) {
-        case -1:
-            $alert = messageType('データベース接続エラー');
-            break;
-        default:
-            $_SESSION['id'] = $id;
-            $_SESSION['alert'] = messageType('新規登録が完了しました', true);
-            header('Location:../management.php');
-            exit;
-    }
+    alert('不正なアクセスです', 'CAUTION');
+} else if (writeCompany()) {
+    $url = 'Location:../management.php';
 }
-header('Location:login.php');
+header($url);
 
-function white_Company()
+function writeCompany()
 {
     global $name;
     global $tel;
     global $postal;
-    global $address_first;
-    global $address_second;
-    global $address_third;
+    global $prefecture;
+    global $city;
+    global $town;
     global $mail;
     global $password;
     try {
         $pdo = getPDO();//pdo取得
         //insert文の発行
-        $stmt = $pdo->prepare("insert into companies values(null, :name, :tel ,:postal, :address_first, :address_second,:address_third, null, :mail, :password ,null)");
-        $stmt->execute(array(":name" => $name, ":tel" => $tel, ":postal" => $postal, ":address_first" => $address_first, ":address_second" => $address_second, ":address_third" => $address_third, ":mail" => $mail, ":password" => $password));
-        $id = $pdo->lastInsertId();
+        $stmt = $pdo->prepare("insert into companies values(null, :name, :tel ,:postal, :prefecture, :city,:town, null, :mail, :password ,null)");
+        $stmt->execute(array(":name" => $name, ":tel" => $tel, ":postal" => $postal, ":prefecture" => $prefecture, ":city" => $city, ":town" => $town, ":mail" => $mail, ":password" => $password));
+        $_SESSION['id'] = $pdo->lastInsertId();
         $stmt = $pdo->prepare("delete from pre_companies where mail = :mail");
         $stmt->bindValue(":mail", $mail, PDO::PARAM_STR);
         $stmt->execute();
-        return $id;
+        return 1;
     } catch (PDOException $e) {
-        return -1;
+        alert('データベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }
+    return 0;
 }
-
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>create</title>
-</head>
-<body>
-<p>登録が完了しました。</p>
-</body>
-</html>

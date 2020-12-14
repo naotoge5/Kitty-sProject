@@ -1,26 +1,29 @@
 drop database if exists kittydb;
 create database kittydb;
+
 use kittydb;
 /*↓を使う*/
 create user 'kitty'@'localhost' identified by 'pro02';
 /*mysql8.0~*/
 /*create user 'kitty'@'localhost' identified with mysql_native_password by 'pro02';*/
 
-/*権限の付与*/
+/*権限の付drop database if exists kittydb;
+create database kittydb;
+与*/
 grant all on kittydb.* to 'kitty'@'localhost';
 create table companies
 (
-    id             int auto_increment primary key,
-    name           varchar(100) not null,
-    tel            varchar(100) not null,
-    postal         varchar(100) not null,
-    address_first  varchar(100) not null,
-    address_second varchar(100) not null,
-    address_third  varchar(100) not null,
-    details        text,
-    mail           varchar(100) not null,
-    password       varchar(100) not null,
-    object_update  datetime
+    id            int auto_increment primary key,
+    name          varchar(100) not null,
+    tel           varchar(100) null,
+    postal        varchar(100) not null,
+    prefecture    varchar(100) not null,
+    city          varchar(100) not null,
+    town          varchar(100) not null,
+    details       text,
+    mail          varchar(100) not null,
+    password      varchar(100) not null,
+    object_update datetime
 );
 
 create table objects
@@ -42,11 +45,11 @@ create table pre_companies
 );
 
 insert into companies
-values (null, '京都コンピュータ学院 京都駅前校', '0120123456', '6018407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
+values (null, '京都コンピュータ学院 京都駅前校', '0120-123-456', '601-8407', '京都府', '京都市南区', '西九条寺ノ前町10-5', '電話対応受付時間9:00-22:00',
         '10naotoge5.ykputi@gmail.com',
         '$2y$10$CstYoew/bQ0z7Yjb6T1wh.Z3wfynIEbQ5eySdwN8kyYaekPjfDSxC', null);
 insert into companies
-values (null, '京都情報大学院大学 百万遍キャンパス', '0120789111', '6068225', '京都府', '京都市左京区', '田中門前町7', null,
+values (null, '京都情報大学院大学 百万遍キャンパス', '012-078-9111', '606-8225', '京都府', '京都市左京区', '田中門前町7', null,
         'st071959@m03.kyoto-kcg.ac.jp',
         '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa', null);
 insert into objects
