@@ -9,8 +9,14 @@ $categories = ['現金', '財布', '鍵', '携帯電話', '証明書・カード
 //pdoの取得
 function getPDO()
 {
+    static $pdo;
     $option = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-    return new PDO('mysql:host=localhost;dbname=kittydb', 'kitty', 'pro02', $option);
+    if (preg_match('/heroku/', $_SERVER['REQUEST_URI'])) {
+        $pdo = new PDO('mysql:host=us-cdbr-east-02.cleardb.com;dbname=heroku_c356dc99892b5ac', 'b4f8ee3200a178', '41b5b3b6', $option);
+    } else {
+        $pdo = new PDO('mysql:host=localhost;dbname=kittydb', 'kitty', 'pro02', $option);
+    }
+    return $pdo;
 }
 
 //XSS対策
