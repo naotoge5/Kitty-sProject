@@ -2,7 +2,7 @@ drop database if exists kittydb;
 create database kittydb;
 use kittydb;
 /*↓を使う*/
-create user 'kitty'@'localhost' identified by 'pro02';
+create user 'kitty' @'localhost' identified by 'pro02';
 /*mysql8.0~*/
 /*create user 'kitty'@'localhost' identified with mysql_native_password by 'pro02';*/
 /*権限の付与*/
@@ -17,7 +17,7 @@ create table companies (
     town varchar(100) not null,
     details text,
     mail varchar(100) not null,
-    password varchar(100) not null,
+    password varchar(100) not null
     /*object_update datetime*/
 );
 create table objects (
@@ -45,8 +45,7 @@ values (
         '西九条寺ノ前町10-5',
         '電話対応受付時間9:00-22:00',
         '10naotoge5.ykputi@gmail.com',
-        '$2y$10$CstYoew/bQ0z7Yjb6T1wh.Z3wfynIEbQ5eySdwN8kyYaekPjfDSxC',
-        null
+        '$2y$10$CstYoew/bQ0z7Yjb6T1wh.Z3wfynIEbQ5eySdwN8kyYaekPjfDSxC'
     );
 insert into companies
 values (
@@ -59,8 +58,7 @@ values (
         '田中門前町7',
         null,
         'st071959@m03.kyoto-kcg.ac.jp',
-        '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa',
-        null
+        '$2y$10$CScjAAj9Cg4DspqQ1MubOe3t6bmy53TaN1GsrWaSahde/a9c4HTEa'
     );
 insert into objects
 values (
