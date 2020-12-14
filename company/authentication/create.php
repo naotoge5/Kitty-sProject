@@ -31,7 +31,7 @@ function writeCompany()
     try {
         $pdo = getPDO();//pdo取得
         //insert文の発行
-        $stmt = $pdo->prepare("insert into companies values(null, :name, :tel ,:postal, :prefecture, :city,:town, null, :mail, :password ,null)");
+        $stmt = $pdo->prepare("insert into companies values(null, :name, :tel ,:postal, :prefecture, :city,:town, null, :mail, :password)");
         $stmt->execute(array(":name" => $name, ":tel" => $tel, ":postal" => $postal, ":prefecture" => $prefecture, ":city" => $city, ":town" => $town, ":mail" => $mail, ":password" => $password));
         $_SESSION['id'] = $pdo->lastInsertId();
         $stmt = $pdo->prepare("delete from pre_companies where mail = :mail");

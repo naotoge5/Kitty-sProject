@@ -63,7 +63,7 @@ function send_mail()
         $mailer = new PHPMailer(true);//インスタンスを生成（true指定で例外を有効化）
 
         //文字エンコードを指定
-        mb_language('uni');
+        //mb_language('uni');
         mb_internal_encoding('UTF-8');
         $mailer->CharSet = 'utf-8';
         // SMTPサーバの設定
