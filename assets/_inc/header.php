@@ -29,7 +29,6 @@ unset($_SESSION['alert']);
         </div>
     <?php endif; ?>
 </header>
-<div class="my-4 py-4">&nbsp;</div>
 <?php if ($alert and !$alert['continue']) : ?>
     <main>
         <div class="container">
