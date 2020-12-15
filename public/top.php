@@ -17,10 +17,6 @@ include('../assets/functions.php');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/public.js"></script>
     <style>
-        .item-middle {
-            display: flex;
-            align-items: center;
-        }
         .rounded-right {
             border-radius: 0px;
         }
@@ -29,19 +25,21 @@ include('../assets/functions.php');
 
 <body>
     <?php include("../assets/_inc/header.php") ?>
-    <main class="vh-100 item-middle">
-        <div class="container">
-            <h3 class="text-center text-black pb-4">落とし物検索</h3>
-            <form id="search" method="get" action="search.php">
-                <div class="input-group">
-                    <input class="form-control border-secondary" type="search" name="name" placeholder="店舗名" aria-label="Search">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-secondary rounded-right"><i class="fa fa-search"></i></button>
-                    </span>
+    <main>
+        <div class="vh-100 d-flex align-items-center">
+            <div class="container">
+                <h3 class="text-center text-black pb-4">落とし物検索</h3>
+                <form id="search" method="get" action="search.php">
+                    <div class="input-group">
+                        <input class="form-control border-secondary" type="search" name="name" placeholder="店舗名" aria-label="Search">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary rounded-right"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                <div class="fixed-bottom m-2">
+                    <button type="button" class="btn btn-success btn-block">絞り込み条件を選ぶ</button>
                 </div>
-            </form>
-            <div class="fixed-bottom m-2">
-                <button type="button" class="btn btn-success btn-block">絞り込み条件を選ぶ</button>
             </div>
         </div>
     </main>
