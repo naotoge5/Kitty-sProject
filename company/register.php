@@ -26,6 +26,7 @@ $title = $id ? '編集' : '新規登録　';
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/ja.js"></script>
     <script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="../assets/js/company.js"></script>
 </head>
