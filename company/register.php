@@ -44,7 +44,7 @@ $title = $id ? '編集' : '新規登録　';
                         <input type="hidden" name="id" value="<?= $id ?>">
                         <div class="form-group">
                             <label>名前</label>
-                            <input type="text" name="name" class="form-control" placeholder="名前を入力してください" size="25" maxlength="100" value="<?php if ($object) echo h($object['name']) ?>" required>
+                            <input type="text" name="name" class="form-control" placeholder="落とし物名を入力してください" size="25" maxlength="100" value="<?php if ($object) echo h($object['name']) ?>" required>
                         </div>
                         <div class="form-group">
                             <label>詳細</label>

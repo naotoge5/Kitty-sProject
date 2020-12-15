@@ -67,12 +67,12 @@ include('../assets/functions.php');
                                     </select>
                                 </li>
                                 <li class="list-group-item">
-                                    <select name="cities" class="form-control" required>
+                                    <select name="cities" class="form-control">
                                         <option value="市区町村を選択してください">市区町村を選択してください</option>
                                     </select>
                                 </li>
                                 <li class="list-group-item">
-                                    <select name="towns" class="form-control" required>
+                                    <select name="towns" class="form-control">
                                         <option value="町域を選択してください">町域を選択してください</option>
                                     </select>
                                 </li>
