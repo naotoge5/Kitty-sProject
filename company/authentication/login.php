@@ -22,6 +22,7 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
 
 <body>
     <?php include('../../assets/_inc/header.php') ?>
+    <div class="my-4 py-4">&nbsp;</div>
     <main>
         <div class="container">
             <div class="card my-4">

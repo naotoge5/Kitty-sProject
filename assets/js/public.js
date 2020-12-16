@@ -1,8 +1,9 @@
 $(function () {
     if ($(window).width() > 428) {
-        $("#date").append('<div class="input-group"><input type="text" name="date" class="form-control rounded-left" value="" required><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>');
+        $("#date").append('<div class="input-group"><input type="text" name="date" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>');
     } else {
         $("#date").append('<input type="date" name="date" class="form-control"></input>');
+        $("select").toggleClass('form-control d-block w-100');
     }
 
     $("#narrow").change(function (e) {
@@ -20,35 +21,39 @@ $(function () {
         if ($("#narrow-button").hasClass("btn-success")) {
             $("#narrow-button").text('絞り込み検索');
         } else {
-            $("#narrow-button").html('<i class="fa fa-times"></i> 閉じる');
+            $("#narrow-button").html('<i class="fa fa-times"></i>&nbsp;閉じる&nbsp;');
         }
     });
-    $("#date .input-group").datetimepicker({
-        dayViewHeaderFormat: 'YYYY年 MMMM',
-        format: 'YYYY-MM-DD',
-        locale: 'ja',
-        showClose: true
-    });
-    $("#objects_table").DataTable({
-        "paging": false,
-        "info": false,
-        columnDefs: [
-            { targets: 0, width: "50%" }
-        ],
-        oLanguage: {
-            /* 日本語化設定 */
-            sLengthMenu: "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
-            oPaginate: { // ページネーション欄
-                sNext: "次へ",
-                sPrevious: "前へ"
-            },
-            sInfo: "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
-            sSearch: "検索 ", // 検索欄(例 = 検索 --)
-            sZeroRecords: "表示するデータがありません", // 表示する行がない場合
-            sInfoEmpty: "0 件中 0件 を表示しています", // 行が表示されていない場合
-            sInfoFiltered: "全 _MAX_ 件から絞り込み" // 検索後に総件数を表示する場合
-        }
-    });
+    if ($("#top").length) {
+        $("#date .input-group").datetimepicker({
+            dayViewHeaderFormat: 'YYYY年 MMMM',
+            format: 'YYYY-MM-DD',
+            locale: 'ja',
+            showClose: true
+        });
+    }
+    if ($("#show").length) {
+        $("#objects_table").DataTable({
+            "paging": false,
+            "info": false,
+            columnDefs: [
+                { targets: 0, width: "50%" }
+            ],
+            oLanguage: {
+                /* 日本語化設定 */
+                sLengthMenu: "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+                oPaginate: { // ページネーション欄
+                    sNext: "次へ",
+                    sPrevious: "前へ"
+                },
+                sInfo: "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+                sSearch: "検索 ", // 検索欄(例 = 検索 --)
+                sZeroRecords: "表示するデータがありません", // 表示する行がない場合
+                sInfoEmpty: "0 件中 0件 を表示しています", // 行が表示されていない場合
+                sInfoFiltered: "全 _MAX_ 件から絞り込み" // 検索後に総件数を表示する場合
+            }
+        });
+    }
 });
 
 let url = "http://geoapi.heartrails.com/api/json?jsonp=?";
@@ -96,6 +101,7 @@ function setCities(json) {
         option.val(cities[index].city);
         $('select[name="cities"]').append(option);
         $('select[name="cities"]').prop("disabled", false);
+        $('select[name="cities"]').prop("required", true);
     }
 }
 

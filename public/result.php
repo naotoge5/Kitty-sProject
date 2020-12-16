@@ -1,5 +1,7 @@
 <?php
-include '../assets/functions.php';
+include("../assets/functions.php");
+include("search.php");
+/*
 $companies = isset($_SESSION['data']['results']) ? $_SESSION['data']['results'] : 0;
 if (!isset($_SESSION['data']['keywords'])) {
 }
@@ -14,6 +16,7 @@ foreach ($_SESSION['data']['keywords'] as $index => $keyword) {
     }
 }
 $keywords .= "に該当するデータは" . (count($companies)) . "件ありました。";
+*/
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -21,7 +24,7 @@ $keywords .= "に該当するデータは" . (count($companies)) . "件ありま
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>落とし物検索システム</title>
+    <title>落とし物検索システム-検索結果</title>
 
     <!-- style -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">

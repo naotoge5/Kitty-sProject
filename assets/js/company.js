@@ -2,7 +2,7 @@ $(function () {
     $("#menu a:last").click(function () {
         $.ajax({
             type: "POST",
-            url: "ajax.php",
+            url: "../assets/ajax.php",
             data: { logout: '' }
         }).done(function (response) {
             console.log('ログアウト');

@@ -1,14 +1,13 @@
 <?php
 include('../assets/functions.php');
-if (!isset($_SESSION['id'])) {
+$id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
+if ($id) {
+    $company = readCompanyData($id);
+    $objects = readObjectList($id);
+} else {
     header('Location:authentication/login.php');
     exit;
 }
-
-$id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
-$company = readCompanyData($id);
-$objects = readObjectList($id);
-//include('../assets/_inc/header.php');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -30,6 +29,7 @@ $objects = readObjectList($id);
 
 <body>
     <?php include("../assets/_inc/header.php") ?>
+    <div class="my-4 py-4">&nbsp;</div>
     <main id="management">
         <div class="container">
             <div class="card">

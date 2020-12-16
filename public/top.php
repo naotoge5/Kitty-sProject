@@ -7,8 +7,8 @@ include('../assets/functions.php');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="落とし物検索システム">
-    <title>落とし物検索システム</title>
+    <!--<meta name="description" content="落とし物検索システム">-->
+    <title>落とし物検索システム-TOP</title>
 
     <!-- style -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -25,13 +25,13 @@ include('../assets/functions.php');
 
 <body>
     <?php include("../assets/_inc/header.php") ?>
-    <main>
+    <main id="top">
         <div class="vh-100 d-flex align-items-center">
             <div class="container px-4">
                 <h3 class="text-center text-black pb-4">落とし物検索</h3>
                 <form method="get" action="result.php">
                     <div class="input-group">
-                        <input class="form-control border-secondary" type="search" name="name" placeholder="店舗名" aria-label="Search">
+                        <input class="form-control border-secondary" type="search" name="name" placeholder="店舗名" required>
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-secondary rounded-right" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
                         </span>
