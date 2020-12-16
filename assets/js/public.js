@@ -1,18 +1,22 @@
 $(function () {
-    $("input[name='search']").on("keydown",function(ev){
-        if ((ev.which && ev.which === 13) ||(ev.keyCode && ev.keyCode === 13)){
-          return false;
-        } else {
-          return true;
-        }
-      });
-    $("#search").change(function (e) {
+    if ($(window).width() < 576) {
+        $("#dayi").append('<input type="date" name="date" class="form-control"></input>');
+    } else {
+        $("#dayi").append('<div class="input-group" id="date"><input type="text" name="date" class="form-control rounded-left" value="" required><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>');
+    }
+    $("#narrow").change(function (e) {
         let target = $(e.target)
         if (target.attr("name") === 'prefectures') {
             changePrefecture();
         } else if (target.attr("name") === 'cities') {
             changeCity();
         }
+    });
+    $('#date').datetimepicker({
+        dayViewHeaderFormat: 'YYYY年 MMMM',
+        format: 'YYYY-MM-DD',
+        locale: 'ja',
+        showClose: true
     });
     $("#objects_table").DataTable({
         "paging": false,
@@ -43,7 +47,7 @@ function changePrefecture() {
     resetCities();
     resetTowns();
     if (prefecture !== '都道府県を選択してください') {
-        $.getJSON(url, {"method": "getCities", "prefecture": prefecture}, setCities);
+        $.getJSON(url, { "method": "getCities", "prefecture": prefecture }, setCities);
     }
 }
 
@@ -61,7 +65,7 @@ function changeCity() {
     let city = $('select[name="cities"] option:selected').val();
     resetTowns();
     if (city !== '市区町村を選択してください') {
-        $.getJSON(url, {'method': 'getTowns', 'city': city}, setTowns);
+        $.getJSON(url, { 'method': 'getTowns', 'city': city }, setTowns);
     }
 }
 
