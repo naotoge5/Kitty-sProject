@@ -3,8 +3,8 @@ include '../assets/functions.php';
 
 $name = $_GET['name'];
 $prefecture = isset($_GET['prefectures']) ? $_GET['prefectures'] : 0;
-$city = $_GET['cities'];
-$town = $_GET['towns'];
+$city = $_GET['cities'] !== "市区町村を選択してください" ? $_GET['cities'] : null;
+$town = $_GET['towns'] !== "町域を選択してください" ? $_GET['towns'] : null;
 $category = $_GET['categories'];
 $query = "";
 $value = [];

@@ -3,17 +3,17 @@ include '../assets/functions.php';
 $companies = isset($_SESSION['data']['results']) ? $_SESSION['data']['results'] : 0;
 if (!isset($_SESSION['data']['keywords'])) {
 }
-unset($_SESSION['data']['results']);
+//unset($_SESSION['data']['results']);
 //include '../assets/_inc/header.php';
 $keywords = '';
 foreach ($_SESSION['data']['keywords'] as $index => $keyword) {
     if ($index == count(['keywords']) + 1) {
         $keywords .= '"' . $keyword . '"';
     } else {
-        $keywords .= '"' . $keyword . '"' . '、';
+        $keywords .= '"' . $keyword . '"' . ' ';
     }
 }
-$keywords .= "に該当するデータは" . (count($companies)) . "件になりました。";
+$keywords .= "に該当するデータは" . (count($companies)) . "件ありました。";
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -60,8 +60,8 @@ $keywords .= "に該当するデータは" . (count($companies)) . "件になり
                         </div>
                     </div>
                 <?php endif; ?>
-                <a href="top.php">検索画面に戻る</a>
             </div>
+            <a href="top.php">検索画面に戻る</a>
         </div>
     </main>
     <?php include '../assets/_inc/footer.php' ?>
