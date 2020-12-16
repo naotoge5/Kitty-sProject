@@ -4,6 +4,7 @@ include_once("../assets/functions.php"); //include_once -> result.php内でfunct
 $company_name = isset($_GET['name']) ? $_GET['name'] : 0; // 必須
 $category = isset($_GET['categories']) ? $_GET['categories'] : 0; // 必須
 if ($company_name) {
+    $companies = searchCompanies();
 } else if ($category) {
     $object_name = empty($_GET['objects']) ? 0 : $_GET['objects']; // 任意
     $prefecture = $_GET['prefectures']; // 必須
@@ -21,6 +22,8 @@ if ($company_name) {
 }
 
 /* 検索-関数 */ // 未着手
+
+/*
 if ($prefecture) {
     if ($prefecture !== '都道府県を選択してください') {
         $query .= " and prefecture=:prefecture and city=:city and town  like :town";
@@ -43,11 +46,6 @@ if ($prefecture) {
 }
 header("Location:result.php");
 
-/**
- * @param string $plus_query
- * @param array $plus_value
- * @return array|int
- */
 function searchCompanies(string $plus_query, array $plus_value)
 {
     global $name;
@@ -62,6 +60,25 @@ function searchCompanies(string $plus_query, array $plus_value)
         return $stmt->fetchAll();
     } catch (PDOException $e) {
         alert($e . 'データーベース接続エラー', 'ERROR');
+    } finally {
+        unset($pdo);
+    }
+    return 0;
+}
+*/
+
+function searchCompanies()
+{
+    global $company_name;
+    $name = '%' . $company_name . '%';
+    try {
+        $pdo = getPDO(); //pdo取得
+        $stmt = $pdo->prepare("select id, name, details from companies where name like :name");
+        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    } catch (PDOException $e) {
+        alert('データーベース接続エラー', 'ERROR');
     } finally {
         unset($pdo);
     }

@@ -35,9 +35,10 @@ $keywords .= "に該当するデータは" . (count($companies)) . "件ありま
 </head>
 
 <body>
+    <?php include("../assets/_inc/header.php") ?>
+    <div class="my-4 py-4">&nbsp;</div>
     <main>
         <div class="container">
-            <?= $keywords ?>
             <div class="row">
                 <?php if ($companies) : ?>
                     <?php foreach ($companies as $company) : ?>
