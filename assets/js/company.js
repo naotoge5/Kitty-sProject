@@ -73,7 +73,7 @@ $(function () {
         let postal = $('input[name="postal"]').val().replace('-', '');
         $.ajax({
             type: "GET",
-            url: "../ajax.php",
+            url: "../../assets/ajax.php",
             data: { request_url: "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + postal }
         }).done(function (response) {//ajax通信に成功したかどうかresponseに値があるかどうかでは無い
             setAddress(response)
@@ -97,7 +97,7 @@ $(function () {
         }
         $.ajax({
             type: "POST",
-            url: "ajax.php",
+            url: "../assets/ajax.php",
             data: { details: details }
         }).done(function (response) {
             //これはよくない

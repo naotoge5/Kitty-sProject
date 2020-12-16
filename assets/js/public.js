@@ -1,18 +1,29 @@
 $(function () {
-    if ($(window).width() < 576) {
-        $("#dayi").append('<input type="date" name="date" class="form-control"></input>');
+    if ($(window).width() > 428) {
+        $("#date").append('<div class="input-group"><input type="text" name="date" class="form-control rounded-left" value="" required><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>');
     } else {
-        $("#dayi").append('<div class="input-group" id="date"><input type="text" name="date" class="form-control rounded-left" value="" required><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>');
+        $("#date").append('<input type="date" name="date" class="form-control"></input>');
     }
+
     $("#narrow").change(function (e) {
         let target = $(e.target)
-        if (target.attr("name") === 'prefectures') {
+        if (target.attr("name") === 'categories') {
+            changeCategory();
+        } else if (target.attr("name") === 'prefectures') {
             changePrefecture();
         } else if (target.attr("name") === 'cities') {
             changeCity();
         }
     });
-    $('#date').datetimepicker({
+    $("#narrow-button").click(function () {
+        $("#narrow-button").toggleClass("btn-danger btn-success");
+        if ($("#narrow-button").hasClass("btn-success")) {
+            $("#narrow-button").text('絞り込み検索');
+        } else {
+            $("#narrow-button").html('<i class="fa fa-times"></i> 閉じる');
+        }
+    });
+    $("#date .input-group").datetimepicker({
         dayViewHeaderFormat: 'YYYY年 MMMM',
         format: 'YYYY-MM-DD',
         locale: 'ja',
@@ -41,12 +52,38 @@ $(function () {
 });
 
 let url = "http://geoapi.heartrails.com/api/json?jsonp=?";
+function changeCategory() {
+    let category = $("select[name='categories'] option:selected").val();
+    console.log(category);
+    resetObjects();
+    if (category !== 'カテゴリー') {
+        $.ajax({
+            type: "GET",
+            url: "../assets/ajax.php",
+            data: { category: category }
+        }).done(function (response) {
+            setObjects(response);
+        }).fail(function () {
+            alert('更新に失敗しました。');
+        });
+    }
+}
+function setObjects(json) {
+    let objects = JSON.parse(json);
+    for (let index = 0; index < objects.length; index++) {
+        let option = $(document.createElement('option'));
+        option.text(objects[index].name);
+        option.val(objects[index].name);
+        $('select[name="objects"]').append(option);
+        $('select[name="objects"]').prop("disabled", false);
+    }
+}
 
 function changePrefecture() {
     let prefecture = $("select[name='prefectures'] option:selected").val();
     resetCities();
     resetTowns();
-    if (prefecture !== '都道府県を選択してください') {
+    if (prefecture !== '都道府県') {
         $.getJSON(url, { "method": "getCities", "prefecture": prefecture }, setCities);
     }
 }
@@ -58,13 +95,14 @@ function setCities(json) {
         option.text(cities[index].city);
         option.val(cities[index].city);
         $('select[name="cities"]').append(option);
+        $('select[name="cities"]').prop("disabled", false);
     }
 }
 
 function changeCity() {
     let city = $('select[name="cities"] option:selected').val();
     resetTowns();
-    if (city !== '市区町村を選択してください') {
+    if (city !== '市区') {
         $.getJSON(url, { 'method': 'getTowns', 'city': city }, setTowns);
     }
 }
@@ -76,6 +114,7 @@ function setTowns(json) {
         option.text(towns[index]);
         option.val(towns[index]);
         $('select[name="towns"]').append(option);
+        $('select[name="towns"]').prop("disabled", false);
     }
 }
 
@@ -97,10 +136,17 @@ function sortTowns(towns_default) {
     return towns;
 }
 
+function resetObjects() {
+    $('select[name="objects"]').prop("disabled", true);
+    $('select[name="objects"]').html('<option value="">名称</option>');
+}
+
 function resetCities() {
-    $('select[name="cities"]').html('<option value="市区町村を選択してください">市区町村を選択してください</option>');
+    $('select[name="cities"]').prop("disabled", true);
+    $('select[name="cities"]').html('<option value="">市区</option>');
 }
 
 function resetTowns() {
-    $('select[name="towns"]').html('<option value="町域を選択してください">町域を選択してください</option>');
+    $('select[name="towns"]').prop("disabled", true);
+    $('select[name="towns"]').html('<option value="">町域</option>');
 }

@@ -38,7 +38,7 @@ include('../assets/functions.php');
                     </div>
                 </form>
                 <div class="fixed-bottom m-2">
-                    <button type="button" data-toggle="collapse" data-target="#narrow" class="btn btn-success btn-block">絞り込み検索</button>
+                    <button id="narrow-button" type="button" data-toggle="collapse" data-target="#narrow" class="btn btn-success btn-block">絞り込み検索</button>
                     <div id="narrow" class="collapse">
                         <div class="card card-body m-2 bg-light">
                             <form action="result.php" method="get">
@@ -46,7 +46,7 @@ include('../assets/functions.php');
                                     <div class="form-group col-12 col-md-6">
                                         <label>落とし物</label>
                                         <select name="categories" class="form-control" required>
-                                            <option value="カテゴリー">カテゴリー</option>
+                                            <option value="">カテゴリー</option>
                                             <?php foreach ($categories as $category) : ?>
                                                 <option value="<?= $category; ?>"><?= $category; ?></option>
                                             <?php endforeach; ?>
@@ -54,8 +54,8 @@ include('../assets/functions.php');
                                     </div>
                                     <div class="form-group col-12 col-md-6">
                                         <label class="d-none d-md-block">&nbsp;</label>
-                                        <select name="categories" class="form-control" required>
-                                            <option value="名称">名称</option>
+                                        <select name="objects" class="form-control" disabled>
+                                            <option value="">名称</option>
                                         </select>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@ include('../assets/functions.php');
                                     <div class="form-group col-12 col-md-4">
                                         <label>地域</label>
                                         <select name="prefectures" class="form-control" required>
-                                            <option value="都道府県を選択してください">都道府県を選択してください</option>
+                                            <option value="">都道府県</option>
                                             <?php foreach ($regions as $region => $prefectures) : ?>
                                                 <optgroup label="<?= $region ?>">
                                                     <?php foreach ($prefectures as $prefecture) : ?>
@@ -75,20 +75,21 @@ include('../assets/functions.php');
                                     </div>
                                     <div class="form-group col-12 col-md-4">
                                         <label class="d-none d-md-block">&nbsp;</label>
-                                        <select name="cities" class="form-control">
-                                            <option value="市区町村を選択してください">市区町村を選択してください</option>
+                                        <select name="cities" class="form-control" disabled>
+                                            <option value="">市区</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-12 col-md-4">
                                         <label class="d-none d-md-block">&nbsp;</label>
-                                        <select name="towns" class="form-control">
-                                            <option value="町域を選択してください">町域を選択してください</option>
+                                        <select name="towns" class="form-control" disabled>
+                                            <option value="">町域</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div id="dayi" class="form-group">
+                                <div id="date" class="form-group">
                                     <label>落とした日</label>
                                 </div>
+                                <button type="submit" class="btn btn-secondary btn-block">この条件で検索する</button>
                             </form>
                         </div>
                     </div>
