@@ -29,11 +29,11 @@ include('../assets/functions.php');
         <div class="vh-100 d-flex align-items-center">
             <div class="container px-4">
                 <h3 class="text-center text-black pb-4">落とし物検索</h3>
-                <form method="get" action="search.php">
+                <form method="get" action="result.php">
                     <div class="input-group">
                         <input class="form-control border-secondary" type="search" name="name" placeholder="店舗名" aria-label="Search">
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-secondary rounded-right" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
+                            <button type="submit" class="btn btn-secondary rounded-right" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </form>
@@ -41,7 +41,7 @@ include('../assets/functions.php');
                     <button type="button" data-toggle="collapse" data-target="#narrow" class="btn btn-success btn-block">絞り込み検索</button>
                     <div id="narrow" class="collapse">
                         <div class="card card-body m-2 bg-light">
-                            <form action="" method="get">
+                            <form action="result.php" method="get">
                                 <div class="form-row">
                                     <div class="form-group col-12 col-md-6">
                                         <label>落とし物</label>
