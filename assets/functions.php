@@ -47,11 +47,11 @@ function getNav($target)
 {
     static $nav;
     if (preg_match('/authentication/', $target)) {
-        $nav = 0;
-    } elseif (preg_match('/public/', $target)) {
-        $nav = [['link' => 'top.php', 'name' => '検索TOP'], ['link' => 'description.php', 'name' => 'サイト概要']];
+        $nav = [['link' => '../../index.php', 'name' => 'サイト']];
+    } elseif (preg_match('/company/', $target)) {
+        $nav = [['link' => 'management.php', 'name' => '管理画面'], ['link' => '../../index.php', 'name' => 'サイト'], ['link' => 'authentication/login.php', 'name' => 'ログアウト']];
     } else {
-        $nav = [['link' => 'management.php', 'name' => '管理画面'], ['link' => 'authentication/login.php', 'name' => 'ログアウト']];
+        $nav = [['link' => 'index.php', 'name' => '検索TOP'], ['link' => 'description.php', 'name' => 'サイト概要'], ['link' => 'company/management.php', 'name' => '企業様']];
     };
     return $nav;
 }

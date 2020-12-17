@@ -1,5 +1,5 @@
 <?php
-include('../assets/functions.php');
+include('assets/functions.php');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -15,14 +15,14 @@ include('../assets/functions.php');
     <!-- script -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/public.js"></script>
+    <script src="assets/js/public.js"></script>
 </head>
 
 <body>
-    <?php include("../assets/_inc/header.php") ?>
+    <?php include("assets/_inc/header.php") ?>
     <main id="description">
     </main>
-    <?php include('../assets/_inc/footer.php') ?>
+    <?php include('assets/_inc/footer.php') ?>
 </body>
 
 </html>

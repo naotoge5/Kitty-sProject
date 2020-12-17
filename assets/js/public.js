@@ -64,7 +64,7 @@ function changeCategory() {
     if (category !== 'カテゴリー') {
         $.ajax({
             type: "GET",
-            url: "../assets/ajax.php",
+            url: "assets/ajax.php",
             data: { category: category }
         }).done(function (response) {
             setObjects(response);

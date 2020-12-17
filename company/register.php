@@ -33,6 +33,7 @@ $title = $id ? '編集' : '新規登録　';
 
 <body>
     <?php include("../assets/_inc/header.php") ?>
+    <div class="my-4 py-4">&nbsp;</div>
     <main id="register">
         <div class="container">
             <div class="card my-4">

@@ -1,11 +1,11 @@
 <?php
-include("../assets/functions.php");
+include("assets/functions.php");
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 if ($id) {
     $company = readCompanyData($id);
     $objects = readObjectList($id);
 } else {
-    header('Location:top.php');
+    header('Location:index.php');
     exit;
 }
 ?>
@@ -24,11 +24,11 @@ if ($id) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/js/public.js"></script>
+    <script src="assets/js/public.js"></script>
 </head>
 
 <body>
-    <?php include("../assets/_inc/header.php") ?>
+    <?php include("assets/_inc/header.php") ?>
     <div class="my-4 py-4">&nbsp;</div>
     <main id="show">
         <div class="container">
@@ -83,7 +83,7 @@ if ($id) {
             </div>
         </div>
     </main>
-    <?php include('../assets/_inc/footer.php') ?>
+    <?php include('assets/_inc/footer.php') ?>
 </body>
 
 </html>

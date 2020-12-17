@@ -1,12 +1,12 @@
 <?php
-include("../assets/functions.php");
+include("assets/functions.php");
 include("search.php");
 /*
 $companies = isset($_SESSION['data']['results']) ? $_SESSION['data']['results'] : 0;
 if (!isset($_SESSION['data']['keywords'])) {
 }
 //unset($_SESSION['data']['results']);
-//include '../assets/_inc/header.php';
+//include 'assets/_inc/header.php';
 $keywords = '';
 foreach ($_SESSION['data']['keywords'] as $index => $keyword) {
     if ($index == count(['keywords']) + 1) {
@@ -31,11 +31,11 @@ $keywords .= "に該当するデータは" . (count($companies)) . "件ありま
     <!-- script -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/public.js"></script>
+    <script src="assets/js/public.js"></script>
 </head>
 
 <body>
-    <?php include("../assets/_inc/header.php") ?>
+    <?php include("assets/_inc/header.php") ?>
     <div class="my-4 py-4">&nbsp;</div>
     <main>
         <div class="container">
@@ -65,10 +65,10 @@ $keywords .= "に該当するデータは" . (count($companies)) . "件ありま
                     </div>
                 <?php endif; ?>
             </div>
-            <a href="top.php">検索画面に戻る</a>
+            <a href="index.php">検索画面に戻る</a>
         </div>
     </main>
-    <?php include '../assets/_inc/footer.php' ?>
+    <?php include 'assets/_inc/footer.php' ?>
 </body>
 
 </html>

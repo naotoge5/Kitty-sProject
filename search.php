@@ -1,5 +1,5 @@
 <?php
-include_once("../assets/functions.php"); //include_once -> result.php内でfunction読み込みの為
+include_once("assets/functions.php"); //include_once -> result.php内でfunction読み込みの為
 
 $company_name = isset($_GET['name']) ? $_GET['name'] : 0; // 必須
 $category = isset($_GET['categories']) ? $_GET['categories'] : 0; // 必須
@@ -17,7 +17,7 @@ if ($company_name) {
     }
 } else {
     alert('不正なアクセスです', 'CAUTION');
-    header('Location:top.php');
+    header('Location:index.php');
     exit;
 }
 
