@@ -40,7 +40,7 @@ include('../assets/functions.php');
                 <div class="fixed-bottom m-2">
                     <button id="narrow-button" type="button" data-toggle="collapse" data-target="#narrow" class="btn btn-success btn-block">絞り込み検索</button>
                     <div id="narrow" class="collapse">
-                        <div class="card card-body m-2 bg-light">
+                        <div class="card card-body m-2 bg-light overflow-auto" style="max-height: 80vh !important;">
                             <form action="result.php" method="get">
                                 <div class="form-row">
                                     <div class="form-group col-12 col-md-6">
@@ -89,7 +89,7 @@ include('../assets/functions.php');
                                 <div id="date" class="form-group">
                                     <label>落とした日</label>
                                 </div>
-                                <button type="submit" class="btn btn-secondary btn-block">この条件で検索する</button>
+                                <button type="submit" class="btn btn-secondary btn-block">この条件で検索</button>
                             </form>
                         </div>
                     </div>
