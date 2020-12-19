@@ -33,22 +33,20 @@ if ($id) {
     <main id="show">
         <div class="container">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title mb-0"><?= h($company['name']) ?></h3>
-                </div>
+                <h3 class="card-header"><?= h($company['name']) ?></h3>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <h5 class="mb-0 card-title">住所</h5>
-                            <p class="card-text">〒&nbsp;<?= h($company['postal']) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?>
+                            <p class="card-text mb-0">〒&nbsp;<?= h($company['postal']) . "<br>" . h($company['prefecture']) . h($company['city']) . h($company['town']) ?>
                             </p>
                             <h5 class="mb-0 card-title">電話番号</h5>
-                            <p class="card-text">TEL：<a href="tel:<?= str_replace('-', '', h($company['tel'])) ?>"><?= h($company['tel']) ?></a>
+                            <p class="card-text">TEL：<a href="tel:<?= str_replace('-', '', h($company['tel'])) ?>" class="card-link"><?= h($company['tel']) ?></a>
                             </p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <h5 class="mb-0 card-title ">営業時間等</h5>
-                            <textarea name="details" class="w-100 form-control" placeholder="営業時間、電話受付可能時間等" readonly><?= h($company['details']); ?></textarea>
+                            <textarea name="details" class="w-100 form-control h-75" placeholder="営業時間、電話受付可能時間等" readonly><?= h($company['details']); ?></textarea>
                         </div>
                     </div>
                     <iframe class="mt-2 " width="100%" height="100%" src=" https://maps.google.co.jp/maps?output=embed&q=<?= h($company['name']) ?>"></iframe>

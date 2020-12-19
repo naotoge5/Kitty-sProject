@@ -26,9 +26,7 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
     <main>
         <div class="container">
             <div class="card my-4">
-                <div class="card-header">
-                    <h3 class="card-title mb-0">ログイン ／ ご新規</h3>
-                </div>
+                <h3 class="card-header">ログイン ／ ご新規</h3>
                 <div class="card-body d-none d-sm-block">
                     <form id="login" action="check.php" method="post">
                         <div class="form-group">

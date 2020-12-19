@@ -1,8 +1,8 @@
 <?php
 include('../assets/functions.php');
-$id = isset($_POST['id']) ? $_POST['id'] : null;
+$id = isset($_POST['id']) ? $_POST['id'] : 0;
 
-is_null($id) ? alert('不正なアクセスです', 'CAUTION') : deleteObject();
+$id ? deleteObject() : alert('不正なアクセスです', 'CAUTION');
 
 header('Location:management.php');
 
@@ -10,7 +10,7 @@ function deleteObject()
 {
     global $id;
     try {
-        $pdo = getPDO();//pdo取得
+        $pdo = getPDO(); //pdo取得
         $stmt = $pdo->prepare("delete from objects where id = :id");
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();

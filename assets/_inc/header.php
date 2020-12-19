@@ -1,5 +1,5 @@
 <?php
-$nav = getNav($_SERVER['REQUEST_URI']);
+$nav = getNav($_SERVER['PHP_SELF']);
 $alert = isset($_SESSION['alert']) ? $_SESSION['alert'] : 0;
 unset($_SESSION['alert']);
 ?>
@@ -31,6 +31,7 @@ unset($_SESSION['alert']);
 </header>
 <?php if ($alert and !$alert['continue']) : ?>
     <main>
+        <div class="my-4 py-4">&nbsp;</div>
         <div class="container">
             <div class="card my-4">
                 <div class="card-header pb-0">

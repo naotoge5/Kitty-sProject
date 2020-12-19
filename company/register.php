@@ -8,8 +8,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $object = $id ? readObjectData($id) : 0;
 $datetime = $object ? explode(' ', $object['datetime']) : 0;
 
-$title = $id ? '編集' : '新規登録　';
-//include('../assets/_inc/header.php');
+$title = $id ? '編集' : '新規登録';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -37,10 +36,7 @@ $title = $id ? '編集' : '新規登録　';
     <main id="register">
         <div class="container">
             <div class="card my-4">
-                <!--my-4:card外の上下に空間-->
-                <div class="card-header pb-0">
-                    <h3 class="card-title"><?= $title ?></h3>
-                </div>
+                <h3 class="card-header"><?= $title ?></h3>
                 <div class="card-body d-none d-sm-block">
                     <form action="update.php" method="POST">
                         <input type="hidden" name="id" value="<?= $id ?>">

@@ -33,9 +33,7 @@ if ($id) {
     <main id="management">
         <div class="container">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title mb-0"><?= h($company['name']) ?></h3>
-                </div>
+                <h3 class="card-header"><?= h($company['name']) ?></h3>
                 <div class="card-body d-none d-sm-block">
                     <div class="row">
                         <div class="col-6">

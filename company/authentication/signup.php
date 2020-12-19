@@ -32,9 +32,7 @@ if (!$mail) {
     <main>
         <div class="container">
             <div class="card my-4">
-                <div class="card-header">
-                    <h3 class="card-title mb-0">サインアップ</h3>
-                </div>
+                <h3 class="card-header">サインアップ</h3>
                 <div class="card-body">
                     <div class="ml-3">
                         <form id="signup" action="create.php" method="post">
@@ -50,7 +48,7 @@ if (!$mail) {
                             </div>
                             <div class="form-group">
                                 <label>電話番号</label>
-                                <input type="text" name="tel" class="form-control"pattern="\d{3,4}-\d{3,4}-\d{3,4}" maxlength="13" minlength="12" placeholder="ハイフン有り,半角" required>
+                                <input type="text" name="tel" class="form-control" pattern="\d{3,4}-\d{3,4}-\d{3,4}" maxlength="13" minlength="12" placeholder="ハイフン有り,半角" required>
                             </div>
                             <div class="form-group">
                                 <label>郵便番号</label>
