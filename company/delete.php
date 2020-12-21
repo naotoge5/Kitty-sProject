@@ -2,7 +2,7 @@
 include('../assets/functions.php');
 $id = isset($_POST['id']) ? $_POST['id'] : 0;
 
-$id ? deleteObject() : alert('不正なアクセスです', 'CAUTION');
+$id ? connect($id, "delete from objects where id = ?") : alert('不正なアクセスです', 'CAUTION');
 
 header('Location:management.php');
 

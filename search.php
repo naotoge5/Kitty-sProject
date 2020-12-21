@@ -2,21 +2,28 @@
 include_once("assets/functions.php"); //include_once -> result.php内でfunction読み込みの為
 
 $company_name = isset($_GET['name']) ? $_GET['name'] : 0; // 必須
+
 $category = isset($_GET['categories']) ? $_GET['categories'] : 0; // 必須
-if ($company_name) {
-    $companies = searchCompanies();
-} else if ($category) {
-    $object_name = empty($_GET['objects']) ? 0 : $_GET['objects']; // 任意
-    $prefecture = $_GET['prefectures']; // 必須
-    $city = $_GET['cities']; // 必須
-    $town = empty($_GET['towns']) ? 0 : $_GET['towns']; // 任意
-    $datetime = empty($_GET['towns']) ? 0 : $_GET['towns']; // 任意
-    if ($datetime) {
-        $datetime_first = $datetime . ' 00:00:00'; // 該当日の午前0時
-        $datetime_last = $datetime . ' 23:59:59'; // 該当日の午後23時59分
+if (!empty($_GET['name'])) {
+    $companies = readAll('%' . $_GET['name'] . '%', "select id, name, details from companies where name like ? limit 10");
+} else if (!empty($_GET['categories'])) {
+    if (empty($_GET['towns'])) {
+        $companies = readAll([$_GET['prefectures'], $_GET['cities']], "select id, name, details from companies where prefecture = ? and city = ?");
+    } else {
+        $companies = readAll([$_GET['prefectures'], $_GET['cities'], $_GET['towns'] . '%'], "select id, name, details from companies where prefecture = ? and city = ? and town like ?");
     }
+    $param = [$_GET['categories']];
+    $query = "select distinct company_id from objects where category = ?";
+    if (!empty($_GET['objects'])) {
+        $param = array_push($param, $_GET['objects']);
+        $query .= " and name = ?";
+    }
+    if (!empty($_GET['date'])) {
+        $param = array_merge($param, [$_GET['date'] . ' 00:00:00', $_GET['date'] . ' 23:59:59']);
+        $query .= " and datetime between ? and ?";
+    }
+    $company_ids = readAll($param, $query);
 } else {
-    alert('不正なアクセスです', 'CAUTION');
     header('Location:index.php');
     exit;
 }

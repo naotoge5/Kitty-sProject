@@ -31,7 +31,7 @@ include('assets/functions.php');
                 <h3 class="text-center text-black pb-4">落とし物検索</h3>
                 <form method="get" action="result.php">
                     <div class="input-group">
-                        <input class="form-control border-secondary" type="search" name="name" placeholder="店舗名" required>
+                        <input class="form-control border-secondary" pattern=".*\S+.*"　type="search" name="name" placeholder="店舗名" required>
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-secondary rounded-right" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
                         </span>

@@ -1,9 +1,8 @@
 <?php
 include('../assets/functions.php');
-$id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
-if ($id) {
-    $company = readCompanyData($id);
-    $objects = readObjectList($id);
+if (is_numeric($_SESSION['id'])) {
+    $company = read($_SESSION['id'], "select * from companies where id = ?");
+    $objects = readAll($_SESSION['id'], "select * from objects where company_id = ?");
 } else {
     header('Location:authentication/login.php');
     exit;

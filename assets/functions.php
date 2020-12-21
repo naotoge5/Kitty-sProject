@@ -65,9 +65,76 @@ function alert(string $message, string $type)
     }
     $_SESSION['alert'] = $alert;
 }
+/**
+ * 1件取得
+ * @param mixed $param 必要なパラメーター
+ * @param string $query 実行するsql構文
+ * @return int|array 0 or 配列
+ */
 
-//企業情報の呼び出し
-function readCompanyData(int $id)
+function read($param, $query)
+{
+    if (!is_array($param)) $param = [$param];
+    try {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($param);
+        $result = $stmt->fetch();
+        if ($result) return $result;
+    } catch (PDOException $e) {
+        alert('データーベース接続エラー', 'ERROR');
+    } finally {
+        unset($pdo);
+    }
+    return 0;
+}
+/**
+ * 複数取得
+ * @param mixed $param 必要なパラメーター
+ * @param string $query 実行するsql構文
+ * @return int|array 0 or 多次元配列
+ */
+function readAll($param, $query)
+{
+    if (!is_array($param)) $param = [$param];
+    try {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($param);
+        $result = $stmt->fetchAll();
+        if ($result) return $result;
+    } catch (PDOException $e) {
+        alert('データーベース接続エラー', 'ERROR');
+    } finally {
+        unset($pdo);
+    }
+    return 0;
+}
+/**
+ * 挿入|更新|削除
+ * @param mixed $param 必要なパラメーター
+ * @param string $query 実行するsql構文
+ */
+function connect($param, string $query)
+{
+    if (!is_array($param)) $param = [$param];
+    try {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($param);
+        return 1;
+    } catch (PDOException $e) {
+        alert('データーベース接続エラー', 'ERROR');
+        return 0;
+    } finally {
+        unset($pdo);
+    }
+}
+
+/**
+ * 企業情報の取得
+ */
+function readCompany(int $id)
 {
     try {
         $pdo = getPDO();
@@ -85,8 +152,12 @@ function readCompanyData(int $id)
     return 0;
 }
 
-//拾得物一覧の呼び出し
-function readObjectList(int $id)
+/**
+ * 落とし物全件の取得
+ * @param int $id 企業ID
+ * @return array|int 落とし物|
+ */
+function readObjects(int $id)
 {
     try {
         $pdo = getPDO();
@@ -170,4 +241,138 @@ function updateDetails(string $details, int $id)
         unset($pdo);
     }
     return 0;
+}
+
+class CompanyTable
+{
+    public $id;
+    public $name;
+    public $tel;
+    public $postal;
+    public $prefecture;
+    public $city;
+    public $town;
+    public $details;
+    public $mail;
+    public $password;
+    public $objects;
+
+    function __construct($id)
+    {
+        if (is_numeric($id)) {
+            $company = $this->getCompany($id);
+            if ($company) {
+                foreach ($this as $key => $value) {
+                    $this->$key = $company[$key];
+                }
+            }
+        } else {
+            $this->id = null;
+        }
+    }
+    //企業情報の呼び出し
+    private function getCompany(int $id)
+    {
+        try {
+            $pdo = getPDO();
+            $stmt = $pdo->prepare("select * from companies where id=:id limit 1");
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            if ($result) return $result;
+            alert('不正なアクセスです', 'CAUTION');
+        } catch (PDOException $e) {
+            alert('データーベース接続エラー', 'ERROR');
+        } finally {
+            unset($pdo);
+        }
+        return 0;
+    }
+}
+
+class ObjectTable
+{
+}
+
+class Company
+{
+    static function readFromId(int $id)
+    {
+
+        try {
+            $pdo = getPDO();
+            $stmt = $pdo->prepare("select * from companies where id=:id limit 1");
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            if ($result) return $result;
+            alert('不正なアクセスです', 'CAUTION');
+        } catch (PDOException $e) {
+            alert('データーベース接続エラー', 'ERROR');
+        } finally {
+            unset($pdo);
+        }
+        return 0;
+    }
+
+    static function readAllFromName(string $name)
+    {
+        $name = '%' . $name . '%';
+        try {
+            $pdo = getPDO(); //pdo取得
+            $stmt = $pdo->prepare("select id, name, details from companies where name like :name limit 10");
+            $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            alert('データーベース接続エラー', 'ERROR');
+        } finally {
+            unset($pdo);
+        }
+        return 0;
+    }
+
+    static function readAllFromArea()
+    {
+    }
+
+    static function delete()
+    {
+    }
+
+    static function write()
+    {
+    }
+
+    static function update()
+    {
+    }
+}
+class Item
+{
+    /**
+     * 落とし物IDよりデータ1件を取得
+     */
+    static function read(int $id)
+    {
+    }
+
+    /**
+     * 企業IDよりデータ全件を取得
+     */
+    static function readAll(int $id)
+    {
+        try {
+            $pdo = getPDO();
+            $stmt = $pdo->prepare("select * from objects where company_id=:company_id");
+            $stmt->bindValue(":company_id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            alert('データーベース接続エラー', 'ERROR');
+        } finally {
+            unset($pdo);
+        }
+        return 0;
+    }
 }
