@@ -9,12 +9,18 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
+require "update.php";
 
 $mail = isset($_POST['mail']) ? $_POST['mail'] : 0;
+$password = isset($_POST['password']) ? $_POST['password'] : 0;
+$confirmation_email = isset($_POST['confirmation_email']) ? $_POST['confirmation_email'] : 0;
 $token = hash('sha256', uniqid(rand(), 1));
 $url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 if ($mail) {
     if (check_mail() and write_preCompany()) send_mail();
+}else if($confirmation_email){
+    if ( write__preCompany()) send__mail();
+    update($password,$confirmation_emai);
 } else {
     alert('不正なアクセスです', 'CAUTION');
 }
@@ -96,3 +102,79 @@ function send_mail()
     }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+function write__preCompany()
+{
+    global $token;
+    global $confirmation_email;
+    try {
+        $pdo = getPDO();
+        $stmt = $pdo->prepare("insert into pre_companies values(null, :token, :mail, now())");
+        $stmt->execute(array(":token" => $token, ":mail" => $confirmation_email));
+        return 1;
+    } catch (PDOException $e) {
+        alert('データベース接続エラー', 'ERROR');
+    } finally {
+        unset($pdo);
+    }
+    return 0;
+}
+
+function send__mail()
+{
+    global $confirmation_email;
+    global $password;
+    try {
+        $mailer = new PHPMailer(true);//インスタンスを生成（true指定で例外を有効化）
+        /*
+        なくても動く!?
+        //文字エンコードを指定
+        //mb_language('uni');
+        //mb_internal_encoding('UTF-8');
+        */
+        $mailer->CharSet = 'utf-8';
+        // SMTPサーバの設定
+        $mailer->isSMTP();                          // SMTPの使用宣言
+        $mailer->Host = 'smtp.kcg.ac.jp';   // SMTPサーバーを指定
+        $mailer->SMTPAuth = true;                 // SMTP authenticationを有効化
+        $mailer->Username = 'st071959';   // SMTPサーバーのユーザ名
+        $mailer->Password = '10ikoanNita05Kcg';           // SMTPサーバーのパスワード
+        $mailer->SMTPSecure = 'tls';  // 暗号化を有効（tls or ssl）無効の場合はfalse
+        $mailer->Port = 587; // TCPポートを指定（tlsの場合は465や587）
+
+        // 送受信先設定（第二引数は省略可）
+        $mailer->setFrom('st071959@m03.kyoto-kcg.ac.jp', '落とし物管理システム'); // 送信者
+        $mailer->addAddress($confirmation_email);   // 宛先
+
+        // 送信内容設定
+        $mailer->Subject = 'パスワードを変更しました';
+        $mailer->Body = "貴方のパスワードは".$password."です。";
+        // 送信
+        $mailer->send();
+        alert('メールアドレスにパスワード変更のURLを送信しました', 'SUCCESS');
+        return 1;
+    } catch (Exception $e) {
+        alert('メールの送信に失敗しました', 'CAUTION');
+    } finally {
+        unset($mailer);
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+?>
