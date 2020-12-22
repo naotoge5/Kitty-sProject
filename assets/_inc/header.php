@@ -17,7 +17,7 @@ unset($_SESSION['alert']);
                         </li>
                     <?php endforeach; ?>
                 </ul>
-                <small class="text-right">&copy; 2020 Kitty-sProject from Kyoto Computer Gakuin</small>
+                <p class="text-right m-0"><small>&copy; 2020 Kitty-sProject from Kyoto Computer Gakuin</small></p>
             </div>
         </nav>
     <?php endif; ?>

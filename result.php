@@ -42,7 +42,7 @@ include("search.php");
             <?php else : ?>
                 <div class="card my-2">
                     <div class="card-body">
-                        <p class="card-text"><?= implode(",", $param) ?>に該当するデータがありませんでした</p>
+                        <p class="card-text"><?= implode(",", $param) ?>に該当するデータはありませんでした</p>
                     </div>
                 </div>
             <?php endif; ?>
