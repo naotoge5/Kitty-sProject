@@ -1,9 +1,8 @@
 <?php
 include("assets/functions.php");
-$id = isset($_GET['id']) ? $_GET['id'] : 0;
-if ($id) {
-    $company = readCompanyData($id);
-    $objects = readObjectList($id);
+if (is_numeric($_GET['id'])) {
+    $company = read($_GET['id'], "select * from companies where id = ?");
+    $objects = readAll($_GET['id'], "select * from objects where company_id = ?");
 } else {
     header('Location:index.php');
     exit;
