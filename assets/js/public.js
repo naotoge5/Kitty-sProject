@@ -1,8 +1,8 @@
 $(function () {
     if ($(window).width() > 428) {
-        $("#date").append('<div class="input-group"><input type="text" name="date" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>');
+        $("#date").append('<div class="form-row"><div class="form-group col-5"><div class="input-group"><input type="text" name="start" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div></div><div class="col-2 text-center"><label class="pt-2">&#65374</label></div><div class="form-group col-5"><div class="input-group"><input type="text" name="finish" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div></div></div>');
     } else {
-        $("#date").append('<input type="date" name="date" class="form-control"></input>');
+        $("#date").append('<div class="form-row"><div class="col-5"><input type="date" name="start" class="form-control"></input></div><div class="col-2"><label class="col-1 text-center pt-2">&#65374</label></div><div class="col-5"><input type="date" name="finish" class="form-control"></input></div></div>');
         $("select").toggleClass('form-control d-block w-100');
     }
 

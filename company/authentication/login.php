@@ -40,8 +40,6 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
                             <small class="form-text text-muted">パスワードを忘れた<a href="">場合</a></small>
                         </div>
                         <input type="submit" class="btn btn-success">
-                        <small class="text-muted">st071959@m03.kyoto-kcg.ac.jp kittypro0201</small>
-                        <small class="text-muted">10naotoge5.ykputi@gmail.com kittypro02</small>
                     </form>
                 </div>
                 <div class="card-body d-block d-sm-none">

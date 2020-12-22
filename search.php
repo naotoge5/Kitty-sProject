@@ -18,8 +18,8 @@ if (!empty($_GET['name'])) {
         $param[] = $_GET['objects'];
         $query .= " and name = ?";
     }
-    if (!empty($_GET['date'])) {
-        $param = array_merge($param, [$_GET['date'] . ' 00:00:00', $_GET['date'] . ' 23:59:59']);
+    if (!empty($_GET['start']) and !empty($_GET['finish'])) {
+        $param = array_merge($param, [$_GET['start'] . ' 00:00:00', $_GET['finish'] . ' 23:59:59']);
         $query .= " and datetime between ? and ?";
     }
     $query .= ")";
