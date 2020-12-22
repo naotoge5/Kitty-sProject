@@ -16,10 +16,8 @@ unset($_SESSION['alert']);
                             <a class="nav-link" href="<?= $item['link'] ?>"><?= $item['name'] ?></a>
                         </li>
                     <?php endforeach; ?>
-                    <li class="nav-item text-right">
-                        <small>&copy; 2020 Kitty-sProject from Kyoto Computer Gakuin</small>
-                    <li class="nav-item">
                 </ul>
+                <small class="text-right">&copy; 2020 Kitty-sProject from Kyoto Computer Gakuin</small>
             </div>
         </nav>
     <?php endif; ?>

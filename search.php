@@ -26,6 +26,8 @@ if (!empty($_GET['name'])) {
     $companies = readAll($param, $query);
     $query_json = json_encode($query);
     echo "<script>console.log( '$query_json' );</script>";
+    array_pop($param);
+    array_pop($param);
 } else {
     header('Location:index.php');
     exit;
