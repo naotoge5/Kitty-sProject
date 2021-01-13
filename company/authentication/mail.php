@@ -70,15 +70,15 @@ function send_mail()
         $mailer->CharSet = 'utf-8';
         // SMTPサーバの設定
         $mailer->isSMTP();                          // SMTPの使用宣言
-        $mailer->Host = 'smtp.kcg.ac.jp';   // SMTPサーバーを指定
+        $mailer->Host = 's205.xrea.com';   // SMTPサーバーを指定
         $mailer->SMTPAuth = true;                 // SMTP authenticationを有効化
-        $mailer->Username = 'st071959';   // SMTPサーバーのユーザ名
-        $mailer->Password = '10ikoanNita05Kcg';           // SMTPサーバーのパスワード
+        $mailer->Username = 'info@naotoge5.cf';   // SMTPサーバーのユーザ名
+        $mailer->Password = 'Pv5L46rAdPGV';           // SMTPサーバーのパスワード
         $mailer->SMTPSecure = 'tls';  // 暗号化を有効（tls or ssl）無効の場合はfalse
         $mailer->Port = 587; // TCPポートを指定（tlsの場合は465や587）
 
         // 送受信先設定（第二引数は省略可）
-        $mailer->setFrom('st071959@m03.kyoto-kcg.ac.jp', '落とし物管理システム'); // 送信者
+        $mailer->setFrom('info@naotoge5.cf', '落とし物管理システム'); // 送信者
         $mailer->addAddress($mail);   // 宛先
 
         // 送信内容設定

@@ -33,6 +33,7 @@ include("search.php");
                                     <?= h($company['name']) ?>
                                 </a>
                                 <div class="card-body">
+                                    <h6 class="card-title">営業時間等</h4>
                                     <p class="card-text"><?= h($company['details']) ?></p>
                                 </div>
                             </div>
