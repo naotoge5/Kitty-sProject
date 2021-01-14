@@ -10,11 +10,37 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-$mail = isset($_POST['mail']) ? $_POST['mail'] : 0;
-$token = hash('sha256', uniqid(rand(), 1));
-$url = str_replace('/mail.php', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-if ($mail) {
-    if (check_mail() and write_preCompany()) send_mail();
+if (isset($_POST['mail'])) {
+    switch ($_GET['pattern']) {
+        case 'signup':
+            $company = read($_POST['mail'], "select mail from companies where mail = ?");
+            if ($company) {
+                alert('"' . $_POST['mail'] . '"はすでに利用されています', 'CAUTION');
+            } else {
+                $token = hash('sha256', uniqid(rand(), 1));
+                $url = str_replace('/mail.php?pattern=signup', '/signup.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+                if (connect([$token, $_POST['mail']], "insert into pre_companies values(null, ?, ?, now())") and send_mail($url, '登録は完了していません' . "\n【新規登録ページ】")) {
+                    header('Location:login.php');
+                    exit;
+                }
+            }
+            header('Location:form.php?pattern=signup');
+            exit;
+        case 'forgot':
+            $company = read($_POST['mail'], "select mail from companies where mail = ?");
+            if ($company) {
+                $token = hash('sha256', uniqid(rand(), 1));
+                $url = str_replace('/mail.php?pattern=forgot', '/reset.php?token=' . $token, (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+                if (connect([$token, $_POST['mail']], "insert into pre_companies values(null, ?, ?, now())") and send_mail($url, '【パスワード変更ページ】')) {
+                    header('Location:login.php');
+                    exit;
+                }
+            } else {
+                alert('"' . $_POST['mail'] . '"は利用されていません', 'CAUTION');
+            }
+            header('Location:form.php?pattern=forgot');
+            exit;
+    }
 } else {
     alert('不正なアクセスです', 'CAUTION');
 }
@@ -55,12 +81,10 @@ function check_mail()
     return 0;
 }
 
-function send_mail()
+function send_mail($url, $body)
 {
-    global $mail;
-    global $url;
     try {
-        $mailer = new PHPMailer(true);//インスタンスを生成（true指定で例外を有効化）
+        $mailer = new PHPMailer(true); //インスタンスを生成（true指定で例外を有効化）
         /*
         なくても動く!?
         //文字エンコードを指定
@@ -79,15 +103,15 @@ function send_mail()
 
         // 送受信先設定（第二引数は省略可）
         $mailer->setFrom('info@naotoge5.cf', '落とし物管理システム'); // 送信者
-        $mailer->addAddress($mail);   // 宛先
+        $mailer->addAddress($_POST['mail']);   // 宛先
 
         // 送信内容設定
-        $mailer->Subject = '仮登録が完了しました。';
-        $mailer->Body = "登録は完了していません。\n\n【登録ページ】\nURL\n" . $url . "\n\n24時間以内に登録を完了させてください。";
+        $mailer->Subject = 'URLのご案内';
+        $mailer->Body = $body . "\n" . $url . "\n\n24時間以内に完了させてください。";
 
         // 送信
         $mailer->send();
-        alert('メールアドレスに新規登録のURLを送信しました', 'SUCCESS');
+        alert('確認のメールを送信しました', 'SUCCESS');
         return 1;
     } catch (Exception $e) {
         alert('メールの送信に失敗しました', 'CAUTION');

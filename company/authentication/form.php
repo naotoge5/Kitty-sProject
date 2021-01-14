@@ -1,7 +1,13 @@
 <?php
 include('../../assets/functions.php');
-unset($_SESSION['id']);
-if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
+if ($_GET['pattern'] == 'signup') {
+    $title = '新規登録のURLが送信されます';
+} else if ($_GET['pattern'] == 'forgot') {
+    $title = 'パスワード変更のURLが送信されます';
+} else {
+    header('Location:login.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -9,14 +15,15 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>ログイン</title>
+    <title>確認</title>
 
-    <!-- style -->
+    <!-- css読み込み -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- script -->
+    <!-- 外部js読み込み -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <!-- script -->
     <script src="../../assets/js/company.js"></script>
 </head>
 
@@ -26,31 +33,21 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
     <main>
         <div class="container" style="width: 28rem;">
             <div class="card my-4">
-                <h3 class="card-header">ログイン</h3>
+                <h3 class="card-header">確認</h3>
                 <div class="card-body d-none d-sm-block">
-                    <form id="login" action="check.php" method="post">
+                <h5 class="card-title"><?= $title ?></h5>
+                    <form id="form" action="mail.php?pattern=<?= $_GET['pattern'] ?>" method="post">
                         <div class="form-group">
                             <label>メールアドレス</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-envelope fa-fw"></i></div>
                                 </div>
-                                <input type="email" class="form-control" id="inlineFormInputGroup" name="mail" placeholder="email" required>
+                                <input type="email" class="form-control" name="mail" placeholder="email" required>
                             </div>
-                            <small class="form-text text-muted">新規の企業様は<a href="form.php?pattern=signup">こちら</a></small>
-                            <!--<small class="form-text text-warning">新規の企業様はメールアドレスを入力後、<br>送信ボタンをクリックしてください。確認のメールが送信されます。</small>-->
+                            <small class="form-text text-muted">ログインは<a href="login.php">こちら</a></small>
                         </div>
-                        <div class="form-group">
-                            <label>パスワード</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-lock fa-fw"></i></div>
-                                </div>
-                                <input type="password" class="form-control" id="inlineFormInputGroup" name="password" placeholder="password" required>
-                            </div>
-                            <small class="form-text text-muted">パスワードを忘れた<a href="form.php?pattern=forgot">場合</a></small>
-                        </div>
-                        <input type="submit" class="btn btn-info" value="ログイン">
+                        <input type="submit" class="btn btn-info">
                     </form>
                 </div>
                 <div class="card-body d-block d-sm-none">

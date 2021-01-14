@@ -1,36 +1,16 @@
 <?php
 //遷移ページのチェック　ログイン可否
 include('../../assets/functions.php');
-$mail = isset($_POST['mail']) ? $_POST['mail'] : 0;
-$password = $_POST['password'];
-$url = 'Location:login.php';
-if ($mail) {
-    if (login_check()) $url = 'Location:../management.php';
-} else if (login_check()) {
+if (isset($_POST['mail'])) {
+    $company = read($_POST['mail'], "select * from companies where mail = ?");
+    if (password_verify($_POST['password'], $company['password'])) { // 可否を判断する
+        $_SESSION['id'] = $company['id'];
+        alert('ログインしました', 'SUCCESS');
+        header('Location:../management.php');
+        exit;
+    }
+    alert('メールアドレス、またはパスワードが違います', 'CAUTION');
+} else {
     alert('不正なアクセスです', 'CAUTION');
 }
-header($url);
-
-function login_check()
-{
-    global $mail;
-    global $password;
-    try {
-        $pdo = getPDO();
-        $stmt = $pdo->prepare("select * from companies where mail=:mail limit 1");
-        $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
-        $stmt->execute();
-        $result = $stmt->fetch();//結果の取り出し
-        if (password_verify($password, $result['password'])) {// 可否を判断する
-            $_SESSION['id'] = $result['id'];
-            alert('ログインしました', 'SUCCESS');
-            return 1;
-        }
-        alert('メールアドレス、またはパスワードが違います', 'CAUTION');
-    } catch (PDOException $e) {
-        alert('データーベース接続エラー', 'ERROR');
-    } finally {
-        unset($pdo);
-    }
-    return 0;
-}
+header('Location:login.php');

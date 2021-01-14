@@ -82,7 +82,7 @@ function read($param, $query)
         $result = $stmt->fetch();
         if ($result) return $result;
     } catch (PDOException $e) {
-        alert('データーベース接続エラー', 'ERROR');
+        alert('データーベース接続エラー'.$e, 'ERROR');
     } finally {
         unset($pdo);
     }

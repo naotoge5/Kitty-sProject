@@ -35,22 +35,6 @@ $(function () {
             }
         });
     }
-    //form#signにEnterKey無効&submitの制御
-    $("#login").keypress(function (e) {
-        if (e.which === 13) {
-            return false;
-        }
-    }).submit(function () {
-        let password = $('input[name="password"]').val();
-        if (password.length == 0) {
-            let result = confirm('新規登録でよろしいですか');
-            if (result) {
-                $(this).attr('action', 'mail.php');
-            } else {
-                return false;
-            }
-        }
-    });
     $("#signup").submit(function () {
         let password = $('input[name="password"]').val();
         let password_check = $('input[name="password_check"]').val();
@@ -64,6 +48,18 @@ $(function () {
         let address = $('input[name="prefecture"]').val() + $('input[name="city"]').val() + $('input[name="town"]').val();
         let mail = $('input[name="mail"]').val();
         let result = confirm('企業名\n' + name + '\n電話番号\n' + tel + '\n郵便番号\n' + postal + '\n住所\n' + address + '\nメールアドレス\n' + mail + '\nパスワード\n' + '*****');
+        if (!result) {
+            return false;
+        }
+    });
+    $("#reset").submit(function () {
+        let password = $('input[name="password"]').val();
+        let password_check = $('input[name="password_check"]').val();
+        if (password !== password_check) {
+            alert('パスワードが一致しません');
+            return false;
+        }
+        let result = confirm('変更しますか');
         if (!result) {
             return false;
         }
