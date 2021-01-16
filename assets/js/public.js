@@ -108,12 +108,14 @@ $(function () {
         $("#date > .form-row").append('<div class="col-5"><input type="date" name="start" class="form-control"></input></div><div class="col-2 text-center"><label class="pt-2">&#65374</label></div><div class="col-5"><input type="date" name="finish" class="form-control"></input></div>');
         $("select").toggleClass('form-control d-block w-100');
     } else {
-        $("#date .input-group").datetimepicker({
-            dayViewHeaderFormat: 'YYYY年 MMMM',
-            format: 'YYYY-MM-DD',
-            locale: 'ja',
-            showClose: true
-        });
+        if ($("#date .input-group").length) {
+            $("#date .input-group").datetimepicker({
+                dayViewHeaderFormat: 'YYYY年 MMMM',
+                format: 'YYYY-MM-DD',
+                locale: 'ja',
+                showClose: true
+            });
+        }
     }
 
     $("#narrow").change(function (e) {

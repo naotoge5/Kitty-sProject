@@ -24,7 +24,7 @@ include("search.php");
     <main>
         <div class="container">
             <?php if ($companies) : ?>
-                <p><?= implode(",", $param) ?>に該当するデータは<?= count($companies) ?>件です</p>
+                <p><?= implode(",", $keywords) ?>に該当するデータは<?= count($companies) ?>件です</p>
                 <div class="row">
                     <?php foreach ($companies as $company) : ?>
                         <div class="col-12 col-sm-6 my-2">
