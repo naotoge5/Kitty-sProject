@@ -31,7 +31,7 @@ if ($_GET['pattern'] == 'signup') {
     <?php include('../../assets/_inc/header.php') ?>
     <div class="my-4 py-4">&nbsp;</div>
     <main>
-        <div class="container" style="width: 28rem;">
+        <div class="container" style="max-width: 28rem;">
             <div class="card my-4">
                 <h3 class="card-header">確認</h3>
                 <div class="card-body d-none d-sm-block">

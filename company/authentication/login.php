@@ -24,7 +24,7 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
     <?php include('../../assets/_inc/header.php') ?>
     <div class="my-4 py-4">&nbsp;</div>
     <main>
-        <div class="container" style="width: 28rem;">
+        <div class="container" style="max-width: 28rem;">
             <div class="card my-4">
                 <h3 class="card-header">ログイン</h3>
                 <div class="card-body d-none d-sm-block">
@@ -38,7 +38,6 @@ if (isset($_POST['logout'])) alert('ログアウトしました', 'SUCCESS');
                                 <input type="email" class="form-control" id="inlineFormInputGroup" name="mail" placeholder="email" required>
                             </div>
                             <small class="form-text text-muted">新規の企業様は<a href="form.php?pattern=signup">こちら</a></small>
-                            <!--<small class="form-text text-warning">新規の企業様はメールアドレスを入力後、<br>送信ボタンをクリックしてください。確認のメールが送信されます。</small>-->
                         </div>
                         <div class="form-group">
                             <label>パスワード</label>

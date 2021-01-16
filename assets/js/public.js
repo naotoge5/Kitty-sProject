@@ -1,65 +1,12 @@
-$(function () {
-    if ($(window).width() > 428) {
-        $("#date").append('<div class="form-row"><div class="form-group col-5"><div class="input-group"><input type="text" name="start" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div></div><div class="col-2 text-center"><label class="pt-2">&#65374</label></div><div class="form-group col-5"><div class="input-group"><input type="text" name="finish" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div></div></div>');
-    } else {
-        $("#date").append('<div class="form-row"><div class="col-5"><input type="date" name="start" class="form-control"></input></div><div class="col-2"><label class="col-1 text-center pt-2">&#65374</label></div><div class="col-5"><input type="date" name="finish" class="form-control"></input></div></div>');
-        $("select").toggleClass('form-control d-block w-100');
-    }
-
-    $("#narrow").change(function (e) {
-        let target = $(e.target)
-        if (target.attr("name") === 'categories') {
-            changeCategory();
-        } else if (target.attr("name") === 'prefectures') {
-            changePrefecture();
-        } else if (target.attr("name") === 'cities') {
-            changeCity();
-        }
-    });
-    $("#narrow-button").click(function () {
-        $("#narrow-button").toggleClass("btn-danger btn-success");
-        if ($("#narrow-button").hasClass("btn-success")) {
-            $("#narrow-button").text('絞り込み検索');
-        } else {
-            $("#narrow-button").html('<i class="fa fa-times"></i>&nbsp;閉じる&nbsp;');
-        }
-    });
-    if ($("#top").length) {
-        $("#date .input-group").datetimepicker({
-            dayViewHeaderFormat: 'YYYY年 MMMM',
-            format: 'YYYY-MM-DD',
-            locale: 'ja',
-            showClose: true
-        });
-    }
-    if ($("#show").length) {
-        $("#objects_table").DataTable({
-            "paging": false,
-            "info": false,
-            columnDefs: [
-                { targets: 0, width: "50%" }
-            ],
-            oLanguage: {
-                /* 日本語化設定 */
-                sLengthMenu: "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
-                oPaginate: { // ページネーション欄
-                    sNext: "次へ",
-                    sPrevious: "前へ"
-                },
-                sInfo: "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
-                sSearch: "検索 ", // 検索欄(例 = 検索 --)
-                sZeroRecords: "表示するデータがありません", // 表示する行がない場合
-                sInfoEmpty: "0 件中 0件 を表示しています", // 行が表示されていない場合
-                sInfoFiltered: "全 _MAX_ 件から絞り込み" // 検索後に総件数を表示する場合
-            }
-        });
-    }
-});
+//index.php
+let userAgent = window.navigator.userAgent.toLowerCase();
+var defaultpicker = false;
+if (userAgent.indexOf("android") !== -1 || userAgent.indexOf("iphone") !== -1 || userAgent.indexOf("ipad") !== -1) defaultpicker = true;
 
 let url = "http://geoapi.heartrails.com/api/json?jsonp=?";
+
 function changeCategory() {
     let category = $("select[name='categories'] option:selected").val();
-    console.log(category);
     resetObjects();
     if (category !== 'カテゴリー') {
         $.ajax({
@@ -156,3 +103,63 @@ function resetTowns() {
     $('select[name="towns"]').prop("disabled", true);
     $('select[name="towns"]').html('<option value="">町域</option>');
 }
+$(function () {
+    if (defaultpicker) {
+        $("#date > .form-row").empty();
+        $("#date > .form-row").append('<div class="col-5"><input type="date" name="start" class="form-control"></input></div><div class="col-2"><label class="col-1 text-center pt-2">&#65374</label></div><div class="col-5"><input type="date" name="finish" class="form-control"></input></div>');
+        $("select").toggleClass('form-control d-block w-100');
+    }
+
+    $("#narrow").change(function (e) {
+        let target = $(e.target)
+        if (target.attr("name") === 'categories') {
+            changeCategory();
+        } else if (target.attr("name") === 'prefectures') {
+            changePrefecture();
+        } else if (target.attr("name") === 'cities') {
+            changeCity();
+        }
+    });
+
+    $("#narrow-button").click(function () {
+        $("#narrow-button").toggleClass("btn-danger btn-success");
+        if ($("#narrow-button").hasClass("btn-success")) {
+            $("#narrow-button").text('絞り込み検索');
+        } else {
+            $("#narrow-button").html('<i class="fa fa-times"></i>&nbsp;閉じる&nbsp;');
+        }
+    });
+
+    if ($("#date").length) {
+        $("#date .input-group").datetimepicker({
+            dayViewHeaderFormat: 'YYYY年 MMMM',
+            format: 'YYYY-MM-DD',
+            locale: 'ja',
+            showClose: true
+        });
+    }
+
+    //show.php
+    if ($("#objects_table").length) {
+        $("#objects_table").DataTable({
+            "paging": false,
+            "info": false,
+            columnDefs: [
+                { targets: 0, width: "50%" }
+            ],
+            oLanguage: {
+                /* 日本語化設定 */
+                sLengthMenu: "表示　_MENU_　件", // 表示行数欄(例 = 表示 10 件)
+                oPaginate: { // ページネーション欄
+                    sNext: "次へ",
+                    sPrevious: "前へ"
+                },
+                sInfo: "_TOTAL_ 件中 _START_件から_END_件 を表示しています", // 現在の表示欄(例 = 100 件中 20件から30件 を表示しています)
+                sSearch: "検索 ", // 検索欄(例 = 検索 --)
+                sZeroRecords: "表示するデータがありません", // 表示する行がない場合
+                sInfoEmpty: "0 件中 0件 を表示しています", // 行が表示されていない場合
+                sInfoFiltered: "全 _MAX_ 件から絞り込み" // 検索後に総件数を表示する場合
+            }
+        });
+    }
+});

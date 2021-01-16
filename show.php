@@ -29,7 +29,7 @@ if (is_numeric($_GET['id'])) {
 <body>
     <?php include("assets/_inc/header.php") ?>
     <div class="my-4 py-4">&nbsp;</div>
-    <main id="show">
+    <main>
         <div class="container">
             <div class="card">
                 <h3 class="card-header"><?= h($company['name']) ?></h3>

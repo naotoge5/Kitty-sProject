@@ -25,7 +25,7 @@ include('assets/functions.php');
 
 <body>
     <?php include("assets/_inc/header.php") ?>
-    <main id="top">
+    <main>
         <div class="vh-100 d-flex align-items-center">
             <div class="container px-4">
                 <h3 class="text-center text-black pb-4">落とし物検索</h3>
@@ -42,52 +42,54 @@ include('assets/functions.php');
                     <div id="narrow" class="collapse">
                         <div class="card card-body m-2 bg-light overflow-auto" style="max-height: 80vh !important;">
                             <form action="result.php" method="get">
-                                <div class="form-row">
-                                    <div class="form-group col-12 col-md-6">
-                                        <label>落とし物</label>
-                                        <select name="categories" class="form-control" required>
-                                            <option value="">カテゴリー</option>
-                                            <?php foreach ($categories as $category) : ?>
-                                                <option value="<?= $category; ?>"><?= $category; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-6">
-                                        <label class="d-none d-md-block">&nbsp;</label>
-                                        <select name="objects" class="form-control" disabled>
-                                            <option value="">名称</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group">
+                                    <label>落とし物</label>
+                                    <select name="categories" class="form-control" required>
+                                        <option value="">カテゴリー</option>
+                                        <?php foreach ($categories as $category) : ?>
+                                            <option value="<?= $category; ?>"><?= $category; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-12 col-md-4">
-                                        <label>地域</label>
-                                        <select name="prefectures" class="form-control" required>
-                                            <option value="">都道府県</option>
-                                            <?php foreach ($regions as $region => $prefectures) : ?>
-                                                <optgroup label="<?= $region ?>">
-                                                    <?php foreach ($prefectures as $prefecture) : ?>
-                                                        <option value="<?= $prefecture ?>"><?= $prefecture ?></option>
-                                                    <?php endforeach; ?>
-                                                </optgroup>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-4">
-                                        <label class="d-none d-md-block">&nbsp;</label>
-                                        <select name="cities" class="form-control" disabled>
-                                            <option value="">市区</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-4">
-                                        <label class="d-none d-md-block">&nbsp;</label>
-                                        <select name="towns" class="form-control" disabled>
-                                            <option value="">町域</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group">
+                                    <select name="objects" class="form-control" disabled>
+                                        <option value="">名称</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>地域</label>
+                                    <select name="prefectures" class="form-control" required>
+                                        <option value="">都道府県</option>
+                                        <?php foreach ($regions as $region => $prefectures) : ?>
+                                            <optgroup label="<?= $region ?>">
+                                                <?php foreach ($prefectures as $prefecture) : ?>
+                                                    <option value="<?= $prefecture ?>"><?= $prefecture ?></option>
+                                                <?php endforeach; ?>
+                                            </optgroup>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="cities" class="form-control" disabled>
+                                        <option value="">市区</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="towns" class="form-control" disabled>
+                                        <option value="">町域</option>
+                                    </select>
                                 </div>
                                 <div id="date" class="form-group">
                                     <label>落とした日</label>
+                                    <div class="form-row">
+                                        <div class="form-group col-5">
+                                            <div class="input-group"><input type="text" name="start" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>
+                                        </div>
+                                        <div class="col-2 text-center"><label class="pt-2">&#65374</label></div>
+                                        <div class="form-group col-5">
+                                            <div class="input-group"><input type="text" name="finish" class="form-control rounded-left"><span class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></span></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-secondary btn-block">この条件で検索</button>
                             </form>
