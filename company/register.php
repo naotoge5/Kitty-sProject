@@ -69,7 +69,7 @@ $title = $id ? '編集' : '新規登録';
                                 <div class="input-group date" id="date">
                                     <label for="date" class="pr-2 pt-1">日付</label>
                                     <input type="text" name="date" class="form-control rounded-left" value="<?php if ($object) echo h($datetime[0]); ?>" required />
-                                    <span class="input-group-append ">
+                                    <span class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </span>
                                 </div>

@@ -1,3 +1,7 @@
+let userAgent = window.navigator.userAgent.toLowerCase();
+var defaultpicker = true;
+if (userAgent.indexOf("windows") !== -1 || userAgent.indexOf("macintosh") !== -1) defaultpicker = false;
+
 //signup.php
 function setAddress(response) {
     let data = JSON.parse(response);
@@ -127,17 +131,24 @@ $(function () {
     });
 
     //register.php
-    if ($(".date").length) {
-        $('#date').datetimepicker({
-            dayViewHeaderFormat: 'YYYY年 MMMM',
-            format: 'YYYY-MM-DD',
-            locale: 'ja',
-            showClose: true
-        });
-        $('#time').datetimepicker({
-            format: 'HH:mm',
-            locale: 'ja',
-            showClose: true
-        });
+    if (defaultpicker) {
+        $(".date .input-group-append").remove();
+        $('input[name="date"]').get(0).type = 'date';
+        $('input[name="time"]').get(0).type = 'time';
+        $("select").toggleClass('form-control d-block w-100');
+    } else {
+        if ($(".date").length) {
+            $('#date').datetimepicker({
+                dayViewHeaderFormat: 'YYYY年 MMMM',
+                format: 'YYYY-MM-DD',
+                locale: 'ja',
+                showClose: true
+            });
+            $('#time').datetimepicker({
+                format: 'HH:mm',
+                locale: 'ja',
+                showClose: true
+            });
+        }
     }
 });
