@@ -1,8 +1,8 @@
 //index.php
 let userAgent = window.navigator.userAgent.toLowerCase();
-var defaultpicker = false;
-if (userAgent.indexOf("android") !== -1 || userAgent.indexOf("iphone") !== -1 || userAgent.indexOf("ipad") !== -1) defaultpicker = true;
-
+var defaultpicker = true;
+//if (userAgent.indexOf("android") !== -1 || userAgent.indexOf("iphone") !== -1 || userAgent.indexOf("ipad") !== -1) defaultpicker = true;
+if (userAgent.indexOf("windows") !== -1 || userAgent.indexOf("mac") !== -1) defaultpicker = false;
 let url = "http://geoapi.heartrails.com/api/json?jsonp=?";
 
 function changeCategory() {
@@ -106,7 +106,7 @@ function resetTowns() {
 $(function () {
     if (defaultpicker) {
         $("#date > .form-row").empty();
-        $("#date > .form-row").append('<div class="col-5"><input type="date" name="start" class="form-control"></input></div><div class="col-2"><label class="col-1 text-center pt-2">&#65374</label></div><div class="col-5"><input type="date" name="finish" class="form-control"></input></div>');
+        $("#date > .form-row").append('<div class="col-5"><input type="date" name="start" class="form-control"></input></div><div class="col-2 text-center"><label class="pt-2">&#65374</label></div><div class="col-5"><input type="date" name="finish" class="form-control"></input></div>');
         $("select").toggleClass('form-control d-block w-100');
     }
 

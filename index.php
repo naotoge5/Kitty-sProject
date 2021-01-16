@@ -43,20 +43,6 @@ include('assets/functions.php');
                         <div class="card card-body m-2 bg-light overflow-auto" style="max-height: 80vh !important;">
                             <form action="result.php" method="get">
                                 <div class="form-group">
-                                    <label>落とし物</label>
-                                    <select name="categories" class="form-control" required>
-                                        <option value="">カテゴリー</option>
-                                        <?php foreach ($categories as $category) : ?>
-                                            <option value="<?= $category; ?>"><?= $category; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select name="objects" class="form-control" disabled>
-                                        <option value="">名称</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label>地域</label>
                                     <select name="prefectures" class="form-control" required>
                                         <option value="">都道府県</option>
@@ -77,6 +63,20 @@ include('assets/functions.php');
                                 <div class="form-group">
                                     <select name="towns" class="form-control" disabled>
                                         <option value="">町域</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>落とし物</label>
+                                    <select name="categories" class="form-control" required>
+                                        <option value="">カテゴリー</option>
+                                        <?php foreach ($categories as $category) : ?>
+                                            <option value="<?= $category; ?>"><?= $category; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="objects" class="form-control" disabled>
+                                        <option value="">名称</option>
                                     </select>
                                 </div>
                                 <div id="date" class="form-group">
