@@ -16,7 +16,7 @@ create table companies (
     prefecture varchar(100) not null,
     city varchar(100) not null,
     town varchar(100) not null,
-    details text,
+    details text default '',
     mail varchar(100) not null,
     password varchar(100) not null
 );
